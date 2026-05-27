@@ -4,7 +4,9 @@ This document is the reusable playbook for turning research into a static HTML p
 
 ## Goal
 
-Create a trustworthy, source-backed HTML artifact from a research question or topic. The output should be easy to open locally, publish on GitHub Pages, or adapt into another site.
+Create a trustworthy, source-backed wiki-style HTML artifact from a research question or topic. The output should be easy to open locally, publish on GitHub Pages, or adapt into another site.
+
+For this repository, use `ex.html` and `docs/wiki-html-style-rules.md` as the default format guide.
 
 ## Default File Structure
 
@@ -72,8 +74,8 @@ Rules:
 
 Build the page around the reader's job:
 
-- Title: literal subject or useful offer.
-- Lead: the practical takeaway.
+- Title: literal subject.
+- Lead: the practical takeaway in plain Korean.
 - Body: grouped by decision points or learning steps.
 - Visuals: tables, timelines, comparison grids, diagrams, screenshots, or simple charts.
 - Sources: visible and easy to inspect.
@@ -82,9 +84,11 @@ Default sections:
 
 1. Summary.
 2. Key findings.
-3. Details or walkthrough.
-4. Implications or next steps.
-5. Sources.
+3. Background and recent changes.
+4. How it works.
+5. Details or walkthrough.
+6. Implications or next steps.
+7. Sources.
 
 ## Phase 5: HTML Build
 
@@ -97,6 +101,8 @@ Default requirements:
 - No external tracking scripts.
 - Source links visible in the page.
 - Works at mobile and desktop widths.
+- Compact wiki layout with a left fixed table of contents on desktop.
+- Namuwiki-adjacent Korean tone: direct, human, plain, and lightly explanatory.
 
 Quality checks:
 
@@ -119,6 +125,7 @@ Record checks in `qa.md`:
 - Mobile layout checked: yes/no
 - Links checked: yes/no
 - Citation section present: yes/no
+- Desktop left TOC checked: yes/no
 - Known limits:
 ```
 
