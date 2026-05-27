@@ -4,7 +4,7 @@ description: "Research a topic with current, source-backed information and turn 
 license: MIT
 metadata:
   author: hyun2xyz
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 # Wikibird Research HTML
@@ -20,6 +20,9 @@ outputs/YYYY-MM-DD-topic-slug/
 ├── index.html
 ├── research.md
 ├── qa.md
+├── assets/
+│   └── screenshots/
+│       └── 01-source-or-page.png
 └── typst/
     ├── main.typ
     ├── index.pdf
@@ -34,6 +37,8 @@ Typst output is optional. Produce it when the user asks for PDF, print, Typst, c
 - Prefer official, primary, institutional, standards, paper, release-note, or direct-source material.
 - Use secondary sources for interpretation and context, not as the sole basis for important claims.
 - Record a source map and claim ledger in `research.md`.
+- Capture at least one Chrome screenshot for every research HTML page, preferably from a primary source or from the rendered final page.
+- Save screenshots under `assets/screenshots/` and record the URL, capture date, viewport, and purpose in `research.md`.
 - Use exact dates rather than "recently" or "now".
 - If sources conflict, show the conflict and avoid forced certainty.
 - Never invent citations, quotes, images, dates, source titles, or access status.
@@ -78,7 +83,21 @@ Minimum requirements:
 - Mobile transparent hamburger appears after scroll with a short fade.
 - Bottom-right top button jumps to the page top.
 - Key/callout boxes use very pale mint (`#f0fff9`) with soft mint border (`#b7ead8`).
+- Include screenshot figures in the article body when they help the reader understand the topic. Use real `<figure>` and `<figcaption>` elements with useful `alt` text.
 - Source links are visible in a final source section.
+
+## Chrome Screenshot Rules
+
+Use Chrome access when available. Prefer the agent's native Chrome/browser tool for authenticated, interactive, or dynamic pages. If native Chrome automation is not available but shell access is available, use `scripts/capture-chrome-screenshot.sh`.
+
+Default screenshot contract:
+
+- Capture at least one image for every research HTML output.
+- For product, tool, website, documentation, grant, policy, or visual-reference research, capture 2-4 screenshots from the most relevant primary pages when possible.
+- Save images as `assets/screenshots/01-short-name.png`, `02-short-name.png`, etc.
+- Embed selected screenshots in `index.html` with `figure.screenshot`.
+- Do not screenshot private dashboards, personal data, paid content, cookies, passwords, or anything the user has not asked to include.
+- If screenshots cannot be captured, continue the research but document the reason in `qa.md`.
 
 ## Typst Rules
 
@@ -104,3 +123,4 @@ Before completion:
 - `references/wiki-html-style-rules.md`: visual and editorial house style.
 - `references/typst-output.md`: Typst/PDF output guidance.
 - `assets/wikibird-brief.typ`: starter Typst template.
+- `scripts/capture-chrome-screenshot.sh`: Chrome headless screenshot helper.

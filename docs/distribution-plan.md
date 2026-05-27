@@ -13,6 +13,7 @@ skills/wikibird-research-html/
 ├── SKILL.md
 ├── LICENSE
 ├── agents/openai.yaml
+├── scripts/
 ├── references/
 └── assets/
 ```

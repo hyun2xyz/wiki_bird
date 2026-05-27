@@ -2,6 +2,8 @@
 
 Wikibird is a small research-to-HTML harness. It defines an agent that can research a topic, synthesize the evidence, and produce a static wiki-style HTML page with visible citations.
 
+Research pages also carry Chrome-captured screenshots as local page assets, so the final HTML has visible source/product evidence instead of text-only notes.
+
 ## Files
 
 - `.claude/agents/research-html-builder.md` - reusable agent definition.
@@ -12,6 +14,7 @@ Wikibird is a small research-to-HTML harness. It defines an agent that can resea
 - `docs/distribution-plan.md` - publishing and cross-agent installation plan.
 - `ex.html` - reference HTML shape and typography.
 - `typst/wikibird-brief.typ` - shared Typst brief template for PDF/document experiments.
+- `skills/wikibird-research-html/scripts/capture-chrome-screenshot.sh` - Chrome headless screenshot helper for skill users.
 - `outputs/` - recommended location for generated pages.
 
 ## How to Use

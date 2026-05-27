@@ -28,6 +28,7 @@ outputs/YYYY-MM-DD-topic-slug/
 - Add a fixed bottom-right top button that jumps to the page top.
 - On mobile, hide the TOC in an off-canvas left drawer. After the reader scrolls down, show a transparent hamburger button at top-left with a short fade/dissolve transition. Tapping it opens the TOC.
 - Keep body width moderate. The page should feel like a readable article, not a wide dashboard.
+- Include Chrome-captured screenshots when the topic has a visible web/product/source surface.
 
 ## Layout Defaults
 
@@ -42,6 +43,38 @@ outputs/YYYY-MM-DD-topic-slug/
 - Use simple borders and light gray surfaces.
 - Avoid decorative gradients, card-heavy layouts, and marketing-style sections.
 - Use cards only for repeated comparison items or source boxes.
+
+## Screenshot Figures
+
+- Save screenshots under `assets/screenshots/`.
+- Use screenshots as evidence or orientation, not decoration.
+- Use full-width figures inside the article flow.
+- Give every screenshot useful `alt` text.
+- Captions should say what was captured, from where, and the capture date.
+- Keep screenshots readable. Avoid dark, blurred, tiny, or heavily cropped captures unless the crop is intentional.
+
+Default CSS:
+
+```css
+.screenshot {
+  margin: 24px 0 30px;
+}
+
+.screenshot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.screenshot figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+```
 
 ## Writing Tone
 
@@ -139,4 +172,5 @@ Before calling the page done:
 - Heading links work.
 - Text does not overlap or overflow.
 - Source section exists.
+- Screenshot figures exist when a visual/source capture is useful.
 - Current facts have exact dates or source freshness notes.

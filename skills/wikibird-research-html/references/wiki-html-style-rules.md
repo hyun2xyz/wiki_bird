@@ -30,6 +30,36 @@ The target is a compact, readable wiki page: factual, easy to scan, and closer t
 - Clicking the hamburger opens the TOC drawer.
 - Clicking a TOC link or backdrop closes it.
 
+## Screenshot Figures
+
+- Save Chrome screenshots under `assets/screenshots/`.
+- Include at least one screenshot figure for research HTML pages when Chrome capture is available.
+- Use screenshots as evidence or orientation, not decoration.
+- Use useful `alt` text and a caption with source, capture date, and context.
+
+Default CSS:
+
+```css
+.screenshot {
+  margin: 24px 0 30px;
+}
+
+.screenshot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.screenshot figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+```
+
 ## Callouts
 
 Use very pale mint, not yellow:

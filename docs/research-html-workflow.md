@@ -14,7 +14,10 @@ For this repository, use `ex.html` and `docs/wiki-html-style-rules.md` as the de
 outputs/YYYY-MM-DD-topic-slug/
 ├── index.html
 ├── research.md
-└── qa.md
+├── qa.md
+└── assets/
+    └── screenshots/
+        └── 01-source-or-page.png
 ```
 
 Use a shorter structure only for very small tasks.
@@ -54,6 +57,29 @@ Avoid:
 - Copied article text.
 - AI-generated pages without citations.
 - Old pages for volatile claims unless clearly marked as historical.
+
+## Phase 2.5: Chrome Screenshots
+
+Every research HTML page should include at least one Chrome-captured image.
+
+Default capture rules:
+
+- Create `assets/screenshots/`.
+- Prefer screenshots from primary sources: official product pages, official docs, grant/application pages, standards, paper landing pages, or the rendered final HTML page.
+- For visual/product/tool research, capture 2-4 screenshots when useful.
+- Use desktop viewport around `1440x1000` unless the topic is mobile-first.
+- Record URL, capture date, viewport, and purpose in `research.md`.
+- Embed selected screenshots in `index.html` as real `<figure>` blocks.
+
+If the agent has a native Chrome/browser tool, use that first. If not, use the bundled helper:
+
+```sh
+skills/wikibird-research-html/scripts/capture-chrome-screenshot.sh \
+  "https://example.com" \
+  outputs/YYYY-MM-DD-topic-slug/assets/screenshots/01-example.png
+```
+
+Do not screenshot private dashboards, personal data, paid source text, cookies, passwords, or logged-in account pages unless the user explicitly asks and the result is safe to publish.
 
 ## Phase 3: Claim Ledger
 
@@ -112,6 +138,7 @@ Quality checks:
 - Links are distinguishable.
 - Citations are not hidden in comments.
 - Colors meet normal readability expectations.
+- Screenshot figures have useful `alt` text and captions.
 
 ## Phase 6: QA
 
@@ -126,6 +153,8 @@ Record checks in `qa.md`:
 - Links checked: yes/no
 - Citation section present: yes/no
 - Desktop left TOC checked: yes/no
+- Chrome screenshots captured: yes/no
+- Screenshot figures embedded: yes/no
 - Known limits:
 ```
 
