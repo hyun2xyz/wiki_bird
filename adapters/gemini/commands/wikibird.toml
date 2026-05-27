@@ -1,0 +1,15 @@
+description = "Research a topic and produce a Wikibird-style Korean wiki HTML page with research notes, QA, and optional Typst output."
+prompt = """
+Use the Wikibird research workflow from this repository.
+
+Read these files if available:
+- skills/wikibird-research-html/SKILL.md
+- skills/wikibird-research-html/references/research-html-workflow.md
+- skills/wikibird-research-html/references/wiki-html-style-rules.md
+- skills/wikibird-research-html/references/typst-output.md
+
+Task:
+{{args}}
+
+Produce outputs/YYYY-MM-DD-topic-slug/index.html, research.md, qa.md, and Typst output when requested.
+"""

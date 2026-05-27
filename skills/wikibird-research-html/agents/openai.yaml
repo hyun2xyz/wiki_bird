@@ -1,0 +1,8 @@
+interface:
+  display_name: "Wikibird Research HTML"
+  short_description: "Current research to Korean wiki HTML"
+  brand_color: "#B7EAD8"
+  default_prompt: "Use $wikibird-research-html to research this topic and build a Korean wiki-style HTML page."
+
+policy:
+  allow_implicit_invocation: true
