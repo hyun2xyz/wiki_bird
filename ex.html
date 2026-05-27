@@ -14,6 +14,8 @@
 			--link: #2457b7;
 			--paper: #fff;
 			--surface: #f6f7f8;
+			--mark: #e8fff6;
+			--mark-line: #8fe7c7;
 		}
 
 		* {
@@ -105,12 +107,13 @@
 			top: 24px;
 			left: max(20px, calc((100vw - 1180px) / 2));
 			width: 260px;
+			height: fit-content;
 			max-height: calc(100vh - 48px);
-			overflow: auto;
+			overflow-y: auto;
 			border: 1px solid var(--line);
 			background: var(--surface);
 			margin: 0;
-			padding: 14px 16px;
+			padding: 14px 16px 0;
 			font-size: 14px;
 			line-height: 1.45;
 		}
@@ -128,6 +131,10 @@
 
 		.toc li {
 			margin: 5px 0;
+		}
+
+		.toc li:last-child {
+			margin-bottom: 0;
 		}
 
 		.toc-level-3 {
