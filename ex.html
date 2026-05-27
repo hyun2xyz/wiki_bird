@@ -103,9 +103,9 @@
 		.toc {
 			position: fixed;
 			top: 24px;
-			bottom: 24px;
 			left: max(20px, calc((100vw - 1180px) / 2));
 			width: 260px;
+			max-height: calc(100vh - 48px);
 			overflow: auto;
 			border: 1px solid var(--line);
 			background: var(--surface);
@@ -176,6 +176,58 @@
 			overflow-wrap: anywhere;
 		}
 
+		.top-button,
+		.mobile-menu-button {
+			position: fixed;
+			z-index: 30;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 42px;
+			height: 42px;
+			border: 1px solid rgba(34, 34, 34, 0.34);
+			background: rgba(255, 255, 255, 0.72);
+			color: var(--text);
+			text-decoration: none;
+			backdrop-filter: blur(8px);
+			-webkit-backdrop-filter: blur(8px);
+		}
+
+		.top-button {
+			right: 18px;
+			bottom: 18px;
+			font-size: 20px;
+			line-height: 1;
+		}
+
+		.mobile-menu-button {
+			top: 12px;
+			left: 12px;
+			display: none;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 180ms ease;
+		}
+
+		.mobile-menu-button span {
+			position: absolute;
+			width: 19px;
+			height: 1px;
+			background: currentColor;
+		}
+
+		.mobile-menu-button span:nth-child(1) {
+			transform: translateY(-6px);
+		}
+
+		.mobile-menu-button span:nth-child(3) {
+			transform: translateY(6px);
+		}
+
+		.menu-backdrop {
+			display: none;
+		}
+
 		@media (min-width: 1180px) {
 			main {
 				margin-left: calc(max(20px, (100vw - 1180px) / 2) + 310px);
@@ -185,11 +237,50 @@
 
 		@media (max-width: 1179px) {
 			.toc {
-				position: static;
-				width: auto;
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				z-index: 25;
+				width: min(82vw, 320px);
 				max-height: none;
-				margin: 24px 0 34px;
+				margin: 0;
+				padding: 58px 18px 20px;
 				font-size: 15px;
+				background: rgba(246, 247, 248, 0.96);
+				box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+				transform: translateX(-105%);
+				transition: transform 200ms ease;
+			}
+
+			body.toc-open .toc {
+				transform: translateX(0);
+			}
+
+			.mobile-menu-button {
+				display: inline-flex;
+			}
+
+			.mobile-menu-button.is-visible,
+			body.toc-open .mobile-menu-button {
+				opacity: 1;
+				pointer-events: auto;
+			}
+
+			.menu-backdrop {
+				position: fixed;
+				inset: 0;
+				z-index: 20;
+				display: block;
+				background: rgba(255, 255, 255, 0.34);
+				opacity: 0;
+				pointer-events: none;
+				transition: opacity 200ms ease;
+			}
+
+			body.toc-open .menu-backdrop {
+				opacity: 1;
+				pointer-events: auto;
 			}
 		}
 
@@ -208,7 +299,12 @@
 		}
 	</style>
 </head>
-<body>
+<body id="top">
+	<button class="mobile-menu-button" type="button" aria-label="목차 열기" aria-expanded="false">
+		<span></span><span></span><span></span>
+	</button>
+	<div class="menu-backdrop" aria-hidden="true"></div>
+	<a class="top-button" href="#top" aria-label="최상단으로 이동">↑</a>
 	<main>
 		<header>
 			<h1>웹 개념 정리</h1>
@@ -547,5 +643,39 @@
 <ul><li>[[<a href="https://www.ibm.com/think/topics/database" target="_blank" rel="noopener">https://www.ibm.com/think/topics/database</a> IBM, What is a database?]]</li></ul>
 <ul><li>[[<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages" target="_blank" rel="noopener">https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages</a> GitHub Docs, What is GitHub Pages?]]</li></ul>
 	</main>
+	<script>
+		(() => {
+			const body = document.body;
+			const button = document.querySelector(".mobile-menu-button");
+			const backdrop = document.querySelector(".menu-backdrop");
+			const toc = document.querySelector(".toc");
+			const mobileQuery = window.matchMedia("(max-width: 1179px)");
+			if (!button || !backdrop || !toc) return;
+
+			const closeToc = () => {
+				body.classList.remove("toc-open");
+				button.setAttribute("aria-expanded", "false");
+			};
+
+			const syncButton = () => {
+				const show = mobileQuery.matches && window.scrollY > 160;
+				button.classList.toggle("is-visible", show || body.classList.contains("toc-open"));
+				if (!mobileQuery.matches) closeToc();
+			};
+
+			button.addEventListener("click", () => {
+				const opening = !body.classList.contains("toc-open");
+				body.classList.toggle("toc-open", opening);
+				button.setAttribute("aria-expanded", String(opening));
+				syncButton();
+			});
+
+			backdrop.addEventListener("click", closeToc);
+			toc.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeToc));
+			window.addEventListener("scroll", syncButton, { passive: true });
+			window.addEventListener("resize", syncButton);
+			syncButton();
+		})();
+	</script>
 </body>
 </html>

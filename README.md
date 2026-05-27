@@ -8,6 +8,7 @@ Wikibird is a small research-to-HTML harness. It defines an agent that can resea
 - `docs/research-html-workflow.md` - human-readable workflow and QA checklist.
 - `docs/wiki-html-style-rules.md` - house style for compact wiki pages.
 - `ex.html` - reference HTML shape and typography.
+- `typst/wikibird-brief.typ` - shared Typst brief template for PDF/document experiments.
 - `outputs/` - recommended location for generated pages.
 
 ## How to Use
@@ -28,3 +29,12 @@ For volatile facts, require live source verification. For private or local sourc
 ## Publishing
 
 The generated `outputs/.../index.html` files are static and can be opened locally or published with GitHub Pages.
+
+Typst experiments live under each output's `typst/` folder. Compile from the repository root:
+
+```sh
+typst compile --root . outputs/<slug>/typst/main.typ outputs/<slug>/typst/index.pdf
+typst compile --root . --features html outputs/<slug>/typst/main.typ outputs/<slug>/typst/index.html
+```
+
+Typst HTML export is still marked incomplete by the compiler, so use the PDF output as the more stable Typst result.

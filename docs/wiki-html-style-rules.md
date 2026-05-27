@@ -23,7 +23,9 @@ outputs/YYYY-MM-DD-topic-slug/
 - Use numbered `h2` and `h3` headings.
 - Include a visible `nav.toc` table of contents.
 - On desktop, keep the table of contents fixed on the left while the article scrolls.
-- On narrower screens, return the table of contents to normal document flow above the body.
+- The desktop TOC box should end directly after the last TOC item. Do not stretch it to the bottom of the viewport unless the TOC is taller than the viewport.
+- Add a fixed bottom-right top button that jumps to the page top.
+- On mobile, hide the TOC in an off-canvas left drawer. After the reader scrolls down, show a transparent hamburger button at top-left with a short fade/dissolve transition. Tapping it opens the TOC.
 - Keep body width moderate. The page should feel like a readable article, not a wide dashboard.
 
 ## Layout Defaults
@@ -33,6 +35,7 @@ outputs/YYYY-MM-DD-topic-slug/
 - Body line height: around `1.7`.
 - Article max width: around `820-900px`.
 - Desktop left TOC width: around `240-280px`.
+- Desktop TOC: `position: fixed`, `top` set, no fixed `bottom`, and `max-height` constrained to the viewport.
 - Use simple borders and light gray surfaces.
 - Avoid decorative gradients, card-heavy layouts, and marketing-style sections.
 - Use cards only for repeated comparison items or source boxes.
