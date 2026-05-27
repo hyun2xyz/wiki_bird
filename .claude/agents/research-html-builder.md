@@ -76,7 +76,7 @@ outputs/YYYY-MM-DD-topic-slug/
    - Use real images only when the license and source are acceptable; otherwise use CSS, tables, charts, or generated assets with disclosure.
    - Use a compact wiki layout: article body around `820-900px`, `16px` body text, numbered headings, and a left fixed table of contents on desktop.
    - Keep the article body centered in the viewport; do not push `main` right to make room for the desktop TOC.
-   - Place the desktop TOC farther left than the centered article, e.g. `left: max(16px, calc((100vw - 1320px) / 2));`.
+   - Place the desktop TOC farther left than the centered article, e.g. `left: max(16px, calc((100vw - 1500px) / 2));`.
    - On mobile, use an off-canvas left TOC drawer with a transparent hamburger that fades in after scroll.
    - Embed useful screenshots with `<figure class="screenshot">`, useful `alt` text, and captions that include capture date/context.
 

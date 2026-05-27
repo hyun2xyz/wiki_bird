@@ -68,6 +68,7 @@ CHROME="$(find_chrome)" || {
 }
 
 mkdir -p "$(dirname "$OUTPUT_PATH")"
+rm -f "$OUTPUT_PATH"
 PROFILE_DIR="$(mktemp -d)"
 CHROME_LOG="$(mktemp)"
 cleanup() {

@@ -76,7 +76,7 @@ Minimum requirements:
 - Self-contained `index.html` with inline CSS and small inline JS only when needed.
 - Desktop TOC fixed on the left.
 - Article `main` stays centered in the viewport; do not push it right to make room for the TOC.
-- Desktop TOC sits farther left than the article, e.g. `left: max(16px, calc((100vw - 1320px) / 2));`.
+- Desktop TOC sits farther left than the article, e.g. `left: max(16px, calc((100vw - 1500px) / 2));`.
 - Desktop TOC box uses `height: fit-content`; do not set a fixed `bottom`.
 - Desktop TOC bottom padding is slightly larger than top padding for optical balance.
 - Mobile TOC is an off-canvas left drawer.

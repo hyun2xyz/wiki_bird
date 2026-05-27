@@ -38,7 +38,7 @@ outputs/YYYY-MM-DD-topic-slug/
 - Article max width: around `820-900px`.
 - Desktop left TOC width: around `240-280px`.
 - Desktop TOC: `position: fixed`, `top` set, no fixed `bottom`, `height: fit-content`, and slightly larger bottom padding than top padding for optical balance. Use `max-height` only as a fallback for very long TOCs.
-- Desktop TOC should sit farther left than the centered article. A good default is `left: max(16px, calc((100vw - 1320px) / 2));`.
+- Desktop TOC should sit farther left than the centered article. A good default is `left: max(16px, calc((100vw - 1500px) / 2));`.
 - Callout/key boxes should use the default very pale mint highlight (`#f0fff9`) with a soft mint border, not the older pale yellow note color.
 - Use simple borders and light gray surfaces.
 - Avoid decorative gradients, card-heavy layouts, and marketing-style sections.

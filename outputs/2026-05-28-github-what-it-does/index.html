@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="ko" id="top">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>GitHub가 뭘 하는 건지 - Wikibird</title>
+	<style>
+		:root {
+			color-scheme: light;
+			--text: #222;
+			--muted: #62676d;
+			--line: #aeb4bb;
+			--soft-line: #d8dde3;
+			--link: #2457b7;
+			--paper: #fff;
+			--surface: #f6f7f8;
+			--mark: #f0fff9;
+			--mark-line: #b7ead8;
+			--ink: #1f2933;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+
+		body {
+			margin: 0;
+			width: 100vw;
+			background: var(--paper);
+			color: var(--text);
+			font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+			font-size: 16px;
+			line-height: 1.72;
+			letter-spacing: 0;
+			overflow-x: hidden;
+		}
+
+		main {
+			width: 100%;
+			max-width: 880px;
+			margin: 0 auto;
+			padding: 30px 34px 72px;
+			overflow-wrap: anywhere;
+		}
+
+		header {
+			border-bottom: 2px solid var(--line);
+			margin-bottom: 26px;
+			padding-bottom: 18px;
+		}
+
+		h1 {
+			margin: 0 0 10px;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: clamp(34px, 4vw, 50px);
+			line-height: 1.08;
+			letter-spacing: 0;
+		}
+
+		.meta {
+			margin: 0;
+			color: var(--muted);
+			font-size: 14px;
+		}
+
+		h2, h3, h4 {
+			font-weight: 700;
+			line-height: 1.35;
+			letter-spacing: 0;
+		}
+
+		h2 {
+			margin: 40px 0 16px;
+			border-bottom: 2px solid var(--line);
+			padding-bottom: 8px;
+			font-size: 26px;
+		}
+
+		h3 {
+			margin: 30px 0 10px;
+			font-size: 21px;
+		}
+
+		p { margin: 0 0 18px; }
+
+		p, li, figcaption, .key {
+			max-width: 100%;
+			word-break: break-word;
+		}
+
+		a {
+			color: var(--link);
+			text-decoration-thickness: 1px;
+			text-underline-offset: 3px;
+			overflow-wrap: anywhere;
+			word-break: break-word;
+		}
+
+		code {
+			border: 1px solid var(--soft-line);
+			background: var(--surface);
+			padding: 1px 5px;
+			font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+			font-size: 0.92em;
+		}
+
+		.toc {
+			position: fixed;
+			top: 24px;
+			left: max(16px, calc((100vw - 1500px) / 2));
+			width: 270px;
+			height: fit-content;
+			max-height: calc(100vh - 48px);
+			overflow-y: auto;
+			border: 1px solid var(--line);
+			background: var(--surface);
+			margin: 0;
+			padding: 14px 16px 18px;
+			font-size: 14px;
+			line-height: 1.45;
+		}
+
+		.toc strong {
+			display: block;
+			margin-bottom: 10px;
+			font-size: 16px;
+		}
+
+		.toc ol {
+			margin: 0;
+			padding-left: 22px;
+		}
+
+		.toc li { margin: 5px 0; }
+		.toc li:last-child { margin-bottom: 0; }
+		.toc-level-3 {
+			margin-left: 12px;
+			font-size: 0.95em;
+		}
+
+		.key {
+			background: var(--mark);
+			border: 1px solid var(--mark-line);
+			padding: 14px 16px;
+			margin: 22px 0 26px;
+			overflow-wrap: anywhere;
+		}
+
+		.key p:last-child { margin-bottom: 0; }
+
+		.flow {
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+			gap: 10px;
+			margin: 22px 0 30px;
+		}
+
+		.flow div {
+			border: 1px solid var(--line);
+			background: #fff;
+			padding: 13px 12px;
+			min-height: 132px;
+		}
+
+		.flow b {
+			display: block;
+			margin-bottom: 5px;
+			font-size: 15px;
+		}
+
+		.flow span {
+			color: var(--muted);
+			font-size: 14px;
+			line-height: 1.5;
+		}
+
+		.table-wrap {
+			overflow-x: auto;
+			margin: 18px 0 28px;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			min-width: 720px;
+			font-size: 14px;
+			line-height: 1.55;
+		}
+
+		th, td {
+			border: 1px solid var(--soft-line);
+			padding: 9px 10px;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		th { background: var(--surface); }
+
+		.screenshot {
+			margin: 24px 0 30px;
+		}
+
+		.screenshot img {
+			display: block;
+			width: 100%;
+			max-width: 100%;
+			height: auto;
+			border: 1px solid var(--line);
+			background: #fff;
+		}
+
+		.screenshot figcaption {
+			margin-top: 8px;
+			color: var(--muted);
+			font-size: 13px;
+			line-height: 1.5;
+		}
+
+		ul, ol {
+			margin: 0 0 16px 22px;
+			padding: 0;
+		}
+
+		li { margin: 5px 0; overflow-wrap: anywhere; }
+		.sources li { margin-bottom: 9px; }
+
+		.top-button,
+		.mobile-menu-button {
+			position: fixed;
+			z-index: 30;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 42px;
+			height: 42px;
+			border: 1px solid rgba(34, 34, 34, 0.34);
+			background: rgba(255, 255, 255, 0.72);
+			color: var(--text);
+			text-decoration: none;
+			backdrop-filter: blur(8px);
+			-webkit-backdrop-filter: blur(8px);
+		}
+
+		.top-button {
+			right: 18px;
+			bottom: 18px;
+			font-size: 20px;
+			line-height: 1;
+		}
+
+		.mobile-menu-button {
+			top: 12px;
+			left: 12px;
+			display: none;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 180ms ease;
+		}
+
+		.mobile-menu-button span {
+			position: absolute;
+			width: 19px;
+			height: 1px;
+			background: currentColor;
+		}
+
+		.mobile-menu-button span:nth-child(1) { transform: translateY(-6px); }
+		.mobile-menu-button span:nth-child(3) { transform: translateY(6px); }
+		.menu-backdrop { display: none; }
+
+		footer {
+			margin-top: 44px;
+			border-top: 1px solid var(--soft-line);
+			padding-top: 14px;
+			color: var(--muted);
+			font-size: 14px;
+		}
+
+		@media (max-width: 1179px) {
+			.toc {
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				z-index: 25;
+				width: min(82vw, 320px);
+				max-height: none;
+				margin: 0;
+				padding: 58px 18px 20px;
+				font-size: 15px;
+				background: rgba(246, 247, 248, 0.96);
+				box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+				transform: translateX(-105%);
+				transition: transform 200ms ease;
+			}
+
+			body.toc-open .toc { transform: translateX(0); }
+
+			.mobile-menu-button { display: inline-flex; }
+			.mobile-menu-button.is-visible,
+			body.toc-open .mobile-menu-button {
+				opacity: 1;
+				pointer-events: auto;
+			}
+
+			.menu-backdrop {
+				position: fixed;
+				inset: 0;
+				z-index: 20;
+				display: block;
+				background: rgba(255, 255, 255, 0.34);
+				opacity: 0;
+				pointer-events: none;
+				transition: opacity 200ms ease;
+			}
+
+			body.toc-open .menu-backdrop {
+				opacity: 1;
+				pointer-events: auto;
+			}
+		}
+
+		@media (max-width: 760px) {
+			main {
+				max-width: 100vw;
+				padding: 24px 18px 56px;
+			}
+			h1 { font-size: 34px; }
+			h2 { font-size: 23px; }
+			h3 { font-size: 19px; }
+			.flow { grid-template-columns: 1fr; }
+		}
+
+		@media print {
+			.toc, .top-button, .mobile-menu-button, .menu-backdrop { display: none !important; }
+			main { max-width: none; margin: 0; padding: 0; }
+			a { color: #000; }
+		}
+	</style>
+</head>
+<body>
+	<button class="mobile-menu-button" type="button" aria-label="목차 열기" aria-expanded="false">
+		<span></span><span></span><span></span>
+	</button>
+	<div class="menu-backdrop" aria-hidden="true"></div>
+	<a class="top-button" href="#top" aria-label="최상단으로 이동">↑</a>
+
+	<main>
+		<header>
+			<h1>GitHub가 뭘 하는 건지</h1>
+			<p class="meta">Wikibird 리서치. 공식 GitHub 자료 기준, 확인일: 2026-05-28.</p>
+		</header>
+
+		<nav class="toc" aria-label="목차">
+			<strong>목차</strong>
+			<ol>
+				<li class="toc-level-2"><a href="#summary">1. 한 줄 결론</a></li>
+				<li class="toc-level-2"><a href="#short">2. 제일 짧게 말하면</a></li>
+				<li class="toc-level-2"><a href="#git-vs-github">3. Git과 GitHub는 다르다</a></li>
+				<li class="toc-level-2"><a href="#flow">4. 개발 흐름으로 보면</a></li>
+				<li class="toc-level-2"><a href="#features">5. GitHub가 하는 일</a></li>
+				<li class="toc-level-3"><a href="#repo">5.1. 저장소</a></li>
+				<li class="toc-level-3"><a href="#collab">5.2. 협업과 리뷰</a></li>
+				<li class="toc-level-3"><a href="#automation">5.3. 자동화</a></li>
+				<li class="toc-level-3"><a href="#security">5.4. 보안</a></li>
+				<li class="toc-level-3"><a href="#ai">5.5. AI</a></li>
+				<li class="toc-level-2"><a href="#why">6. 왜 많이 쓰나</a></li>
+				<li class="toc-level-2"><a href="#misunderstandings">7. 헷갈리기 쉬운 점</a></li>
+				<li class="toc-level-2"><a href="#sources">8. 참고한 자료</a></li>
+			</ol>
+		</nav>
+
+		<section id="summary">
+			<h2>1. 한 줄 결론</h2>
+			<div class="key">
+				<p><strong>GitHub는 코드를 올려두는 창고이면서, 개발팀이 코드를 바꾸고 검토하고 자동으로 테스트/배포하고 안전하게 관리하는 작업장이다.</strong></p>
+			</div>
+			<p>처음에는 “개발자용 Google Drive”라고 생각해도 된다. 다만 정확히는 Drive보다 훨씬 개발 쪽에 특화되어 있다. 파일을 그냥 보관하는 게 아니라, 누가 언제 무엇을 바꿨는지 남기고, 그 변경을 리뷰하고, 문제가 없는지 자동으로 검사하고, 필요하면 서버에 배포하는 흐름까지 이어 준다.</p>
+			<p>GitHub 공식 문서는 GitHub를 “코드를 저장, 공유, 함께 작업하는 클라우드 기반 플랫폼”이라고 설명한다. 회사 소개 페이지에서는 “secure software”를 만들고 전달하는 개발자 플랫폼이라고 더 넓게 잡는다.</p>
+
+			<figure class="screenshot">
+				<img src="assets/screenshots/01-github-about.png" alt="GitHub About page showing developer platform message and usage scale">
+				<figcaption>GitHub About 페이지 Chrome 캡처. GitHub는 자신을 secure software를 만들고 전달하는 개발자 플랫폼으로 소개한다. 캡처일: 2026-05-28.</figcaption>
+			</figure>
+		</section>
+
+		<section id="short">
+			<h2>2. 제일 짧게 말하면</h2>
+			<p>GitHub는 개발 프로젝트의 “작업 기록장 + 공유 폴더 + 검토실 + 자동화 장치”에 가깝다.</p>
+			<p>혼자 쓰면 백업과 이력 관리가 된다. 팀이 쓰면 “이 변경을 넣어도 되는가?”를 같이 검토하는 공간이 된다. 회사가 쓰면 개발, 보안, 배포, 권한 관리를 한 플랫폼 안에서 이어 붙이는 기반이 된다.</p>
+
+			<div class="table-wrap">
+				<table>
+					<thead>
+						<tr>
+							<th>비유</th>
+							<th>GitHub에서 실제로 하는 일</th>
+							<th>왜 중요한가</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>공유 폴더</td>
+							<td>repository에 프로젝트 파일을 저장하고 공유한다.</td>
+							<td>내 컴퓨터에만 있던 코드를 팀과 세상에 보여줄 수 있다.</td>
+						</tr>
+						<tr>
+							<td>작업 기록장</td>
+							<td>commit으로 변경 이력을 남긴다.</td>
+							<td>누가 뭘 바꿨는지 추적하고, 문제가 생기면 되돌릴 수 있다.</td>
+						</tr>
+						<tr>
+							<td>검토실</td>
+							<td>pull request에서 변경 내용을 리뷰한다.</td>
+							<td>코드를 바로 섞지 않고, 검토 후 합칠 수 있다.</td>
+						</tr>
+						<tr>
+							<td>작업판</td>
+							<td>Issues와 Projects로 버그, 기능, 할 일을 추적한다.</td>
+							<td>코드뿐 아니라 “무엇을 해야 하는지”도 관리된다.</td>
+						</tr>
+						<tr>
+							<td>자동화 장치</td>
+							<td>Actions로 테스트, 빌드, 배포를 자동 실행한다.</td>
+							<td>사람이 매번 손으로 확인하던 일을 반복 가능하게 만든다.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<section id="git-vs-github">
+			<h2>3. Git과 GitHub는 다르다</h2>
+			<p>여기서 많이 헷갈린다. <strong>Git</strong>은 버전 관리 시스템이다. 내 컴퓨터 안에서도 쓸 수 있다. 파일 변경 이력을 남기고, 브랜치를 만들고, 이전 상태로 돌아갈 수 있게 해준다.</p>
+			<p><strong>GitHub</strong>는 Git을 웹 위에서 협업하기 좋게 만든 플랫폼이다. Git이 “기록하는 기술”이라면, GitHub는 그 기록을 팀원들과 공유하고 검토하고 자동화하는 장소다.</p>
+
+			<figure class="screenshot">
+				<img src="assets/screenshots/02-github-docs-about.png" alt="GitHub Docs page explaining GitHub and Git">
+				<figcaption>GitHub Docs의 “About GitHub and Git” 페이지 Chrome 캡처. 공식 문서는 GitHub와 Git을 함께 쓰면 협업할 수 있다고 설명한다. 캡처일: 2026-05-28.</figcaption>
+			</figure>
+		</section>
+
+		<section id="flow">
+			<h2>4. 개발 흐름으로 보면</h2>
+			<p>GitHub의 핵심은 “코드가 바뀌는 흐름”을 정리하는 데 있다. 대충 이런 식이다.</p>
+			<div class="flow" aria-label="GitHub 개발 흐름">
+				<div>
+					<b>1. 저장소</b>
+					<span>프로젝트 파일을 repository에 둔다.</span>
+				</div>
+				<div>
+					<b>2. 브랜치</b>
+					<span>새 기능이나 수정은 별도 branch에서 작업한다.</span>
+				</div>
+				<div>
+					<b>3. 커밋</b>
+					<span>변경 단위를 commit으로 기록한다.</span>
+				</div>
+				<div>
+					<b>4. PR</b>
+					<span>pull request로 변경을 보여주고 리뷰받는다.</span>
+				</div>
+				<div>
+					<b>5. 자동화</b>
+					<span>Actions가 테스트/빌드/배포를 돌린다.</span>
+				</div>
+			</div>
+			<p>이 흐름 덕분에 “내가 수정한 파일을 그냥 덮어쓰기”가 아니라, 변경의 이유와 결과가 남는다. 프로젝트가 커질수록 이 차이가 커진다.</p>
+		</section>
+
+		<section id="features">
+			<h2>5. GitHub가 하는 일</h2>
+			<h3 id="repo">5.1. 저장소: 프로젝트의 집</h3>
+			<p>GitHub의 기본 단위는 repository다. 코드, 문서, 설정 파일, 이미지, 릴리스 파일 등이 들어간다. 공식 문서도 repository를 프로젝트 파일을 저장하고 협업하는 공간으로 설명한다.</p>
+			<p>중요한 건 그냥 파일 보관이 아니라 “변경 이력”이다. 같은 파일이 계속 바뀌어도 어떤 변경이 언제 들어갔는지 남는다. 이게 개발에서 꽤 결정적이다.</p>
+
+			<h3 id="collab">5.2. 협업과 리뷰: 바로 합치지 않는다</h3>
+			<p>GitHub에서 팀 작업은 보통 branch와 pull request를 중심으로 돈다. 누군가 기능을 만들면 바로 메인 코드에 넣지 않고, PR로 “이 변경을 넣어도 될까요?”라고 올린다.</p>
+			<p>팀원은 코드 차이를 보고 댓글을 달거나 수정 요청을 한다. 테스트가 통과하고 리뷰가 끝나면 merge한다. 그래서 GitHub는 코드 저장소인 동시에 코드 리뷰 공간이다.</p>
+
+			<h3 id="automation">5.3. 자동화: 사람이 반복하던 일을 Actions가 한다</h3>
+			<p>GitHub Actions는 repository 안에서 workflow를 자동으로 실행한다. 공식 문서는 Actions가 소프트웨어 개발 workflow를 자동화, 커스터마이즈, 실행한다고 설명한다.</p>
+			<p>예를 들어 PR이 열릴 때마다 테스트를 돌리고, main branch에 merge되면 웹사이트를 배포하고, 새 release가 만들어지면 패키지를 발행하게 할 수 있다. “매번 사람이 터미널에서 돌리던 검사”를 GitHub 안으로 올리는 셈이다.</p>
+
+			<h3 id="security">5.4. 보안: 코드와 secret을 지킨다</h3>
+			<p>GitHub는 보안 기능도 꽤 넓게 갖고 있다. dependency graph, SBOM, GitHub Advisory Database, Dependabot alerts, push protection 같은 기능이 공식 문서에 정리되어 있다.</p>
+			<p>예를 들어 의존성 패키지에 취약점이 발견되면 Dependabot이 알려주고, secret이 코드에 들어가려 하면 push protection이 막을 수 있다. 코드를 저장하는 곳이기 때문에, 코드가 위험해지는 순간도 같이 잡으려는 구조다.</p>
+
+			<h3 id="ai">5.5. AI: Copilot이 붙으면서 방향이 넓어졌다</h3>
+			<p>요즘 GitHub를 볼 때 Copilot을 빼면 설명이 살짝 낡는다. 공식 문서 기준 GitHub Copilot은 Chat, inline suggestions, PR summaries, CLI, code review, IDE agent mode, Spark, Spaces, MCP servers, agent skills 등을 포함한다.</p>
+			<p>특히 Copilot cloud agent는 GitHub 안에서 repository를 조사하고, 구현 계획을 만들고, branch에 코드를 고치고, pull request까지 만들 수 있는 방향으로 설명된다. GitHub가 “코드 저장소”에서 “AI가 작업하는 개발 플랫폼”으로 확장되고 있다는 뜻이다.</p>
+		</section>
+
+		<section id="why">
+			<h2>6. 왜 많이 쓰나</h2>
+			<p>GitHub가 많이 쓰이는 이유는 단순히 유명해서가 아니다. 코드 개발에서 필요한 여러 행위가 한 흐름으로 붙어 있기 때문이다.</p>
+			<ul>
+				<li>코드를 저장하고 공유한다.</li>
+				<li>변경 이력을 남긴다.</li>
+				<li>브랜치로 안전하게 실험한다.</li>
+				<li>Pull Request로 검토하고 합친다.</li>
+				<li>Issues와 Projects로 할 일을 추적한다.</li>
+				<li>Actions로 테스트와 배포를 자동화한다.</li>
+				<li>Dependabot, secret scanning, code scanning 같은 기능으로 위험을 줄인다.</li>
+				<li>Copilot으로 코드 작성, 리뷰, agent 작업까지 붙인다.</li>
+			</ul>
+			<p>그래서 GitHub는 개인 포트폴리오에도 쓰이고, 오픈소스 프로젝트에도 쓰이고, 회사 개발팀의 업무 시스템으로도 쓰인다. About 페이지 기준 GitHub는 180M+ developers, 4M+ organizations, 420M+ repositories, Fortune 100의 90% 사용 수치를 제시한다.</p>
+		</section>
+
+		<section id="misunderstandings">
+			<h2>7. 헷갈리기 쉬운 점</h2>
+			<h3>GitHub는 코드를 대신 잘 만들어주는 곳인가?</h3>
+			<p>기본적으로는 아니다. GitHub의 핵심은 코드의 저장, 협업, 리뷰, 자동화다. 다만 Copilot이 붙으면서 코드 작성 보조와 agent 작업까지 들어왔다. 그러니까 “원래는 협업 플랫폼, 지금은 AI 개발 도구까지 붙은 플랫폼” 정도로 보면 된다.</p>
+
+			<h3>GitHub에 올리면 무조건 공개되나?</h3>
+			<p>아니다. repository는 public 또는 private으로 만들 수 있다. 공개 오픈소스 프로젝트는 public을 쓰고, 개인/회사 내부 코드는 private을 쓴다.</p>
+
+			<h3>개발자가 아니면 쓸 일이 없나?</h3>
+			<p>주 사용자는 개발자지만, 문서, 강의 자료, 데이터, 디자인 시스템, 연구 노트처럼 버전 관리가 필요한 자료에도 쓸 수 있다. 다만 GitHub의 언어와 인터페이스는 개발 흐름에 맞춰져 있어서 처음엔 낯설 수 있다.</p>
+
+			<h3>Google Drive와 뭐가 다른가?</h3>
+			<p>Drive는 파일 공유에 강하고, GitHub는 변경 이력과 협업 절차에 강하다. 특히 “이 변경을 리뷰하고, 테스트하고, 합친다”는 흐름은 GitHub 쪽이 훨씬 강하다.</p>
+		</section>
+
+		<section id="sources">
+			<h2>8. 참고한 자료</h2>
+			<ul class="sources">
+				<li><a href="https://github.com/about/">About GitHub</a>, GitHub, checked 2026-05-28.</li>
+				<li><a href="https://docs.github.com/en/get-started/start-your-journey/about-github-and-git">About GitHub and Git</a>, GitHub Docs, checked 2026-05-28.</li>
+				<li><a href="https://github.com/features">GitHub Features</a>, GitHub, checked 2026-05-28.</li>
+				<li><a href="https://docs.github.com/en/repositories/creating-and-managing-repositories">Creating and managing repositories</a>, GitHub Docs, checked 2026-05-28.</li>
+				<li><a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues">About issues</a>, GitHub Docs, checked 2026-05-28.</li>
+				<li><a href="https://docs.github.com/en/actions">GitHub Actions documentation</a>, GitHub Docs, checked 2026-05-28.</li>
+				<li><a href="https://docs.github.com/en/code-security/getting-started/github-security-features">GitHub security features</a>, GitHub Docs, checked 2026-05-28.</li>
+				<li><a href="https://docs.github.com/en/copilot/get-started/features">GitHub Copilot features</a>, GitHub Docs, checked 2026-05-28.</li>
+				<li><a href="https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent">About GitHub Copilot cloud agent</a>, GitHub Docs, checked 2026-05-28.</li>
+			</ul>
+		</section>
+
+		<footer>
+			<p>Wikibird output. Source freshness checked 2026-05-28.</p>
+		</footer>
+	</main>
+
+	<script>
+		const body = document.body;
+		const menuButton = document.querySelector('.mobile-menu-button');
+		const backdrop = document.querySelector('.menu-backdrop');
+		const toc = document.querySelector('.toc');
+
+		function setOpen(open) {
+			body.classList.toggle('toc-open', open);
+			menuButton.setAttribute('aria-expanded', String(open));
+		}
+
+		function updateButton() {
+			menuButton.classList.toggle('is-visible', window.scrollY > 120);
+		}
+
+		menuButton.addEventListener('click', () => setOpen(!body.classList.contains('toc-open')));
+		backdrop.addEventListener('click', () => setOpen(false));
+		toc.addEventListener('click', (event) => {
+			if (event.target.closest('a')) setOpen(false);
+		});
+		window.addEventListener('scroll', updateButton, { passive: true });
+		updateButton();
+	</script>
+</body>
+</html>
