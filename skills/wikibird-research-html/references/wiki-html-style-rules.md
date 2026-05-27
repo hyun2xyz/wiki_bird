@@ -10,11 +10,13 @@ The target is a compact, readable wiki page: factual, easy to scan, and closer t
 - Use numbered `h2` and `h3` headings.
 - Include a visible `nav.toc` table of contents.
 - Keep body width around `820-900px`.
+- Keep `main` centered with `margin: 0 auto`; do not offset the article for the desktop TOC.
 
 ## Desktop TOC
 
 - Use `position: fixed`.
 - Set `top`.
+- Place it farther left than the centered article. A good default is `left: max(16px, calc((100vw - 1320px) / 2));`.
 - Do not set a fixed `bottom`.
 - Use `height: fit-content`.
 - Use `max-height` only as a fallback for very long TOCs.

@@ -23,6 +23,7 @@ outputs/YYYY-MM-DD-topic-slug/
 - Use numbered `h2` and `h3` headings.
 - Include a visible `nav.toc` table of contents.
 - On desktop, keep the table of contents fixed on the left while the article scrolls.
+- Keep the article itself centered in the viewport. Do not offset `main` to compensate for the TOC.
 - The desktop TOC box should end directly after the last TOC item. Do not stretch it to the bottom of the viewport unless the TOC is taller than the viewport.
 - Add a fixed bottom-right top button that jumps to the page top.
 - On mobile, hide the TOC in an off-canvas left drawer. After the reader scrolls down, show a transparent hamburger button at top-left with a short fade/dissolve transition. Tapping it opens the TOC.
@@ -36,6 +37,7 @@ outputs/YYYY-MM-DD-topic-slug/
 - Article max width: around `820-900px`.
 - Desktop left TOC width: around `240-280px`.
 - Desktop TOC: `position: fixed`, `top` set, no fixed `bottom`, `height: fit-content`, and slightly larger bottom padding than top padding for optical balance. Use `max-height` only as a fallback for very long TOCs.
+- Desktop TOC should sit farther left than the centered article. A good default is `left: max(16px, calc((100vw - 1320px) / 2));`.
 - Callout/key boxes should use the default very pale mint highlight (`#f0fff9`) with a soft mint border, not the older pale yellow note color.
 - Use simple borders and light gray surfaces.
 - Avoid decorative gradients, card-heavy layouts, and marketing-style sections.

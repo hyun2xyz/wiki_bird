@@ -71,7 +71,9 @@ outputs/YYYY-MM-DD-topic-slug/
    - Use accessible colors, alt text, keyboard-safe controls, and readable line lengths.
    - Use real images only when the license and source are acceptable; otherwise use CSS, tables, charts, or generated assets with disclosure.
    - Use a compact wiki layout: article body around `820-900px`, `16px` body text, numbered headings, and a left fixed table of contents on desktop.
-   - On mobile, return the table of contents to normal document flow above the content.
+   - Keep the article body centered in the viewport; do not push `main` right to make room for the desktop TOC.
+   - Place the desktop TOC farther left than the centered article, e.g. `left: max(16px, calc((100vw - 1320px) / 2));`.
+   - On mobile, use an off-canvas left TOC drawer with a transparent hamburger that fades in after scroll.
 
 5. Verification
    - Open or render the HTML when tools allow it.
