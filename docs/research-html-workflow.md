@@ -6,7 +6,7 @@ This document is the reusable playbook for turning research into a static HTML p
 
 Create a trustworthy, source-backed wiki-style HTML artifact from a research question or topic. The output should be easy to open locally, publish on GitHub Pages, or adapt into another site.
 
-For this repository, use `ex.html` and `docs/wiki-html-style-rules.md` as the default format guide.
+For this repository, use `docs/wiki-html-style-rules.md` as the default format guide.
 
 ## Default File Structure
 
@@ -29,12 +29,23 @@ Before researching, capture:
 - Topic or question.
 - Audience.
 - Desired language and tone.
+- Research depth: `하`, `중`, or `상`. Default is `중`.
 - Required output path.
 - Deadline or freshness requirement.
 - Must-use or banned sources.
 - Whether the page is informational, persuasive, instructional, or comparative.
 
 If the topic includes current facts, do live verification.
+
+Depth settings:
+
+| Depth | Sources | Screenshots | Best for |
+| --- | --- | --- | --- |
+| `하` | 3-5 | 1-2 | Quick orientation or short note. |
+| `중` | 6-10 | 3-5 | Default Wikibird page. |
+| `상` | 10+ where available | 5-8 | Person/company/technology history, serious study notes, complex comparisons. |
+
+Record the selected depth in `research.md`.
 
 ## Phase 2: Source Map
 
@@ -66,10 +77,13 @@ Default capture rules:
 
 - Create `assets/screenshots/`.
 - Prefer screenshots from primary sources: official product pages, official docs, grant/application pages, standards, paper landing pages, or the rendered final HTML page.
-- For visual/product/tool research, capture 2-4 screenshots when useful.
+- Match screenshot count to research depth: `하` 1-2, `중` 3-5, `상` 5-8 when useful public visual sources exist.
+- For people, products, tools, places, books, courses, companies, and visual-reference research, include enough images that the page is not text-only.
 - Use desktop viewport around `1440x1000` unless the topic is mobile-first.
 - Record URL, capture date, viewport, and purpose in `research.md`.
+- Add an image coverage note to `research.md`: captured, intentionally skipped, failed.
 - Embed selected screenshots in `index.html` as real `<figure>` blocks.
+- Do not screenshot every keyword. Capture images that anchor important sections and help the reader understand the subject.
 
 If the agent has a native Chrome/browser tool, use that first. If not, use the bundled helper:
 
@@ -80,6 +94,17 @@ skills/wikibird-research-html/scripts/capture-chrome-screenshot.sh \
 ```
 
 Do not screenshot private dashboards, personal data, paid source text, cookies, passwords, or logged-in account pages unless the user explicitly asks and the result is safe to publish.
+
+### Person Profile Baseline
+
+When the topic is a person, research the basic profile before the larger interpretation:
+
+- Full name, common name, occupation/role, and why they matter.
+- Birth date or age, birthplace, nationality/background, and education when reliable public sources support it.
+- Current affiliation and major career timeline.
+- Public face/appearance reference from an official bio, personal site, university/company profile, conference page, or reputable public page when available.
+- Representative work screenshots: official project, course, paper, company/product, lecture, or talk page.
+- If a profile fact is not reliably available, say it is not confirmed.
 
 ## Phase 3: Claim Ledger
 
@@ -128,6 +153,7 @@ Default requirements:
 - Source links visible in the page.
 - Works at mobile and desktop widths.
 - Compact wiki layout with a left fixed table of contents on desktop.
+- Source section heading is `출처`.
 - Namuwiki-adjacent Korean tone: direct, human, plain, and lightly explanatory.
 
 Quality checks:
@@ -142,6 +168,8 @@ Quality checks:
 
 ## Phase 6: QA
 
+After writing a research output, run `node scripts/build-index.js` from the repo root. The generated root `index.html` is a local-only list of Wikibird outputs.
+
 Record checks in `qa.md`:
 
 ```md
@@ -155,6 +183,9 @@ Record checks in `qa.md`:
 - Desktop left TOC checked: yes/no
 - Chrome screenshots captured: yes/no
 - Screenshot figures embedded: yes/no
+- Depth recorded: yes/no
+- Screenshot count matches depth: yes/no
+- Person profile baseline checked: yes/no/not applicable
 - Known limits:
 ```
 

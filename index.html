@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko" id="top">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Wikibird Index</title>
+	<style>
+		:root {
+			color-scheme: light;
+			--text: #222;
+			--muted: #4a4a4a;
+			--link: #2f6de0;
+			--paper: #fff;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			background: var(--paper);
+			color: var(--text);
+			font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+			font-size: 22px;
+			line-height: 1.55;
+			letter-spacing: 0;
+		}
+
+		main {
+			max-width: 1180px;
+			margin: 0;
+			padding: 18px 24px 56px;
+			word-break: keep-all;
+			overflow-wrap: break-word;
+		}
+
+		a {
+			color: var(--link);
+			text-decoration: none;
+			text-underline-offset: 3px;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+		ol {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		li {
+			display: flex;
+			gap: 32px;
+			align-items: baseline;
+			margin: 4px 0;
+		}
+
+		time {
+			flex: 0 0 225px;
+			color: var(--muted);
+		}
+
+		@media (max-width: 760px) {
+			body { font-size: 18px; }
+			main { padding: 14px 16px 42px; }
+			li {
+				display: block;
+				margin: 10px 0;
+			}
+			time {
+				display: block;
+				margin-bottom: 1px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<ol aria-label="Wikibird 리서치 목록">
+			<li><time>28 May, 2026</time><a href="outputs/2026-05-28-wikibird-manual/index.html">Wikibird 사용 설명서</a></li>
+		</ol>
+	</main>
+</body>
+</html>

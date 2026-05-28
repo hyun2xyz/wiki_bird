@@ -4,12 +4,39 @@ description: "Research a topic with current, source-backed information and turn 
 license: MIT
 metadata:
   author: hyun2xyz
-  version: "0.1.1"
+  version: "0.1.3"
 ---
 
 # Wikibird Research HTML
 
 Use this skill when the user wants a researched topic turned into a readable wiki-style artifact, especially in Korean.
+
+## Activation Voice
+
+When this skill is active, every assistant conversational reply to the user must end with `짹`.
+
+Examples:
+
+- `정리해 드릴게요 짹`
+- `완료했습니다 짹`
+
+Do not add `짹` inside code blocks, file contents, source titles, quotes, citations, or generated article body unless the user explicitly asks for that artifact itself to use the bird voice.
+
+## User Settings
+
+Accept these optional user settings in Korean or English. If the user does not specify a setting, use the default.
+
+| Setting | Values | Default | Meaning |
+| --- | --- | --- | --- |
+| `리서치 깊이` / `research depth` | `하`, `중`, `상` | `중` | Controls source count, detail level, image count, and QA strictness. |
+
+Depth rules:
+
+- `하`: quick wiki note. Use about 3-5 reliable sources, 1-2 screenshots, and a compact page with the essential flow only.
+- `중`: normal Wikibird output. Use about 6-10 sources, 3-5 screenshots, a source map, claim ledger, timeline/table when useful, and a complete source section.
+- `상`: deep study output. Use 10+ sources where available, 5-8 screenshots or visual figures, stronger cross-checking, richer timeline/context, common misunderstandings, and a more explicit claim ledger.
+
+When the user says "가볍게", "짧게", or "빠르게", treat it as `하`. When the user says "쭉", "제대로", "공부용", "깊게", "상세히", or asks about a person/company/technology history, prefer `중` or `상` depending on scope.
 
 ## Outputs
 
@@ -36,12 +63,25 @@ Typst output is optional. Produce it when the user asks for PDF, print, Typst, c
 - Use live research for current facts, product details, people, companies, laws, prices, versions, schedules, or recommendations.
 - Prefer official, primary, institutional, standards, paper, release-note, or direct-source material.
 - Use secondary sources for interpretation and context, not as the sole basis for important claims.
+- Apply the selected `리서치 깊이` before gathering sources. Record the chosen depth in `research.md`.
+- Add an image coverage note to `research.md`: which screenshots were captured, which important visual sources were skipped, and why.
 - Record a source map and claim ledger in `research.md`.
 - Capture at least one Chrome screenshot for every research HTML page, preferably from a primary source or from the rendered final page.
 - Save screenshots under `assets/screenshots/` and record the URL, capture date, viewport, and purpose in `research.md`.
 - Use exact dates rather than "recently" or "now".
 - If sources conflict, show the conflict and avoid forced certainty.
 - Never invent citations, quotes, images, dates, source titles, or access status.
+
+## People / Profile Research
+
+When researching a person, do not only summarize their ideas or projects. Build a basic profile first:
+
+- Full name, common name, occupation/role, and why they matter.
+- Birth date or age, birthplace, nationality/background, and education when reliable public sources support it.
+- Current affiliation and major career timeline.
+- Public face/appearance reference when safe and available: prefer an official bio page, personal site, university/company profile, conference page, or other reputable public page shown as a Chrome screenshot. Do not scrape private social photos or private personal data.
+- Representative work images: official project page, paper/course page, company/product page, lecture page, or public talk page.
+- If a basic profile fact is unavailable or conflicts across sources, say so plainly instead of filling the gap.
 
 ## Writing Style
 
@@ -82,9 +122,14 @@ Minimum requirements:
 - Mobile TOC is an off-canvas left drawer.
 - Mobile transparent hamburger appears after scroll with a short fade.
 - Bottom-right top button jumps to the page top.
-- Key/callout boxes use very pale mint (`#f0fff9`) with soft mint border (`#b7ead8`).
+- `h1` uses the Korean gothic/system sans stack, not a serif title font. Use a slightly smaller scale and open line-height so long Korean/English mixed titles do not look cramped. A good default is `font-size: clamp(30px, 3.4vw, 42px); line-height: 1.18;`.
+- Key/callout blocks use a quiet left border, like an editorial note. Do not use full mint box backgrounds for the main summary/caption block.
+- Korean prose uses word-based wrapping: `word-break: keep-all`, `overflow-wrap: break-word`, and `hyphens: auto`. Links keep word-based wrapping; code and long tokens may use stronger breaking.
+- Section body content is slightly indented under the heading line. Headings stay aligned; direct section children such as paragraphs, lists, key notes, figures, tables, timelines, and flow blocks get about `10px` left offset, reset on mobile.
 - Include screenshot figures in the article body when they help the reader understand the topic. Use real `<figure>` and `<figcaption>` elements with useful `alt` text.
-- Source links are visible in a final source section.
+- Source links are visible in a final source section titled `출처`.
+- Include a small link back to the local root `index.html` on generated wiki pages when the relative path is known.
+- After creating or updating a research output under `outputs/`, refresh the local root index with `node scripts/build-index.js`.
 
 ## Chrome Screenshot Rules
 
@@ -93,7 +138,10 @@ Use Chrome access when available. Prefer the agent's native Chrome/browser tool 
 Default screenshot contract:
 
 - Capture at least one image for every research HTML output.
-- For product, tool, website, documentation, grant, policy, or visual-reference research, capture 2-4 screenshots from the most relevant primary pages when possible.
+- Match screenshot count to research depth: `하` 1-2, `중` 3-5, `상` 5-8 when sources provide useful visual evidence.
+- For product, tool, website, documentation, grant, policy, person, place, book, course, or visual-reference research, capture the most relevant primary pages when possible.
+- For person research, include at least one visual/profile source and at least one representative work/source page when available.
+- Do not screenshot every keyword mechanically. Prefer screenshots that anchor major sections: profile, timeline, official source, representative work, comparison surface, or final render.
 - Save images as `assets/screenshots/01-short-name.png`, `02-short-name.png`, etc.
 - Embed selected screenshots in `index.html` with `figure.screenshot`.
 - Do not screenshot private dashboards, personal data, paid content, cookies, passwords, or anything the user has not asked to include.
@@ -115,6 +163,8 @@ Before completion:
 - Check mobile hamburger visibility after scroll and drawer open behavior.
 - Check visible source section.
 - Check external source links when network tools allow it.
+- Check selected depth is recorded and screenshot count roughly matches the chosen depth.
+- For people, check basic profile fields and public visual/profile evidence are included or explicitly marked unavailable.
 - Record results in `qa.md`.
 
 ## Resources

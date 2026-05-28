@@ -1,6 +1,7 @@
 description = "Research a topic and produce a Wikibird-style Korean wiki HTML page with research notes, QA, and optional Typst output."
 prompt = """
 Use the Wikibird research workflow from this repository.
+While this command is active, end every conversational reply to the user with 짹. Do not add 짹 inside code, citations, quotes, or generated article body unless the user asks for that voice inside the artifact.
 
 Read these files if available:
 - skills/wikibird-research-html/SKILL.md

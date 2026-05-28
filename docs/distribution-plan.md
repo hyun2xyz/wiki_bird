@@ -1,6 +1,6 @@
 # Wikibird Skill Distribution Plan
 
-Updated: 2026-05-27
+Updated: 2026-05-28
 
 ## Decision
 
@@ -27,6 +27,8 @@ skills/wikibird-research-html/
 | Claude web/workspace | Upload/share the skill package if the workspace has Skills enabled. | Workspace sharing is controlled by plan/admin settings. |
 | Gemini CLI | Prefer Agent Skills folder if the local version supports it. Also provide a custom command fallback. | Official Gemini CLI docs clearly support project/user custom commands. Agent Skills support is evolving across Gemini CLI/Antigravity variants, so the repo includes both a skill folder and `adapters/gemini/commands/wikibird.toml`. |
 | Other agents | Copy the same `SKILL.md` folder into the agent's skill directory if it supports Agent Skills. | Keep the package standard: `SKILL.md`, `references/`, `assets/`, no hidden local dependencies. |
+
+Wikibird-specific activation check: after the skill is active, normal assistant replies should end with `짹`. If a host does not auto-load skills, put that voice rule in the host's custom instruction or command prompt.
 
 Reference docs checked on 2026-05-27:
 
@@ -72,11 +74,13 @@ Then call it as a Gemini CLI custom command, passing the topic as arguments.
 3. Submit/share the GitHub repo or the `skills/wikibird-research-html` folder to Agent Skills directories and community marketplaces that accept GitHub skill folders.
 4. For ChatGPT or Claude workspace users, zip only the `skills/wikibird-research-html` folder and upload it through the product UI.
 5. Avoid bundling secrets, cookies, paid source dumps, private research files, or generated outputs inside the skill package.
+6. If GitHub Pages is enabled, use the `docs/` folder as the Pages source. `docs/index.html` is the public Wikibird manual.
 
 ## Public Listing Notes
 
 - There is not one universal official app store for all model vendors. Treat GitHub as the source of truth and list/share the same skill folder wherever a directory or workspace marketplace accepts Agent Skills.
 - The safest public artifact is the standalone `skills/wikibird-research-html` folder: it contains `SKILL.md`, references, assets, metadata, and license text.
+- The repo root `index.html` is a local-only generated list of research outputs. Do not use it as the public landing page.
 - Do not publish generated `outputs/` as part of the skill package. Keep them as examples in the repo only.
 
 ## Quality Bar Before Public Listing

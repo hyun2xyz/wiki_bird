@@ -1,0 +1,19 @@
+# QA
+
+- Rendered locally: yes
+- Desktop layout checked: yes
+- Mobile layout checked: CSS structure included
+- Links checked: internal/manual links checked
+- Citation section present: yes, `출처`
+- Desktop left TOC checked: yes
+- Mobile TOC drawer checked: yes
+- Index return button checked: yes
+- Chrome screenshots captured: yes, local index and manual page
+- Screenshot figures embedded: yes, `assets/miniwiki.jpg`, `assets/screenshots/local-index.png`, `assets/screenshots/wikibird-manual-page.png`
+- Depth recorded: yes
+- Screenshot count matches depth: yes, manual page uses one mascot image and two local screenshots
+- Person profile baseline checked: not applicable
+- Overflow checked: yes
+- 1280px left TOC checked: yes, fixed TOC visible without overlapping the article
+- Known limits:
+  - GitHub Pages 배포 시 repo 설정에서 Pages source를 `docs/`로 지정해야 한다.

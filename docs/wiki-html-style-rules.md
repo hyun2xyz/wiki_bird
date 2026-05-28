@@ -1,6 +1,6 @@
 # Wiki HTML Style Rules
 
-Use `ex.html` as the visual and structural reference. The target is a compact, readable Korean wiki page: factual, easy to scan, and closer to Namuwiki-style explanation than AI essay prose.
+Use this document as the visual and structural reference. The target is a compact, readable Korean wiki page: factual, easy to scan, and closer to Namuwiki-style explanation than AI essay prose.
 
 ## Default Output
 
@@ -36,10 +36,13 @@ outputs/YYYY-MM-DD-topic-slug/
 - Body size: around `16px`.
 - Body line height: around `1.7`.
 - Article max width: around `820-900px`.
+- `h1` should use the same Korean gothic/system sans stack as the body, not a serif title font. Keep it readable on two lines with `clamp(30px, 3.4vw, 42px)` and `line-height: 1.18`.
 - Desktop left TOC width: around `240-280px`.
 - Desktop TOC: `position: fixed`, `top` set, no fixed `bottom`, `height: fit-content`, and slightly larger bottom padding than top padding for optical balance. Use `max-height` only as a fallback for very long TOCs.
 - Desktop TOC should sit farther left than the centered article. A good default is `left: max(16px, calc((100vw - 1500px) / 2));`.
-- Callout/key boxes should use the default very pale mint highlight (`#f0fff9`) with a soft mint border, not the older pale yellow note color.
+- Callout/key blocks should use a quiet left-border note style, not a full tinted box. Keep mint only for rare highlights that need stronger emphasis.
+- Korean prose should break by word, not by arbitrary syllable. Use `word-break: keep-all`, `overflow-wrap: break-word`, and `hyphens: auto` on normal text. Keep stronger breaking only for code or unusually long tokens.
+- Indent section body content slightly under the heading line. Keep headings aligned, but give direct section children such as paragraphs, lists, key notes, figures, tables, timelines, and flow blocks about `10px` of left offset. Reset that offset on mobile.
 - Use simple borders and light gray surfaces.
 - Avoid decorative gradients, card-heavy layouts, and marketing-style sections.
 - Use cards only for repeated comparison items or source boxes.
@@ -73,6 +76,71 @@ Default CSS:
   color: var(--muted);
   font-size: 13px;
   line-height: 1.5;
+}
+```
+
+## Key Note Blocks
+
+Use this for the main one-line conclusion or "우리식으로 말하면" block:
+
+```css
+.key {
+  border: 0;
+  border-left: 3px solid var(--soft-line);
+  background: transparent;
+  padding: 0 0 0 18px;
+  margin: 22px 0 26px;
+}
+```
+
+## Text Wrapping And Body Indent
+
+Default prose wrapping:
+
+```css
+main {
+  overflow-wrap: break-word;
+  word-break: keep-all;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+p, li, figcaption {
+  max-width: 100%;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+a {
+  overflow-wrap: break-word;
+  word-break: keep-all;
+}
+
+code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+```
+
+Default section body offset:
+
+```css
+section > p,
+section > ul,
+section > ol,
+section > .key,
+section > .key-box,
+section > .infobox,
+section > .book-figure,
+section > .screenshot,
+section > .flow,
+section > .timeline,
+section > .table-wrap,
+section > pre {
+  margin-left: 10px;
+  width: calc(100% - 10px);
 }
 ```
 
@@ -147,13 +215,14 @@ For comparison topics:
 - Images need useful `alt` text unless purely decorative.
 - Tables must not overflow on mobile; wrap them in a scroll container if needed.
 - Source links must be real links, not plain text.
+- Every generated wiki page should include a small link back to the local root `index.html` when the relative path is known.
 
 ## Citation Style
 
 Use a final section:
 
 ```html
-<h2 id="sources">참고한 자료</h2>
+<h2 id="sources">출처</h2>
 <ul>
   <li><a href="...">Source title</a>, publisher, date checked YYYY-MM-DD.</li>
 </ul>

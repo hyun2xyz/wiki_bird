@@ -7,10 +7,13 @@ The target is a compact, readable wiki page: factual, easy to scan, and closer t
 - Use a wiki document structure, not a landing page.
 - Put the topic name in `h1`.
 - Put a short meta line under the title.
+- Keep `h1` in the Korean gothic/system sans stack, not a serif title font. Make it readable when it wraps with `clamp(30px, 3.4vw, 42px)` and `line-height: 1.18`.
 - Use numbered `h2` and `h3` headings.
 - Include a visible `nav.toc` table of contents.
 - Keep body width around `820-900px`.
 - Keep `main` centered with `margin: 0 auto`; do not offset the article for the desktop TOC.
+- Use word-based Korean wrapping for prose: `word-break: keep-all`, `overflow-wrap: break-word`, and `hyphens: auto`. Reserve `overflow-wrap: anywhere` for code or unusually long tokens.
+- Keep headings aligned, but indent direct section body content about `10px` so the text block sits slightly under the heading.
 
 ## Desktop TOC
 
@@ -62,21 +65,66 @@ Default CSS:
 
 ## Callouts
 
-Use very pale mint, not yellow:
-
-```css
---mark: #f0fff9;
---mark-line: #b7ead8;
-```
-
-Callout CSS:
+Use a quiet left-border note style for the main summary/caption block:
 
 ```css
 .key {
-  background: var(--mark);
-  border: 1px solid var(--mark-line);
-  padding: 12px 14px;
-  margin: 22px 0;
+  border: 0;
+  border-left: 3px solid var(--soft-line);
+  background: transparent;
+  padding: 0 0 0 18px;
+  margin: 22px 0 26px;
+}
+```
+
+## Text Wrapping And Section Indent
+
+Default prose wrapping:
+
+```css
+main {
+  overflow-wrap: break-word;
+  word-break: keep-all;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+p, li, figcaption {
+  max-width: 100%;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+a {
+  overflow-wrap: break-word;
+  word-break: keep-all;
+}
+
+code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+```
+
+Default body offset:
+
+```css
+section > p,
+section > ul,
+section > ol,
+section > .key,
+section > .key-box,
+section > .infobox,
+section > .book-figure,
+section > .screenshot,
+section > .flow,
+section > .timeline,
+section > .table-wrap,
+section > pre {
+  margin-left: 10px;
+  width: calc(100% - 10px);
 }
 ```
 
@@ -94,7 +142,7 @@ Callout CSS:
 Use a final source section with real links:
 
 ```html
-<h2 id="sources">참고한 자료</h2>
+<h2 id="sources">출처</h2>
 <ul>
   <li><a href="...">Source title</a>, publisher/date, checked YYYY-MM-DD.</li>
 </ul>
