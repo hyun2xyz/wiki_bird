@@ -55,13 +55,14 @@ repo 최상단의 `index.html`은 로컬에서만 쓰는 간단한 목록입니�
 
 ## 설치와 발동
 
-가장 쉬운 기준은 이 GitHub 주소를 전달하는 것입니다.
+가장 쉬운 설치방법은 GitHub 주소를 전달하고 LLM이 하라는 데로 하는 것
 
 ```text
-https://github.com/hyun2xyz/wiki_bird
+https://github.com/hyun2xyz/wiki_bird 확인하고 어떻게 설치하는지 알려주세요.
 ```
 
-단, GitHub 주소만 주는 방식은 “이번 대화에서 읽고 따라 하기”에 가깝습니다. 다음 대화에서도 자동으로 Wikibird가 발동되게 하려면 각 도구가 지원하는 Skills, 프로젝트 지침, 커스텀 명령, custom instruction 중 하나에 등록해야 합니다.
+단, GitHub Claude, Chat gpt 데스크탑/웹 앱에서 주소만 주는 방식은 “해당 대화에서 읽고 따라 하기”에 가깝습니다. 
+다음 대화에서도 자동으로 Wikibird가 발동되게 하려면 각 도구가 지원하는 Skills, 프로젝트 지침, 커스텀 명령, custom instruction 중 하나에 등록해야 합니다.
 
 처음 Wikibird를 학습시키거나 등록한 뒤에는 기본 리서치 깊이를 하나 정합니다.
 
@@ -229,3 +230,6 @@ Typst HTML export는 아직 실험적이라, 문서용 결과는 PDF를 더 안�
 ## 라이선스
 
 MIT. 스킬 폴더 안에도 별도 `LICENSE`가 들어 있어 폴더만 따로 배포할 수 있습니다.
+
+## 그럼 화이팅
+화이팅
