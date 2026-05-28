@@ -1,6 +1,13 @@
 # Wikibird
 
 **2026-05-28 · v0.1.3 · 첫 베타테스트 (ദ്ദി ᴖ⩊ᴖ )** 
+
+[English README](README.en.md)
+
+![Wikibird mini wiki mascot](docs/assets/miniwiki.jpg)
+
+> **안녕하세요. 무엇이든 다 정리해 드릴게요 짹**
+
 ```
 안녕하세요, 현입니다.
 
@@ -31,12 +38,6 @@ AI에게 무언가 요청하고 산출물을 텍스트 또는 Markdown으로 받
 ```
 
 [@hyun2xyz](https://www.instagram.com/hyun2xyz)
-
-[English README](README.en.md)
-
-![Wikibird mini wiki mascot](docs/assets/miniwiki.jpg)
-
-> **안녕하세요. 무엇이든 다 정리해 드릴게요 짹**
 
 
 
