@@ -37,9 +37,7 @@ AI에게 무언가 요청하고 산출물을 텍스트 또는 Markdown으로 받
 
 ```
 
-[@hyun2xyz](https://www.instagram.com/hyun2xyz)
-
-
+Kim Hyun [@hyun2xyz](https://www.instagram.com/hyun2xyz)
 
 Wikibird는 리서치를 해서 바로 읽을 수 있는 위키형 HTML 문서로 정리하는 에이전트/스킬입니다.
 
