@@ -92,15 +92,9 @@ repo 최상단의 `index.html`은 로컬에서만 쓰는 간단한 목록입니�
 https://github.com/hyun2xyz/wiki_bird 확인하고 어떻게 설치하는지 알려주세요.
 ```
 
-단, GitHub Claude, Chat gpt 데스크탑/웹 앱에서 주소만 주는 방식은 “해당 대화에서 읽고 따라 하기”에 가깝습니다. 
-다음 대화에서도 자동으로 Wikibird가 발동되게 하려면 각 도구가 지원하는 Skills, 프로젝트 지침, 커스텀 명령, custom instruction 중 하나에 등록해야 합니다.
-
-처음 Wikibird를 학습시키거나 등록한 뒤에는 기본 리서치 깊이를 하나 정합니다.
-
-```text
-리서치 깊이를 기본값으로 정해둘까요? 하/중/상 중에서 고르면 됩니다.
-하: 빠른 개요, 중: 일반 Wikibird 문서, 상: 공부용 깊은 조사입니다.
-```
+단, Claude, Chat gpt 데스크탑/웹 앱에서는 “대화에서 읽고 따라 하기”에 가깝습니다. 
+다음 대화에서도 자동으로 Wikibird가 발동되게 하려면 Cli환경을 권장하고
+Skills, 프로젝트 지침, 커스텀 명령, custom instruction 중 하나에 등록해야 합니다.
 
 | 환경 | 가장 쉬운 방법 | 계속 쓰는 방법 | 발동 문구 |
 | --- | --- | --- | --- |
@@ -110,6 +104,14 @@ https://github.com/hyun2xyz/wiki_bird 확인하고 어떻게 설치하는지 알
 | Claude Code | 이 repo를 clone한 뒤 `scripts/install-skill.sh claude`를 실행합니다. | `~/.claude/skills/` 또는 프로젝트 `.claude/skills/`에 스킬 폴더를 둡니다. | “Use wikibird-research-html” |
 | Gemini CLI | GitHub 주소 또는 `SKILL.md` 내용을 읽게 합니다. | `scripts/install-skill.sh gemini`를 실행하면 스킬 폴더와 `/wikibird` custom command가 같이 설치됩니다. | `/wikibird 주제` |
 | 기타 LLM | GitHub 주소를 주고 따라 하게 합니다. | system/custom instruction, 프로젝트 지침, 지식 베이스에 `SKILL.md` 핵심을 넣습니다. | “Wikibird 모드로 정리해줘” |
+
+
+처음 Wikibird를 학습시키거나 등록한 뒤에는 기본 리서치 깊이를 하나 정합니다.
+
+```text
+리서치 깊이를 기본값으로 정해둘까요? 하/중/상 중에서 고르면 됩니다.
+하: 빠른 개요, 중: 일반 Wikibird 문서, 상: 공부용 깊은 조사입니다.
+```
 
 터미널에서 쓰는 에이전트는 설치 스크립트가 가장 단순합니다.
 
