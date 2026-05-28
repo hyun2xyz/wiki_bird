@@ -6,7 +6,7 @@
 
 ![Wikibird mini wiki mascot](docs/assets/miniwiki.jpg)
 
-> **안녕하세요. 무엇이든 다 정리해 드릴게요 짹**
+> **짹**
 
 ```
 안녕하세요, 현입니다.
