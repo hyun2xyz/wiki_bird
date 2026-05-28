@@ -1,5 +1,7 @@
 # Wikibird
 
+**2026-05-28 · v0.1.3 · First beta test**
+
 [한국어 README](README.md)
 
 ![Wikibird mini wiki mascot](docs/assets/miniwiki.jpg)
@@ -49,49 +51,6 @@ The root `index.html` is a simple local list.
 Each research record lives in `outputs/YYYY-MM-DD-topic-slug/`. Open that folder's `index.html` locally to read the generated wiki page.
 
 ![Wikibird wiki page screenshot](docs/assets/screenshots/wikibird-manual-page.png)
-
-## Quick Start
-
-Ask an agent that supports skills:
-
-```text
-Use $wikibird-research-html.
-Research the book A New Program for Graphic Design and turn it into outputs/YYYY-MM-DD-graphic-design-course/index.html.
-Check current sources, include Chrome screenshots, and keep research.md and qa.md.
-```
-
-You can also call it more casually:
-
-```text
-Use Wikibird to research the Typst template ecosystem and make a wiki-style HTML page.
-```
-
-Once the agent has learned the skill, this can be even shorter:
-
-```text
-Use Wikibird for a Typst research note.
-```
-
-When Wikibird is active, conversational replies should end with `짹`.
-
-```text
-I'll organize it, 짹
-Done, 짹
-```
-
-Research depth can be set to `하`, `중`, or `상`. If no depth is specified, the default is `중`.
-
-```text
-Use $wikibird-research-html to research Andrej Karpathy.
-Research depth: 상
-Include basic profile information, a public profile/face reference, and representative work pages.
-```
-
-| Depth | Sources | Images | Use |
-| --- | --- | --- | --- |
-| `하` | 3-5 sources | 1-2 images | Quick overview |
-| `중` | 6-10 sources | 3-5 images | Normal Wikibird document |
-| `상` | 10+ sources when available | 5-8 images | Deep study document |
 
 ## Install And Activate
 
@@ -147,6 +106,49 @@ Official references:
 - Anthropic Docs, [Agent Skills - Claude Code](https://docs.claude.com/en/docs/claude-code/skills)
 - Anthropic Help Center, [Use Skills in Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude)
 - Gemini CLI Docs, [Custom Commands](https://google-gemini.github.io/gemini-cli/docs/cli/custom-commands.html)
+
+## Quick Start
+
+Ask an agent that supports skills:
+
+```text
+Use $wikibird-research-html.
+Research the book A New Program for Graphic Design and turn it into outputs/YYYY-MM-DD-graphic-design-course/index.html.
+Check current sources, include Chrome screenshots, and keep research.md and qa.md.
+```
+
+You can also call it more casually:
+
+```text
+Use Wikibird to research the Typst template ecosystem and make a wiki-style HTML page.
+```
+
+Once the agent has learned the skill, this can be even shorter:
+
+```text
+Use Wikibird for a Typst research note.
+```
+
+When Wikibird is active, conversational replies should end with `짹`.
+
+```text
+I'll organize it, 짹
+Done, 짹
+```
+
+Research depth can be set to `하`, `중`, or `상`. If no depth is specified, the default is `중`.
+
+```text
+Use $wikibird-research-html to research Andrej Karpathy.
+Research depth: 상
+Include basic profile information, a public profile/face reference, and representative work pages.
+```
+
+| Depth | Sources | Images | Use |
+| --- | --- | --- | --- |
+| `하` | 3-5 sources | 1-2 images | Quick overview |
+| `중` | 6-10 sources | 3-5 images | Normal Wikibird document |
+| `상` | 10+ sources when available | 5-8 images | Deep study document |
 
 ## Chrome Screenshots
 

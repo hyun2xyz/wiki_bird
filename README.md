@@ -1,5 +1,7 @@
 # Wikibird
 
+**2026-05-28 · v0.1.3 · 첫 베타테스트**
+
 [English README](README.en.md)
 
 ![Wikibird mini wiki mascot](docs/assets/miniwiki.jpg)
@@ -50,51 +52,6 @@ repo 최상단의 `index.html`은 로컬에서만 쓰는 간단한 목록입니�
 각 리서치 기록은 `outputs/YYYY-MM-DD-topic-slug/` 폴더 안에 있고, 그 안의 `index.html`을 로컬에서 열어 확인합니다. Wikibird 문서는 이렇게 왼쪽 목차, 본문, 이미지, 출처가 한 페이지에 정리됩니다.
 
 ![Wikibird wiki page screenshot](docs/assets/screenshots/wikibird-manual-page.png)
-
-## 빠른 사용법
-
-스킬을 지원하는 에이전트에게 이렇게 말하면 됩니다.
-
-```text
-Use $wikibird-research-html.
-새로운 그래픽 디자인 교육과정 책을 조사해서 outputs/YYYY-MM-DD-graphic-design-course/index.html로 정리해 주세요.
-최신 자료를 확인하고, Chrome 스크린샷도 넣고, research.md와 qa.md도 남겨 주세요.
-```
-
-한국어로 짧게 말해도 됩니다.
-
-```text
-$wikibird-research-html 써서 Typst 템플릿 생태계를 조사하고 위키형 HTML로 만들어 주세요.
-```
-
-학습이 되었다면 더 짧게 해도 됩니다.
-
-```text
-위키버드로 써서 Typst 조사해줘
-```
-
-Wikibird가 발동된 대화에서는 답변 끝에 `짹`을 붙이는 작은 말투 규칙이 들어 있습니다.
-
-```text
-정리해 드릴게요 짹
-완료했습니다 짹
-```
-
-리서치 깊이는 `하`, `중`, `상`으로 고를 수 있습니다. 안 쓰면 기본은 `중`입니다.
-
-```text
-$wikibird-research-html 써서 안드레 카파시를 조사해 주세요.
-리서치 깊이: 상
-인물 기본 정보, 얼굴/공식 프로필 화면, 대표 작업 화면도 같이 넣어 주세요.
-```
-
-기준은 대략 이렇습니다.
-
-| 깊이 | 자료량 | 이미지 |
-| --- | --- | --- |
-| 하 | 빠른 개요, 3-5개 출처 | 1-2장 |
-| 중 | 기본 Wikibird 문서, 6-10개 출처 | 3-5장 |
-| 상 | 깊은 공부용 문서, 10개 이상 출처 가능하면 사용 | 5-8장 |
 
 ## 설치와 발동
 
@@ -150,6 +107,51 @@ scripts/install-skill.sh gemini
 - Anthropic Docs, [Agent Skills - Claude Code](https://docs.claude.com/en/docs/claude-code/skills)
 - Anthropic Help Center, [Use Skills in Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude)
 - Gemini CLI Docs, [Custom Commands](https://google-gemini.github.io/gemini-cli/docs/cli/custom-commands.html)
+
+## 빠른 사용법
+
+스킬을 지원하는 에이전트에게 이렇게 말하면 됩니다.
+
+```text
+Use $wikibird-research-html.
+새로운 그래픽 디자인 교육과정 책을 조사해서 outputs/YYYY-MM-DD-graphic-design-course/index.html로 정리해 주세요.
+최신 자료를 확인하고, Chrome 스크린샷도 넣고, research.md와 qa.md도 남겨 주세요.
+```
+
+한국어로 짧게 말해도 됩니다.
+
+```text
+$wikibird-research-html 써서 Typst 템플릿 생태계를 조사하고 위키형 HTML로 만들어 주세요.
+```
+
+학습이 되었다면 더 짧게 해도 됩니다.
+
+```text
+위키버드로 써서 Typst 조사해줘
+```
+
+Wikibird가 발동된 대화에서는 답변 끝에 `짹`을 붙이는 작은 말투 규칙이 들어 있습니다.
+
+```text
+정리해 드릴게요 짹
+완료했습니다 짹
+```
+
+리서치 깊이는 `하`, `중`, `상`으로 고를 수 있습니다. 안 쓰면 기본은 `중`입니다.
+
+```text
+$wikibird-research-html 써서 안드레 카파시를 조사해 주세요.
+리서치 깊이: 상
+인물 기본 정보, 얼굴/공식 프로필 화면, 대표 작업 화면도 같이 넣어 주세요.
+```
+
+기준은 대략 이렇습니다.
+
+| 깊이 | 자료량 | 이미지 |
+| --- | --- | --- |
+| 하 | 빠른 개요, 3-5개 출처 | 1-2장 |
+| 중 | 기본 Wikibird 문서, 6-10개 출처 | 3-5장 |
+| 상 | 깊은 공부용 문서, 10개 이상 출처 가능하면 사용 | 5-8장 |
 
 ## Chrome 스크린샷
 
