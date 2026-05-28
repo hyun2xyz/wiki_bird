@@ -86,7 +86,7 @@ Default capture rules:
 
 - Create `assets/screenshots/`.
 - Prefer screenshots from primary sources: official product pages, official docs, grant/application pages, standards, paper landing pages, or the rendered final HTML page.
-- Match screenshot count to research depth: `하` 1-2, `중` 3-5, `상` 5-8 when useful public visual sources exist.
+- Match screenshot coverage to research depth and the topic. There is no fixed maximum image count; add more screenshots when they clarify the research, support a claim, or make a person/product/project easier to understand.
 - For people, products, tools, places, books, courses, companies, and visual-reference research, include enough images that the page is not text-only.
 - Use desktop viewport around `1440x1000` unless the topic is mobile-first.
 - Record URL, capture date, viewport, and purpose in `research.md`.

@@ -28,7 +28,7 @@ Accept these optional user settings in Korean or English. If the user does not s
 
 | Setting | Values | Default | Meaning |
 | --- | --- | --- | --- |
-| `리서치 깊이` / `research depth` | `하`, `중`, `상` | `중` | Controls source count, detail level, image count, and QA strictness. |
+| `리서치 깊이` / `research depth` | `하`, `중`, `상` | `중` | Controls source count, detail level, image coverage, and QA strictness. |
 
 On first activation or after a fresh install, ask the user to choose a default research depth before starting the first research task when the flow allows it:
 
@@ -41,9 +41,9 @@ If the user gives a clear immediate task and does not answer the setup question,
 
 Depth rules:
 
-- `하`: quick wiki note. Use about 3-5 reliable sources, 1-2 screenshots, and a compact page with the essential flow only.
-- `중`: normal Wikibird output. Use about 6-10 sources, 3-5 screenshots, a source map, claim ledger, timeline/table when useful, and a complete source section.
-- `상`: deep study output. Use 10+ sources where available, 5-8 screenshots or visual figures, stronger cross-checking, richer timeline/context, common misunderstandings, and a more explicit claim ledger.
+- `하`: quick wiki note. Use about 3-5 reliable sources, essential screenshots when useful, and a compact page with the essential flow only.
+- `중`: normal Wikibird output. Use about 6-10 sources, screenshots for major sections as needed, a source map, claim ledger, timeline/table when useful, and a complete source section.
+- `상`: deep study output. Use 10+ sources where available, add enough screenshots or visual figures for understanding and verification, stronger cross-checking, richer timeline/context, common misunderstandings, and a more explicit claim ledger.
 
 When the user says "가볍게", "짧게", or "빠르게", treat it as `하`. When the user says "쭉", "제대로", "공부용", "깊게", "상세히", or asks about a person/company/technology history, prefer `중` or `상` depending on scope.
 
@@ -147,7 +147,7 @@ Use Chrome access when available. Prefer the agent's native Chrome/browser tool 
 Default screenshot contract:
 
 - Capture at least one image for every research HTML output.
-- Match screenshot count to research depth: `하` 1-2, `중` 3-5, `상` 5-8 when sources provide useful visual evidence.
+- Match screenshot coverage to the topic and research depth. There is no fixed maximum image count; add more screenshots when they clarify the research, support a claim, or make a person/product/project easier to understand.
 - For product, tool, website, documentation, grant, policy, person, place, book, course, or visual-reference research, capture the most relevant primary pages when possible.
 - For person research, include at least one visual/profile source and at least one representative work/source page when available.
 - Do not screenshot every keyword mechanically. Prefer screenshots that anchor major sections: profile, timeline, official source, representative work, comparison surface, or final render.
@@ -172,7 +172,7 @@ Before completion:
 - Check mobile hamburger visibility after scroll and drawer open behavior.
 - Check visible source section.
 - Check external source links when network tools allow it.
-- Check selected depth is recorded and screenshot count roughly matches the chosen depth.
+- Check selected depth is recorded and screenshot coverage fits the topic and chosen depth.
 - For people, check basic profile fields and public visual/profile evidence are included or explicitly marked unavailable.
 - Record results in `qa.md`.
 

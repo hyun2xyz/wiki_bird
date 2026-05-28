@@ -11,14 +11,11 @@ Usage:
   scripts/install-skill.sh <target>
 
 Targets:
-  codex        install to ~/.codex/skills/
+  codex        install to $HOME/.agents/skills/ (current Codex user scope)
+  codex-legacy install to ~/.codex/skills/ (older Codex setups)
   claude       install to ~/.claude/skills/
-  gemini       install to ~/.gemini/skills/
-  cursor       install to ~/.cursor/skills/
-  all          install to all targets above
 
-The script copies skills/wikibird-research-html into the selected personal skill directory.
-For gemini, it also installs adapters/gemini/commands/wikibird.toml into ~/.gemini/commands/.
+The script overwrites any existing Wikibird skill folder in the selected personal skill directory.
 USAGE
 }
 
@@ -26,27 +23,19 @@ install_one() {
   local target="$1"
   local base
   case "$target" in
-    codex) base="$HOME/.codex/skills" ;;
+    codex) base="$HOME/.agents/skills" ;;
+    codex-legacy) base="$HOME/.codex/skills" ;;
     claude) base="$HOME/.claude/skills" ;;
-    gemini) base="$HOME/.gemini/skills" ;;
-    cursor) base="$HOME/.cursor/skills" ;;
     *) echo "Unknown target: $target" >&2; usage; exit 2 ;;
   esac
 
   mkdir -p "$base"
+  if [[ -e "$base/$SKILL_NAME" ]]; then
+    echo "Overwriting existing $base/$SKILL_NAME"
+  fi
   rm -rf "$base/$SKILL_NAME"
   cp -R "$SOURCE" "$base/$SKILL_NAME"
   echo "Installed $SKILL_NAME -> $base/$SKILL_NAME"
-
-  if [[ "$target" == "gemini" ]]; then
-    local command_source="$ROOT/adapters/gemini/commands/wikibird.toml"
-    local command_base="$HOME/.gemini/commands"
-    if [[ -f "$command_source" ]]; then
-      mkdir -p "$command_base"
-      cp "$command_source" "$command_base/wikibird.toml"
-      echo "Installed Gemini command -> $command_base/wikibird.toml"
-    fi
-  fi
 }
 
 if [[ $# -ne 1 ]]; then
@@ -55,13 +44,7 @@ if [[ $# -ne 1 ]]; then
 fi
 
 case "$1" in
-  all)
-    install_one codex
-    install_one claude
-    install_one gemini
-    install_one cursor
-    ;;
-  codex|claude|gemini|cursor)
+  codex|codex-legacy|claude)
     install_one "$1"
     ;;
   *)

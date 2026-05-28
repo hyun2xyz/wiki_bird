@@ -86,25 +86,49 @@ repo 최상단의 `index.html`은 로컬에서만 쓰는 간단한 목록입니�
 
 ## 설치와 발동
 
-가장 쉬운 설치방법은 GitHub 주소를 전달하고 LLM이 하라는 데로 하는 것
+Wikibird를 실제로 쓰는 권장 환경은 CLI 기반 에이전트입니다. 리서치 결과를 파일로 저장하고, Chrome 캡처를 남기고, `node scripts/build-index.js` 같은 검증까지 이어가려면 Codex CLI나 Claude Code가 가장 안정적입니다.
 
-```text
-https://github.com/hyun2xyz/wiki_bird 확인하고 어떻게 설치하는지 알려주세요.
+### 1. Codex CLI 설치
+
+```sh
+git clone https://github.com/hyun2xyz/wiki_bird.git
+cd wiki_bird
+scripts/install-skill.sh codex
 ```
 
-단, Claude, Chat gpt 데스크탑/웹 앱에서는 “대화에서 읽고 따라 하기”에 가깝습니다. 
-다음 대화에서도 자동으로 Wikibird가 발동되게 하려면 Cli환경을 권장하고
-Skills, 프로젝트 지침, 커스텀 명령, custom instruction 중 하나에 등록해야 합니다.
+현재 Codex user skill 위치는 `$HOME/.agents/skills/wikibird-research-html/`입니다. repo 전용으로만 쓰려면 `.agents/skills/wikibird-research-html/`에 둘 수 있습니다.
 
-| 환경 | 가장 쉬운 방법 | 계속 쓰는 방법 | 발동 문구 |
-| --- | --- | --- | --- |
-| ChatGPT / GPT | GitHub 주소를 주고 `README.md`와 `SKILL.md`를 읽어 달라고 합니다. | 계정/워크스페이스에 Skills 업로드 기능이 있으면 `skills/wikibird-research-html` 폴더를 zip으로 올립니다. 기능이 없으면 Custom Instructions나 프로젝트 지침에 핵심 규칙을 붙입니다. | “Wikibird로 조사해줘” |
-| Codex | 이 repo를 clone한 뒤 `scripts/install-skill.sh codex`를 실행합니다. | `~/.codex/skills/wikibird-research-html/`에 스킬 폴더를 둡니다. 프로젝트에서는 `AGENTS.md`에 Wikibird 사용 규칙을 적어도 됩니다. | `Use $wikibird-research-html` |
-| Claude 앱 | GitHub 주소를 주고 이번 대화에서 따라 하게 합니다. | 계정/워크스페이스에 Skills 기능이 있으면 스킬 폴더를 업로드합니다. 없으면 Project knowledge나 custom instruction에 `SKILL.md` 내용을 넣습니다. | “Wikibird skill을 써줘” |
-| Claude Code | 이 repo를 clone한 뒤 `scripts/install-skill.sh claude`를 실행합니다. | `~/.claude/skills/` 또는 프로젝트 `.claude/skills/`에 스킬 폴더를 둡니다. | “Use wikibird-research-html” |
-| Gemini CLI | GitHub 주소 또는 `SKILL.md` 내용을 읽게 합니다. | `scripts/install-skill.sh gemini`를 실행하면 스킬 폴더와 `/wikibird` custom command가 같이 설치됩니다. | `/wikibird 주제` |
-| 기타 LLM | GitHub 주소를 주고 따라 하게 합니다. | system/custom instruction, 프로젝트 지침, 지식 베이스에 `SKILL.md` 핵심을 넣습니다. | “Wikibird 모드로 정리해줘” |
+예전 Codex 환경을 쓰고 있다면 legacy 경로로 설치합니다.
 
+```sh
+scripts/install-skill.sh codex-legacy
+```
+
+Codex에서는 이렇게 부르면 됩니다.
+
+```text
+Use $wikibird-research-html
+```
+
+### 2. Claude Code 설치
+
+```sh
+git clone https://github.com/hyun2xyz/wiki_bird.git
+cd wiki_bird
+scripts/install-skill.sh claude
+```
+
+Claude Code에서는 `~/.claude/skills/wikibird-research-html/` 또는 프로젝트 `.claude/skills/wikibird-research-html/`에 스킬 폴더를 둡니다.
+
+Claude Code에서는 이렇게 부르면 됩니다.
+
+```text
+Use wikibird-research-html
+```
+
+설치 스크립트는 기존 Wikibird 설치 폴더가 있으면 지우고 다시 복사합니다.
+
+### 3. 기본 리서치 깊이 설정
 
 처음 Wikibird를 학습시키거나 등록한 뒤에는 기본 리서치 깊이를 하나 정합니다.
 
@@ -113,34 +137,64 @@ Skills, 프로젝트 지침, 커스텀 명령, custom instruction 중 하나에 
 하: 빠른 개요, 중: 일반 Wikibird 문서, 상: 공부용 깊은 조사입니다.
 ```
 
-터미널에서 쓰는 에이전트는 설치 스크립트가 가장 단순합니다.
+### 4. Windows에서 Codex CLI용 수동 설치
 
-```sh
-scripts/install-skill.sh codex
-scripts/install-skill.sh claude
-scripts/install-skill.sh gemini
-scripts/install-skill.sh cursor
+```powershell
+git clone https://github.com/hyun2xyz/wiki_bird.git
+cd wiki_bird
+
+$dest = Join-Path $HOME ".agents\skills\wikibird-research-html"
+New-Item -ItemType Directory -Force (Split-Path $dest) | Out-Null
+Remove-Item -Recurse -Force $dest -ErrorAction SilentlyContinue
+Copy-Item -Recurse ".\skills\wikibird-research-html" $dest
 ```
 
-전부 설치하려면:
+### 5. 설치 확인
 
-```sh
-scripts/install-skill.sh all
+1. Codex나 Claude Code를 다시 시작합니다.
+2. `$wikibird-research-html` 또는 `Use $wikibird-research-html`로 불러봅니다.
+3. 처음 불렀다면 리서치 깊이를 `하`, `중`, `상` 중 하나로 정합니다.
+4. 안 보이면 설치 폴더 안에 `SKILL.md`가 바로 있는지 확인합니다.
+
+Codex 기준으로는 이런 구조여야 합니다.
+
+```text
+$HOME/.agents/skills/wikibird-research-html/SKILL.md
 ```
 
-Gemini CLI에서 스킬 폴더를 바로 읽지 못하는 환경이면 custom command를 씁니다.
+### 6. 앱에서 1분 체험
 
-```sh
-scripts/install-skill.sh gemini
+ChatGPT, Claude, Gemini 앱에서는 설치와 발동법을 따로 설명하지 않습니다. 대신 아래 프롬프트를 한 번 붙여 넣고, 이번 대화에서 Wikibird 방식을 따라 하게 만들면 됩니다.
+
+```text
+https://github.com/hyun2xyz/wiki_bird 를 기준으로 wikibird 방식을 사용해 주세요.
+README.md와 skills/wikibird-research-html/SKILL.md를 읽고 따라 해 주세요.
+
+주제: HTML 프로토타입이 AI 리서치 결과물로 유용한 이유
+리서치 깊이: 중
+결과물:
+- index.html 본문 구조
+- research.md
+- qa.md
+- 캡처 이미지 후보
+- 출처 목록
+
+한국어 위키식 설명문으로 정리해 주세요.
 ```
+
+이 방식은 구조를 맛보는 용도입니다. 앱 안에서는 실제 파일 생성, Chrome 캡처 저장, 로컬 인덱스 갱신이 안정적으로 이어지지 않을 수 있습니다. 제대로 된 Wikibird 결과물을 만들 때는 CLI 환경을 권장합니다.
+
+### 문제 해결
+
+- 앱에서 결과가 일반 답변처럼 나오면: GitHub 주소만 준 상태라 “이번 대화에서 따라 하기”로 동작한 것입니다. 위의 1분 체험 프롬프트처럼 `README.md`와 `SKILL.md`를 읽고, 결과물 목록을 명시합니다.
+- HTML 모양이 Wikibird 스타일과 다르면: 앱이 실제 repo 파일을 열고 저장하지 못해 임의 스타일로 만든 경우가 많습니다. 실제 HTML 파일까지 필요하면 CLI 환경을 권장합니다.
+- Codex에서 스킬이 안 보이면: `$HOME/.agents/skills/wikibird-research-html/SKILL.md` 위치를 확인하고 Codex를 재시작합니다.
+- 예전 Codex 설정을 쓰고 있다면: `scripts/install-skill.sh codex-legacy`로 `~/.codex/skills/`에 설치합니다.
 
 참고한 공식 문서:
 
-- OpenAI Help Center, [Skills in ChatGPT](https://help.openai.com/en/articles/20001066-skills-in-chatgpt)
-- OpenAI Developers, [Codex use cases](https://developers.openai.com/codex/explore/)
-- Anthropic Docs, [Agent Skills - Claude Code](https://docs.claude.com/en/docs/claude-code/skills)
-- Anthropic Help Center, [Use Skills in Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude)
-- Gemini CLI Docs, [Custom Commands](https://google-gemini.github.io/gemini-cli/docs/cli/custom-commands.html)
+- OpenAI Developers, [Codex Skills](https://developers.openai.com/codex/skills)
+- Anthropic Docs, [Agent Skills - Claude Code](https://code.claude.com/docs/en/skills)
 
 ## 빠른 사용법
 
@@ -183,9 +237,9 @@ $wikibird-research-html 써서 안드레 카파시를 조사해 주세요.
 
 | 깊이 | 자료량 | 이미지 |
 | --- | --- | --- |
-| 하 | 빠른 개요, 3-5개 출처 | 1-2장 |
-| 중 | 기본 Wikibird 문서, 6-10개 출처 | 3-5장 |
-| 상 | 깊은 공부용 문서, 10개 이상 출처 가능하면 사용 | 5-8장 |
+| 하 | 빠른 개요, 3-5개 출처 | 핵심 캡처 위주 |
+| 중 | 기본 Wikibird 문서, 6-10개 출처 | 주요 섹션에 필요한 만큼 |
+| 상 | 깊은 공부용 문서, 10개 이상 출처 가능하면 사용 | 이해와 검증에 필요한 만큼 충분히 추가 |
 
 ## Chrome 스크린샷
 
@@ -195,7 +249,7 @@ Wikibird는 리서치 HTML에 최소 1장의 Chrome 캡처 이미지를 넣는 �
 
 - 공식 문서, 제품 페이지, 논문/자료 페이지, 최종 HTML 화면 중 하나를 캡처합니다.
 - 인물 조사라면 공식 프로필/개인 사이트/강연/회사/학교 페이지처럼 얼굴이나 공개 활동을 확인할 수 있는 이미지를 우선합니다.
-- 모든 키워드를 다 캡처하지는 않지만, 주제를 이해하는 데 필요한 주요 시각 자료는 깊이에 맞춰 넣습니다.
+- 모든 키워드를 다 캡처하지는 않지만, 주제를 이해하는 데 필요한 주요 시각 자료는 필요에 따라 더 넣습니다. 이미지 개수에 고정 상한은 두지 않습니다.
 - 이미지는 `assets/screenshots/` 아래에 저장합니다.
 - HTML에는 `<figure class="screenshot">`로 넣습니다.
 - `research.md`에는 URL, 캡처일, viewport, 사용 목적을 적습니다.

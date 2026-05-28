@@ -440,33 +440,43 @@
 
 		<section id="install">
 			<h2>3. 설치와 등록</h2>
-			<p>가장 쉬운 시작은 GitHub 주소를 주는 것이다. 다만 이 방식은 보통 “이번 대화에서 읽고 따라 하기”다. 다음 대화에서도 자동으로 발동되게 하려면 도구별 Skills, 프로젝트 지침, custom instruction, custom command 중 하나에 등록한다.</p>
-			<pre><code>https://github.com/hyun2xyz/wiki_bird</code></pre>
-			<p>터미널형 에이전트에서는 repo 루트에서 설치 스크립트를 실행하는 방식이 가장 단순하다.</p>
-			<pre><code>scripts/install-skill.sh codex
-scripts/install-skill.sh claude
-scripts/install-skill.sh all</code></pre>
+			<p>Wikibird를 실제로 쓰는 권장 환경은 CLI 기반 에이전트다. 리서치 결과를 파일로 저장하고, Chrome 캡처를 남기고, <code>node scripts/build-index.js</code> 같은 검증까지 이어가려면 Codex CLI나 Claude Code가 가장 안정적이다.</p>
+			<h3>Codex CLI</h3>
+			<pre><code>git clone https://github.com/hyun2xyz/wiki_bird.git
+cd wiki_bird
+scripts/install-skill.sh codex</code></pre>
+			<p>현재 Codex user skill 위치는 <code>$HOME/.agents/skills/wikibird-research-html/</code>이다. repo 전용으로만 쓰려면 <code>.agents/skills/wikibird-research-html/</code>에 둘 수 있다. 예전 Codex 환경은 <code>scripts/install-skill.sh codex-legacy</code>로 legacy 경로에 설치한다.</p>
+			<h3>Claude Code</h3>
+			<pre><code>git clone https://github.com/hyun2xyz/wiki_bird.git
+cd wiki_bird
+scripts/install-skill.sh claude</code></pre>
+			<p>Claude Code에서는 <code>~/.claude/skills/wikibird-research-html/</code> 또는 프로젝트 <code>.claude/skills/wikibird-research-html/</code>에 스킬 폴더를 둔다. 설치 스크립트는 기존 Wikibird 설치 폴더가 있으면 지우고 다시 복사한다.</p>
 		</section>
 
 		<section id="activation">
 			<h2>4. 발동과 말투</h2>
+			<p>Codex CLI에서는 <code>Use $wikibird-research-html</code>, Claude Code에서는 <code>Use wikibird-research-html</code>처럼 부른다. 처음 등록하거나 처음 부를 때는 기본 리서치 깊이를 먼저 정한다.</p>
+			<pre><code>리서치 깊이를 기본값으로 정해둘까요? 하/중/상 중에서 고르면 됩니다.
+하: 빠른 개요, 중: 일반 Wikibird 문서, 상: 공부용 깊은 조사입니다.</code></pre>
 			<p>Wikibird 스킬이 활성화되면 일반 대화 답변 끝에 <code>짹</code>을 붙인다. 코드, 인용문, 출처 제목, 생성된 문서 본문 안에는 사용자가 따로 원하지 않는 한 넣지 않는다.</p>
 			<pre><code>정리해 드릴게요 짹
 완료했습니다 짹</code></pre>
-			<div class="table-wrap">
-				<table>
-					<thead>
-						<tr><th>환경</th><th>쉬운 시작</th><th>계속 쓰는 방법</th><th>부르는 말</th></tr>
-					</thead>
-					<tbody>
-						<tr><td>ChatGPT / GPT</td><td>GitHub 주소를 주고 <code>README.md</code>, <code>SKILL.md</code>를 읽게 함</td><td>Skills 업로드가 있으면 zip 업로드. 없으면 Custom Instructions나 프로젝트 지침에 핵심 규칙 붙이기</td><td>“Wikibird로 조사해줘”</td></tr>
-						<tr><td>Codex</td><td><code>scripts/install-skill.sh codex</code></td><td><code>~/.codex/skills/</code> 또는 프로젝트 <code>AGENTS.md</code></td><td><code>Use $wikibird-research-html</code></td></tr>
-						<tr><td>Claude 앱</td><td>GitHub 주소를 주고 이번 대화에서 따라 하게 함</td><td>Skills 기능이 있으면 업로드. 없으면 Project knowledge나 custom instruction에 <code>SKILL.md</code> 넣기</td><td>“Wikibird skill을 써줘”</td></tr>
-						<tr><td>Claude Code</td><td><code>scripts/install-skill.sh claude</code></td><td><code>~/.claude/skills/</code> 또는 프로젝트 <code>.claude/skills/</code></td><td>“Use wikibird-research-html”</td></tr>
-						<tr><td>Gemini CLI</td><td>GitHub 주소나 <code>SKILL.md</code>를 읽게 함</td><td><code>scripts/install-skill.sh gemini</code>로 스킬 폴더와 <code>/wikibird</code> 명령을 같이 설치</td><td><code>/wikibird 주제</code></td></tr>
-					</tbody>
-				</table>
-			</div>
+			<h3>앱에서 1분 체험</h3>
+			<p>ChatGPT, Claude, Gemini 앱에서는 설치와 발동법을 따로 설명하지 않는다. 대신 아래 프롬프트를 한 번 붙여 넣고, 이번 대화에서 Wikibird 방식을 따라 하게 만들면 된다.</p>
+			<pre><code>https://github.com/hyun2xyz/wiki_bird 를 기준으로 wikibird 방식을 사용해 주세요.
+README.md와 skills/wikibird-research-html/SKILL.md를 읽고 따라 해 주세요.
+
+주제: HTML 프로토타입이 AI 리서치 결과물로 유용한 이유
+리서치 깊이: 중
+결과물:
+- index.html 본문 구조
+- research.md
+- qa.md
+- 캡처 이미지 후보
+- 출처 목록
+
+한국어 위키식 설명문으로 정리해 주세요.</code></pre>
+			<p>이 방식은 구조를 맛보는 용도다. 앱 안에서는 실제 파일 생성, Chrome 캡처 저장, 로컬 인덱스 갱신이 안정적으로 이어지지 않을 수 있다. 제대로 된 Wikibird 결과물을 만들 때는 CLI 환경을 권장한다.</p>
 		</section>
 
 		<section id="usage">
@@ -489,9 +499,9 @@ scripts/install-skill.sh all</code></pre>
 						<tr><th>깊이</th><th>출처</th><th>이미지</th><th>쓰임</th></tr>
 					</thead>
 					<tbody>
-						<tr><td>하</td><td>3-5개</td><td>1-2장</td><td>빠른 개요, 짧은 설명</td></tr>
-						<tr><td>중</td><td>6-10개</td><td>3-5장</td><td>기본 Wikibird 문서</td></tr>
-						<tr><td>상</td><td>10개 이상 가능하면 사용</td><td>5-8장</td><td>공부용 정리, 인물/회사/기술사, 복잡한 비교</td></tr>
+						<tr><td>하</td><td>3-5개</td><td>핵심 캡처 위주</td><td>빠른 개요, 짧은 설명</td></tr>
+						<tr><td>중</td><td>6-10개</td><td>주요 섹션에 필요한 만큼</td><td>기본 Wikibird 문서</td></tr>
+						<tr><td>상</td><td>10개 이상 가능하면 사용</td><td>이해와 검증에 필요한 만큼 충분히 추가</td><td>공부용 정리, 인물/회사/기술사, 복잡한 비교</td></tr>
 					</tbody>
 				</table>
 			</div>
@@ -500,7 +510,7 @@ scripts/install-skill.sh all</code></pre>
 
 		<section id="images">
 			<h2>7. 이미지 규칙</h2>
-			<p>이미지는 장식이 아니라 확인용이다. 공식 문서, 제품 페이지, 논문 페이지, 강의 페이지, 최종 렌더 화면처럼 내용을 이해하는 데 도움이 되는 화면을 캡처한다.</p>
+			<p>이미지는 장식이 아니라 확인용이다. 공식 문서, 제품 페이지, 논문 페이지, 강의 페이지, 최종 렌더 화면처럼 내용을 이해하는 데 도움이 되는 화면을 캡처한다. 이미지 개수에 고정 상한은 두지 않고, 필요하면 더 넣는다.</p>
 			<figure class="screenshot">
 				<img src="assets/miniwiki.jpg" alt="Wikibird mini wiki mascot">
 				<figcaption>Wikibird README에 들어간 miniwiki 이미지. 공개 설명서의 식별 이미지로 사용한다.</figcaption>
@@ -543,10 +553,8 @@ open index.html</code></pre>
 				<li><a href="https://github.com/hyun2xyz/wiki_bird/blob/main/skills/wikibird-research-html/SKILL.md">SKILL.md</a>, Wikibird 스킬 본문.</li>
 				<li><a href="https://github.com/hyun2xyz/wiki_bird/blob/main/docs/research-html-workflow.md">docs/research-html-workflow.md</a>, 리서치 작업 흐름.</li>
 				<li><a href="https://github.com/hyun2xyz/wiki_bird/blob/main/docs/wiki-html-style-rules.md">docs/wiki-html-style-rules.md</a>, 위키 HTML 스타일 규칙.</li>
-				<li><a href="https://help.openai.com/en/articles/20001066-skills-in-chatgpt">OpenAI Help Center, Skills in ChatGPT</a>.</li>
-				<li><a href="https://docs.claude.com/en/docs/claude-code/skills">Anthropic Docs, Agent Skills in Claude Code</a>.</li>
-				<li><a href="https://support.claude.com/en/articles/12512180-use-skills-in-claude">Anthropic Help Center, Use Skills in Claude</a>.</li>
-				<li><a href="https://google-gemini.github.io/gemini-cli/docs/cli/custom-commands.html">Gemini CLI Docs, Custom Commands</a>.</li>
+				<li><a href="https://developers.openai.com/codex/skills">OpenAI Developers, Codex Skills</a>.</li>
+				<li><a href="https://code.claude.com/docs/en/skills">Anthropic Docs, Agent Skills in Claude Code</a>.</li>
 			</ul>
 		</section>
 

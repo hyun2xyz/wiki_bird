@@ -19,9 +19,9 @@ If the user gives a concrete task and does not answer the setup question, procee
 
 | Depth | Sources | Screenshots | Use when |
 | --- | --- | --- | --- |
-| `하` | 3-5 | 1-2 | Quick orientation, short explanation, small note. |
-| `중` | 6-10 | 3-5 | Default Wikibird explainer, study note, practical research page. |
-| `상` | 10+ where available | 5-8 | Person/company/technology history, serious study, market map, complex comparison. |
+| `하` | 3-5 | Essential captures only | Quick orientation, short explanation, small note. |
+| `중` | 6-10 | As needed for major sections | Default Wikibird explainer, study note, practical research page. |
+| `상` | 10+ where available | Add enough for understanding and verification | Person/company/technology history, serious study, market map, complex comparison. |
 
 Record the selected depth in `research.md`. If the requested depth is impossible because sources are sparse or screenshots fail, continue with the closest possible output and explain the limit in `qa.md`.
 
@@ -45,7 +45,7 @@ Capture screenshots during research, not after the page is already written.
 Default:
 
 - Create `assets/screenshots/`.
-- Capture screenshots according to the selected depth: `하` 1-2, `중` 3-5, `상` 5-8 when useful public visual sources exist.
+- Capture screenshots according to the selected depth and the topic. There is no fixed maximum image count; add more screenshots when they clarify the research, support a claim, or make a person/product/project easier to understand.
 - Prefer primary-source pages: official docs, official product pages, grant/application pages, original papers, or the final rendered HTML page.
 - Use a desktop viewport around `1440x1000` unless the topic is specifically mobile.
 - Record each screenshot in `research.md` with URL, capture date, viewport, and why it was used.

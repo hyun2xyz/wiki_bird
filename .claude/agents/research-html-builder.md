@@ -64,7 +64,7 @@ outputs/YYYY-MM-DD-topic-slug/
    - Use about 3-5 sources for `하`, 6-10 for `중`, and 10+ for `상` when sources are available.
    - Cross-check important claims across at least two independent sources when possible.
    - Prefer exact dates over relative dates.
-   - Capture screenshots by depth: `하` 1-2, `중` 3-5, `상` 5-8 when useful public visual sources exist.
+   - Capture screenshots by depth and topic. There is no fixed maximum image count; add more screenshots when they clarify the research, support a claim, or make a person/product/project easier to understand.
    - For person research, include a basic profile: birth date or age, birthplace, nationality/background, education, current affiliation, career timeline, one public visual/profile source, and representative work pages where reliable sources allow it.
    - Do not screenshot every keyword. Use images to anchor major sections and note skipped/failed captures in `research.md`.
    - Save screenshots under `outputs/YYYY-MM-DD-topic-slug/assets/screenshots/` and log URL, capture date, viewport, and purpose in `research.md`.
@@ -98,7 +98,7 @@ outputs/YYYY-MM-DD-topic-slug/
    - Check mobile and desktop widths for overflow, overlap, and unreadable type.
    - Check links, source labels, dates, and page title.
    - Check screenshot files load and figure captions are visible.
-   - Check selected depth, image count, and person profile baseline when applicable.
+   - Check selected depth, image coverage, and person profile baseline when applicable.
    - Run `node scripts/build-index.js` from the repo root after creating or updating an output.
    - Record verification results in the final response or `qa.md`.
 

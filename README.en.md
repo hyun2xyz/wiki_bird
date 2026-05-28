@@ -1,12 +1,47 @@
 # Wikibird
 
-**2026-05-28 · v0.1.3 · First beta test**
+**2026-05-28 · v0.1.3 · First beta test (ദ്ദി ᴖ⩊ᴖ )**
+
+```text
+Hello, I'm Hyun.
+
+I study editorial design in Korea, research different AI-powered pipelines,
+and share them with other people.
+I love the sharing philosophy of the World Wide Web, HTML, humor, and writing.
+
+***
+
+On May 9, Thariq Shihipar posted on X about how the Claude Code team uses HTML.
+The point was that, rather than asking AI for something and receiving the result
+as plain text or Markdown, an HTML prototype is often easier to read and judge.
+It is a little like how we usually do not notice it, but through graphic design
+we can take in a lot of information without reading every bit of text.
+The way to use it is simple: at the end of any conversation, say,
+"make this into HTML."
+
+But the HTML UI made this way can be a little uncomfortable.
+More importantly, it is very ugly.
+
+***
+
+Let me introduce my friend Wikibird.
+
+It is a bird we raise in our IYO Wiki.
+Its main service is that it adds 짹 to the end of every sentence, which is cute.
+
+As a side service, when you ask it to research a topic, it organizes the content
+in a wiki style and attaches image references using Chrome captures.
+Everything is saved locally as MD and HTML, so if you open index.html you can see
+all the previous records at once. Of course, you can also host that file.
+
+Then, use it well.
+```
 
 [한국어 README](README.md)
 
 ![Wikibird mini wiki mascot](docs/assets/miniwiki.jpg)
 
-> **Hello. I can organize almost anything for you, chirp.**
+> **Hello. I can organize anything for you, 짹**
 
 Wikibird is a research agent/skill that turns a topic into a readable wiki-style HTML document.
 
@@ -49,18 +84,55 @@ The root `index.html` is a simple local list.
 ![Wikibird local index screenshot](docs/assets/screenshots/local-index.png)
 
 Each research record lives in `outputs/YYYY-MM-DD-topic-slug/`. Open that folder's `index.html` locally to read the generated wiki page.
+Wikibird documents put the left table of contents, body text, images, and sources together on one page.
 
 ![Wikibird wiki page screenshot](docs/assets/screenshots/wikibird-manual-page.png)
 
 ## Install And Activate
 
-The easiest way to start is to give the agent this GitHub URL:
+The recommended way to use Wikibird is through CLI-based agents. If you want research output saved as files, Chrome screenshots captured, and checks like `node scripts/build-index.js` run reliably, use Codex CLI or Claude Code.
 
-```text
-https://github.com/hyun2xyz/wiki_bird
+### 1. Install For Codex CLI
+
+```sh
+git clone https://github.com/hyun2xyz/wiki_bird.git
+cd wiki_bird
+scripts/install-skill.sh codex
 ```
 
-That usually means "read and follow this in the current conversation." For persistent activation in later conversations, register the skill through whichever surface your tool supports: Skills, project instructions, custom commands, custom instructions, or a knowledge base.
+The current Codex user skill location is `$HOME/.agents/skills/wikibird-research-html/`. For repo scope, place the skill at `.agents/skills/wikibird-research-html/`.
+
+For older Codex setups, install into the legacy location:
+
+```sh
+scripts/install-skill.sh codex-legacy
+```
+
+Invoke it in Codex like this:
+
+```text
+Use $wikibird-research-html
+```
+
+### 2. Install For Claude Code
+
+```sh
+git clone https://github.com/hyun2xyz/wiki_bird.git
+cd wiki_bird
+scripts/install-skill.sh claude
+```
+
+For Claude Code, keep the skill folder in `~/.claude/skills/wikibird-research-html/` or project `.claude/skills/wikibird-research-html/`.
+
+Invoke it in Claude Code like this:
+
+```text
+Use wikibird-research-html
+```
+
+The install script overwrites any existing Wikibird skill folder at the target location.
+
+### 3. Set Research Depth
 
 After first installing or teaching Wikibird, ask the user to choose a default research depth:
 
@@ -69,43 +141,64 @@ Would you like to set a default research depth? Choose 하, 중, or 상.
 하: quick overview, 중: normal Wikibird document, 상: deep study research.
 ```
 
-| Environment | Easiest start | Persistent setup | Invocation |
-| --- | --- | --- | --- |
-| ChatGPT / GPT | Give the GitHub URL and ask it to read `README.md` and `SKILL.md`. | If your account/workspace has Skills upload, upload `skills/wikibird-research-html` as a zip. Otherwise put the core rules in Custom Instructions or project instructions. | "Use Wikibird to research this." |
-| Codex | Clone this repo and run `scripts/install-skill.sh codex`. | Keep the skill folder at `~/.codex/skills/wikibird-research-html/`. For a project, add Wikibird rules to `AGENTS.md`. | `Use $wikibird-research-html` |
-| Claude app | Give the GitHub URL for the current conversation. | If Skills are available, upload the skill folder. Otherwise add `SKILL.md` to Project knowledge or custom instructions. | "Use the Wikibird skill." |
-| Claude Code | Clone this repo and run `scripts/install-skill.sh claude`. | Keep the skill folder in `~/.claude/skills/` or project `.claude/skills/`. | "Use wikibird-research-html" |
-| Gemini CLI | Give it the GitHub URL or `SKILL.md`. | Run `scripts/install-skill.sh gemini`; this installs both the skill folder and the `/wikibird` custom command. | `/wikibird topic` |
-| Other LLMs | Give the GitHub URL and ask the model to follow it. | Put the core `SKILL.md` rules in system instructions, custom instructions, project docs, or a knowledge base. | "Use Wikibird mode." |
+### 4. Manual PowerShell Install For Codex CLI
 
-For terminal-based agents, the install script is the simplest path:
+```powershell
+git clone https://github.com/hyun2xyz/wiki_bird.git
+cd wiki_bird
 
-```sh
-scripts/install-skill.sh codex
-scripts/install-skill.sh claude
-scripts/install-skill.sh gemini
-scripts/install-skill.sh cursor
+$dest = Join-Path $HOME ".agents\skills\wikibird-research-html"
+New-Item -ItemType Directory -Force (Split-Path $dest) | Out-Null
+Remove-Item -Recurse -Force $dest -ErrorAction SilentlyContinue
+Copy-Item -Recurse ".\skills\wikibird-research-html" $dest
 ```
 
-Install all supported local targets:
+### 5. Check Installation
 
-```sh
-scripts/install-skill.sh all
+1. Restart Codex or Claude Code.
+2. Invoke `$wikibird-research-html` or `Use $wikibird-research-html`.
+3. On first use, choose a default research depth: `하`, `중`, or `상`.
+4. If the skill does not appear, check that `SKILL.md` is directly inside the installed skill folder.
+
+For Codex, the expected user-scope structure is:
+
+```text
+$HOME/.agents/skills/wikibird-research-html/SKILL.md
 ```
 
-For Gemini CLI fallback:
+### 6. One-Minute App Trial
 
-```sh
-scripts/install-skill.sh gemini
+For ChatGPT, Claude, and Gemini apps, this README does not provide install or activation steps. Use the prompt below to make the model follow Wikibird for the current conversation only.
+
+```text
+Use the Wikibird method based on https://github.com/hyun2xyz/wiki_bird.
+Read README.md and skills/wikibird-research-html/SKILL.md, then follow them.
+
+Topic: Why HTML prototypes are useful as AI research outputs
+Research depth: 중
+Output:
+- index.html body structure
+- research.md
+- qa.md
+- screenshot candidates
+- source list
+
+Write it as a Korean wiki-style explanation.
 ```
+
+This is only for previewing the structure. App chats may not reliably create local files, save Chrome screenshots, or refresh the local index. Use a CLI environment for real Wikibird outputs.
+
+### Troubleshooting
+
+- If an app returns a normal chat answer: it probably treated the GitHub URL as "read this for the current conversation." Use the one-minute trial prompt above and explicitly name `README.md`, `SKILL.md`, and the expected output files.
+- If the HTML does not look like Wikibird: the app may be inventing its own style because it cannot write and verify the repo files. Use a CLI environment for real HTML output.
+- If Codex cannot see the skill: check `$HOME/.agents/skills/wikibird-research-html/SKILL.md`, then restart Codex.
+- If you are on an older Codex setup: run `scripts/install-skill.sh codex-legacy` to install into `~/.codex/skills/`.
 
 Official references:
 
-- OpenAI Help Center, [Skills in ChatGPT](https://help.openai.com/en/articles/20001066-skills-in-chatgpt)
-- OpenAI Developers, [Codex use cases](https://developers.openai.com/codex/explore/)
-- Anthropic Docs, [Agent Skills - Claude Code](https://docs.claude.com/en/docs/claude-code/skills)
-- Anthropic Help Center, [Use Skills in Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude)
-- Gemini CLI Docs, [Custom Commands](https://google-gemini.github.io/gemini-cli/docs/cli/custom-commands.html)
+- OpenAI Developers, [Codex Skills](https://developers.openai.com/codex/skills)
+- Anthropic Docs, [Agent Skills - Claude Code](https://code.claude.com/docs/en/skills)
 
 ## Quick Start
 
@@ -146,9 +239,9 @@ Include basic profile information, a public profile/face reference, and represen
 
 | Depth | Sources | Images | Use |
 | --- | --- | --- | --- |
-| `하` | 3-5 sources | 1-2 images | Quick overview |
-| `중` | 6-10 sources | 3-5 images | Normal Wikibird document |
-| `상` | 10+ sources when available | 5-8 images | Deep study document |
+| `하` | 3-5 sources | Essential captures only | Quick overview |
+| `중` | 6-10 sources | As needed for major sections | Normal Wikibird document |
+| `상` | 10+ sources when available | Add enough for understanding and verification | Deep study document |
 
 ## Chrome Screenshots
 
@@ -158,7 +251,7 @@ Guidelines:
 
 - Capture an official doc page, product page, paper/source page, or the final rendered HTML.
 - For people, prefer official profiles, personal sites, university/company pages, talks, or other reputable public pages.
-- Do not screenshot every keyword. Use images that help the reader understand the topic.
+- Do not screenshot every keyword. Use images that help the reader understand the topic. There is no fixed maximum; add more when they clarify the research.
 - Save images under `assets/screenshots/`.
 - Embed screenshots with `<figure class="screenshot">`.
 - Log URL, capture date, viewport, and purpose in `research.md`.
@@ -226,3 +319,7 @@ Default writing style is Korean wiki-style explanation.
 ## License
 
 MIT. The skill folder also includes its own `LICENSE`, so it can be distributed separately.
+
+## Then, Fighting
+
+Fighting
