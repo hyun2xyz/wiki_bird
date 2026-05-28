@@ -165,6 +165,25 @@
 		.toc li { margin: 5px 0; }
 		.toc li:last-child { margin-bottom: 0; }
 
+		.toc a {
+			text-decoration: none;
+		}
+
+		.toc a .toc-num {
+			color: var(--link);
+			text-decoration: underline;
+			text-decoration-thickness: 1px;
+			text-underline-offset: 3px;
+		}
+
+		.toc a .toc-title {
+			color: var(--text);
+			text-decoration: underline;
+			text-decoration-color: var(--text);
+			text-decoration-thickness: 1px;
+			text-underline-offset: 3px;
+		}
+
 		.key {
 			border-left: 3px solid var(--soft-line);
 			padding: 0 0 0 18px;
@@ -381,17 +400,17 @@
 		<nav class="toc" aria-label="목차">
 			<strong>목차</strong>
 			<ol>
-				<li><a href="#summary">1. 한 줄 결론</a></li>
-				<li><a href="#what">2. Wikibird가 뭔가</a></li>
-				<li><a href="#install">3. 설치와 등록</a></li>
-				<li><a href="#activation">4. 발동과 말투</a></li>
-				<li><a href="#usage">5. 사용법</a></li>
-				<li><a href="#depth">6. 리서치 깊이</a></li>
-				<li><a href="#images">7. 이미지 규칙</a></li>
-				<li><a href="#index">8. 로컬 인덱스</a></li>
-				<li><a href="#examples">9. 화면 예시</a></li>
-				<li><a href="#deploy">10. 배포 구조</a></li>
-				<li><a href="#sources">11. 출처</a></li>
+				<li><a href="#summary"><span class="toc-num">1.</span> <span class="toc-title">한 줄 결론</span></a></li>
+				<li><a href="#what"><span class="toc-num">2.</span> <span class="toc-title">Wikibird가 뭔가</span></a></li>
+				<li><a href="#install"><span class="toc-num">3.</span> <span class="toc-title">설치와 등록</span></a></li>
+				<li><a href="#activation"><span class="toc-num">4.</span> <span class="toc-title">발동과 말투</span></a></li>
+				<li><a href="#usage"><span class="toc-num">5.</span> <span class="toc-title">사용법</span></a></li>
+				<li><a href="#depth"><span class="toc-num">6.</span> <span class="toc-title">리서치 깊이</span></a></li>
+				<li><a href="#images"><span class="toc-num">7.</span> <span class="toc-title">이미지 규칙</span></a></li>
+				<li><a href="#index"><span class="toc-num">8.</span> <span class="toc-title">로컬 인덱스</span></a></li>
+				<li><a href="#examples"><span class="toc-num">9.</span> <span class="toc-title">화면 예시</span></a></li>
+				<li><a href="#deploy"><span class="toc-num">10.</span> <span class="toc-title">배포 구조</span></a></li>
+				<li><a href="#sources"><span class="toc-num">11.</span> <span class="toc-title">출처</span></a></li>
 			</ol>
 		</nav>
 

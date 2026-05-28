@@ -42,6 +42,7 @@ outputs/YYYY-MM-DD-topic-slug/
 - Desktop TOC: `position: fixed`, `top` set, no fixed `bottom`, `height: fit-content`, and slightly larger bottom padding than top padding for optical balance. Use `max-height` only as a fallback for very long TOCs.
 - Desktop TOC should sit farther left than the centered article. A good default is `left: max(16px, calc((100vw - 1500px) / 2));`.
 - TOC lists should use either browser-generated numbers or numbers in the link text, not both. For Wikibird's numbered heading text, use `list-style: none; padding-left: 0;`.
+- In the TOC, color only the section number blue and keep the section title black. Use spans such as `<span class="toc-num">1.</span> <span class="toc-title">Title</span>`, and apply underline styling to the spans rather than the parent anchor.
 - Callout/key blocks should use a quiet left-border note style, not a full tinted box. Keep mint only for rare highlights that need stronger emphasis.
 - Korean prose should break by word, not by arbitrary syllable. Use `word-break: keep-all`, `overflow-wrap: break-word`, and `hyphens: auto` on normal text. Keep stronger breaking only for code or unusually long tokens.
 - Indent section body content slightly under the heading line. Keep headings aligned, but give direct section children such as paragraphs, lists, key notes, figures, tables, timelines, and flow blocks about `10px` of left offset. Reset that offset on mobile.

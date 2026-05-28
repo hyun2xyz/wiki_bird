@@ -27,6 +27,7 @@ The target is a compact, readable wiki page: factual, easy to scan, and closer t
 - Use slightly larger bottom padding than top padding for optical balance.
 - A good default is `padding: 14px 16px 18px`.
 - TOC lists should use either browser-generated numbers or numbers in the link text, not both. For Wikibird's numbered heading text, use `list-style: none; padding-left: 0;`.
+- In the TOC, color only the section number blue and keep the section title black. Use spans such as `<span class="toc-num">1.</span> <span class="toc-title">Title</span>`, and apply underline styling to the spans rather than the parent anchor.
 
 ## Mobile TOC
 

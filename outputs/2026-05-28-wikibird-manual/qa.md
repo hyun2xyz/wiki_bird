@@ -7,6 +7,7 @@
 - Citation section present: yes, `출처`
 - Desktop left TOC checked: yes
 - TOC duplicate numbering checked: yes
+- TOC number/title color checked: yes, numbers blue and titles black
 - Mobile TOC drawer checked: yes
 - Index return button checked: yes
 - Chrome screenshots captured: yes, local index and manual page
