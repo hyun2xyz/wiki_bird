@@ -30,6 +30,15 @@ Accept these optional user settings in Korean or English. If the user does not s
 | --- | --- | --- | --- |
 | `리서치 깊이` / `research depth` | `하`, `중`, `상` | `중` | Controls source count, detail level, image count, and QA strictness. |
 
+On first activation or after a fresh install, ask the user to choose a default research depth before starting the first research task when the flow allows it:
+
+```text
+리서치 깊이를 기본값으로 정해둘까요? 하/중/상 중에서 고르면 됩니다.
+하: 빠른 개요, 중: 일반 Wikibird 문서, 상: 공부용 깊은 조사입니다.
+```
+
+If the user gives a clear immediate task and does not answer the setup question, proceed with `중` for that task and mention that they can change the depth next time.
+
 Depth rules:
 
 - `하`: quick wiki note. Use about 3-5 reliable sources, 1-2 screenshots, and a compact page with the essential flow only.

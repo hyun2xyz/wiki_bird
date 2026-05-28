@@ -158,7 +158,8 @@
 
 		.toc ol {
 			margin: 0;
-			padding-left: 22px;
+			padding-left: 0;
+			list-style: none;
 		}
 
 		.toc li { margin: 5px 0; }
@@ -392,7 +393,7 @@
 			<ol>
 				<li><a href="#summary">1. 한 줄 결론</a></li>
 				<li><a href="#what">2. Wikibird가 뭔가</a></li>
-				<li><a href="#install">3. 설치</a></li>
+				<li><a href="#install">3. 설치와 등록</a></li>
 				<li><a href="#activation">4. 발동과 말투</a></li>
 				<li><a href="#usage">5. 사용법</a></li>
 				<li><a href="#depth">6. 리서치 깊이</a></li>
@@ -414,20 +415,18 @@
 
 		<section id="what">
 			<h2>2. Wikibird가 뭔가</h2>
-			<p>Wikibird는 특정 모델 전용 프롬프트가 아니라, 여러 에이전트가 읽고 따라 할 수 있는 스킬 폴더다. Codex, Claude, Gemini, Cursor처럼 스킬이나 명령 폴더를 읽을 수 있는 환경에 복사해서 쓴다.</p>
+			<p>Wikibird는 특정 모델 전용 프롬프트가 아니라, 여러 에이전트가 읽고 따라 할 수 있는 스킬 폴더다. GitHub 주소를 주고 이번 대화에서 따라 하게 할 수도 있고, Skills나 프로젝트 지침에 등록해서 계속 부르게 할 수도 있다.</p>
 			<p>결과물은 기본적으로 <code>outputs/YYYY-MM-DD-topic-slug/</code> 아래에 만들어진다. 폴더 안에는 <code>index.html</code>, <code>research.md</code>, <code>qa.md</code>, <code>assets/screenshots/</code>가 들어간다.</p>
 		</section>
 
 		<section id="install">
-			<h2>3. 설치</h2>
-			<p>repo 루트에서 설치 스크립트를 실행한다.</p>
+			<h2>3. 설치와 등록</h2>
+			<p>가장 쉬운 시작은 GitHub 주소를 주는 것이다. 다만 이 방식은 보통 “이번 대화에서 읽고 따라 하기”다. 다음 대화에서도 자동으로 발동되게 하려면 도구별 Skills, 프로젝트 지침, custom instruction, custom command 중 하나에 등록한다.</p>
+			<pre><code>https://github.com/hyun2xyz/wiki_bird</code></pre>
+			<p>터미널형 에이전트에서는 repo 루트에서 설치 스크립트를 실행하는 방식이 가장 단순하다.</p>
 			<pre><code>scripts/install-skill.sh codex
 scripts/install-skill.sh claude
-scripts/install-skill.sh gemini
-scripts/install-skill.sh cursor</code></pre>
-			<p>전부 설치하려면 이렇게 실행한다.</p>
-			<pre><code>scripts/install-skill.sh all</code></pre>
-			<p>직접 복사해도 된다. 핵심은 <code>skills/wikibird-research-html</code> 폴더가 각 도구의 skills 폴더 안에 들어가는 것이다.</p>
+scripts/install-skill.sh all</code></pre>
 		</section>
 
 		<section id="activation">
@@ -438,14 +437,14 @@ scripts/install-skill.sh cursor</code></pre>
 			<div class="table-wrap">
 				<table>
 					<thead>
-						<tr><th>환경</th><th>넣는 방법</th><th>부르는 방법</th><th>메모</th></tr>
+						<tr><th>환경</th><th>쉬운 시작</th><th>계속 쓰는 방법</th><th>부르는 말</th></tr>
 					</thead>
 					<tbody>
-						<tr><td>ChatGPT / GPT</td><td>ChatGPT Skills에 스킬 폴더 업로드</td><td><code>$wikibird-research-html</code> 또는 “Wikibird로 조사해줘”</td><td>Agent Skills 형식 기준</td></tr>
-						<tr><td>Codex</td><td><code>scripts/install-skill.sh codex</code></td><td><code>Use $wikibird-research-html</code></td><td>프로젝트 <code>AGENTS.md</code>에도 규칙을 둘 수 있음</td></tr>
-						<tr><td>Claude</td><td>Claude Skills UI나 워크스페이스 Skills에 업로드</td><td>“Wikibird skill을 써줘”</td><td>플랜/워크스페이스 설정에 따라 다름</td></tr>
-						<tr><td>Claude Code</td><td><code>scripts/install-skill.sh claude</code></td><td>“Use wikibird-research-html”</td><td>프로젝트 전용 <code>.claude/skills/</code>도 가능</td></tr>
-						<tr><td>Gemini CLI</td><td><code>~/.gemini/skills/</code> 또는 custom command</td><td><code>/wikibird 주제</code></td><td>fallback은 <code>adapters/gemini/commands/wikibird.toml</code></td></tr>
+						<tr><td>ChatGPT / GPT</td><td>GitHub 주소를 주고 <code>README.md</code>, <code>SKILL.md</code>를 읽게 함</td><td>Skills 업로드가 있으면 zip 업로드. 없으면 Custom Instructions나 프로젝트 지침에 핵심 규칙 붙이기</td><td>“Wikibird로 조사해줘”</td></tr>
+						<tr><td>Codex</td><td><code>scripts/install-skill.sh codex</code></td><td><code>~/.codex/skills/</code> 또는 프로젝트 <code>AGENTS.md</code></td><td><code>Use $wikibird-research-html</code></td></tr>
+						<tr><td>Claude 앱</td><td>GitHub 주소를 주고 이번 대화에서 따라 하게 함</td><td>Skills 기능이 있으면 업로드. 없으면 Project knowledge나 custom instruction에 <code>SKILL.md</code> 넣기</td><td>“Wikibird skill을 써줘”</td></tr>
+						<tr><td>Claude Code</td><td><code>scripts/install-skill.sh claude</code></td><td><code>~/.claude/skills/</code> 또는 프로젝트 <code>.claude/skills/</code></td><td>“Use wikibird-research-html”</td></tr>
+						<tr><td>Gemini CLI</td><td>GitHub 주소나 <code>SKILL.md</code>를 읽게 함</td><td><code>scripts/install-skill.sh gemini</code>로 스킬 폴더와 <code>/wikibird</code> 명령을 같이 설치</td><td><code>/wikibird 주제</code></td></tr>
 					</tbody>
 				</table>
 			</div>
@@ -477,7 +476,7 @@ scripts/install-skill.sh cursor</code></pre>
 					</tbody>
 				</table>
 			</div>
-			<p>사용자가 깊이를 말하지 않으면 기본은 <code>중</code>이다. “쭉”, “자세히”, “공부용” 같은 표현이면 보통 <code>상</code>에 가깝게 잡는다.</p>
+			<p>Wikibird를 처음 등록하거나 처음 부를 때는 기본 리서치 깊이를 먼저 물어본다. 사용자가 깊이를 말하지 않고 바로 작업을 시키면 기본은 <code>중</code>으로 진행하고, 다음부터 바꿀 수 있다고 알려 준다.</p>
 		</section>
 
 		<section id="images">

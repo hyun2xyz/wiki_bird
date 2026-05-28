@@ -6,6 +6,7 @@
 - Links checked: internal/manual links checked
 - Citation section present: yes, `출처`
 - Desktop left TOC checked: yes
+- TOC duplicate numbering checked: yes
 - Mobile TOC drawer checked: yes
 - Index return button checked: yes
 - Chrome screenshots captured: yes, local index and manual page
@@ -15,5 +16,6 @@
 - Person profile baseline checked: not applicable
 - Overflow checked: yes
 - 1280px left TOC checked: yes, fixed TOC visible without overlapping the article
+- Install/activation guidance checked for duplicate sections: yes, README and manual now use one "설치와 발동/등록" flow
 - Known limits:
   - GitHub Pages 배포 시 repo 설정에서 Pages source를 `docs/`로 지정해야 한다.

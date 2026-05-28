@@ -35,6 +35,15 @@ Before researching, capture:
 - Must-use or banned sources.
 - Whether the page is informational, persuasive, instructional, or comparative.
 
+On first activation or after a fresh install, ask the user to choose a default research depth:
+
+```text
+리서치 깊이를 기본값으로 정해둘까요? 하/중/상 중에서 고르면 됩니다.
+하: 빠른 개요, 중: 일반 Wikibird 문서, 상: 공부용 깊은 조사입니다.
+```
+
+If the user gives a concrete task and does not answer the setup question, proceed with `중` for that task and note that the default can be changed later.
+
 If the topic includes current facts, do live verification.
 
 Depth settings:

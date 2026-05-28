@@ -94,9 +94,33 @@ $wikibird-research-html 써서 안드레 카파시를 조사해 주세요.
 | 중 | 기본 Wikibird 문서, 6-10개 출처 | 3-5장 |
 | 상 | 깊은 공부용 문서, 10개 이상 출처 가능하면 사용 | 5-8장 |
 
-## 설치
+## 설치와 발동
 
-이 repo를 받은 뒤 루트에서 실행합니다.
+가장 쉬운 기준은 이 GitHub 주소를 전달하는 것입니다.
+
+```text
+https://github.com/hyun2xyz/wiki_bird
+```
+
+단, GitHub 주소만 주는 방식은 “이번 대화에서 읽고 따라 하기”에 가깝습니다. 다음 대화에서도 자동으로 Wikibird가 발동되게 하려면 각 도구가 지원하는 Skills, 프로젝트 지침, 커스텀 명령, custom instruction 중 하나에 등록해야 합니다.
+
+처음 Wikibird를 학습시키거나 등록한 뒤에는 기본 리서치 깊이를 하나 정합니다.
+
+```text
+리서치 깊이를 기본값으로 정해둘까요? 하/중/상 중에서 고르면 됩니다.
+하: 빠른 개요, 중: 일반 Wikibird 문서, 상: 공부용 깊은 조사입니다.
+```
+
+| 환경 | 가장 쉬운 방법 | 계속 쓰는 방법 | 발동 문구 |
+| --- | --- | --- | --- |
+| ChatGPT / GPT | GitHub 주소를 주고 `README.md`와 `SKILL.md`를 읽어 달라고 합니다. | 계정/워크스페이스에 Skills 업로드 기능이 있으면 `skills/wikibird-research-html` 폴더를 zip으로 올립니다. 기능이 없으면 Custom Instructions나 프로젝트 지침에 핵심 규칙을 붙입니다. | “Wikibird로 조사해줘” |
+| Codex | 이 repo를 clone한 뒤 `scripts/install-skill.sh codex`를 실행합니다. | `~/.codex/skills/wikibird-research-html/`에 스킬 폴더를 둡니다. 프로젝트에서는 `AGENTS.md`에 Wikibird 사용 규칙을 적어도 됩니다. | `Use $wikibird-research-html` |
+| Claude 앱 | GitHub 주소를 주고 이번 대화에서 따라 하게 합니다. | 계정/워크스페이스에 Skills 기능이 있으면 스킬 폴더를 업로드합니다. 없으면 Project knowledge나 custom instruction에 `SKILL.md` 내용을 넣습니다. | “Wikibird skill을 써줘” |
+| Claude Code | 이 repo를 clone한 뒤 `scripts/install-skill.sh claude`를 실행합니다. | `~/.claude/skills/` 또는 프로젝트 `.claude/skills/`에 스킬 폴더를 둡니다. | “Use wikibird-research-html” |
+| Gemini CLI | GitHub 주소 또는 `SKILL.md` 내용을 읽게 합니다. | `scripts/install-skill.sh gemini`를 실행하면 스킬 폴더와 `/wikibird` custom command가 같이 설치됩니다. | `/wikibird 주제` |
+| 기타 LLM | GitHub 주소를 주고 따라 하게 합니다. | system/custom instruction, 프로젝트 지침, 지식 베이스에 `SKILL.md` 핵심을 넣습니다. | “Wikibird 모드로 정리해줘” |
+
+터미널에서 쓰는 에이전트는 설치 스크립트가 가장 단순합니다.
 
 ```sh
 scripts/install-skill.sh codex
@@ -111,28 +135,11 @@ scripts/install-skill.sh cursor
 scripts/install-skill.sh all
 ```
 
-직접 복사해도 됩니다.
+Gemini CLI에서 스킬 폴더를 바로 읽지 못하는 환경이면 custom command를 씁니다.
 
 ```sh
-cp -R skills/wikibird-research-html ~/.codex/skills/
-cp -R skills/wikibird-research-html ~/.claude/skills/
-cp -R skills/wikibird-research-html ~/.gemini/skills/
+scripts/install-skill.sh gemini
 ```
-
-ChatGPT나 Claude 웹/워크스페이스에서는 `skills/wikibird-research-html` 폴더만 zip으로 묶어서 Skills UI에 올리면 됩니다.
-
-## 환경별 발동 방법
-
-스킬을 “학습”시키는 방식은 도구마다 다릅니다. 핵심은 `skills/wikibird-research-html/SKILL.md`를 그 도구가 읽을 수 있는 위치에 두거나, 명령/프롬프트로 불러오게 하는 것입니다.
-
-| 환경 | 넣는 방법 | 발동 방법 | 비고 |
-| --- | --- | --- | --- |
-| ChatGPT / GPT | ChatGPT Skills에서 `skills/wikibird-research-html` 폴더를 업로드하거나 새 Skill로 만듭니다. | 대화에서 `$wikibird-research-html` 또는 “Wikibird로 조사해줘”처럼 명시합니다. | ChatGPT Skills는 Agent Skills 형식을 따릅니다. |
-| Codex | `scripts/install-skill.sh codex` 또는 `cp -R skills/wikibird-research-html ~/.codex/skills/` | Codex 세션에서 `Use $wikibird-research-html` 또는 “위키버드로 리서치해줘”라고 요청합니다. | 반복 사용하려면 프로젝트 `AGENTS.md`에 Wikibird 사용 규칙을 적어도 됩니다. |
-| Claude | Claude Skills UI 또는 워크스페이스 Skills에 스킬 폴더를 업로드합니다. | Claude가 설명과 요청을 보고 자동으로 고르거나, 사용자가 “Wikibird skill을 써줘”라고 부릅니다. | 워크스페이스/플랜 설정에 따라 Skills 사용 가능 여부가 다릅니다. |
-| Claude Code | `scripts/install-skill.sh claude` 또는 `cp -R skills/wikibird-research-html ~/.claude/skills/` | Claude Code에서 “Use wikibird-research-html” 또는 “Wikibird로 HTML 리서치 페이지 만들어줘”라고 요청합니다. | 프로젝트 전용으로는 `.claude/skills/wikibird-research-html/`에 둘 수 있습니다. |
-| Gemini CLI | 스킬 폴더를 직접 읽는 환경이면 `~/.gemini/skills/`에 복사합니다. 안정적인 fallback은 custom command입니다. | `~/.gemini/commands/wikibird.toml`을 설치한 뒤 Gemini CLI에서 `/wikibird 주제`처럼 호출합니다. | Gemini CLI custom commands는 재사용 프롬프트를 명령으로 저장하는 방식입니다. |
-| 일반 LLM / 기타 에이전트 | `SKILL.md` 내용을 system/custom instruction 또는 프로젝트 지침에 붙입니다. | “지금부터 Wikibird 모드로 답해줘”처럼 명시합니다. | 자동 발동이 없으면 매번 명시 호출이 필요합니다. |
 
 참고한 공식 문서:
 
@@ -141,17 +148,6 @@ ChatGPT나 Claude 웹/워크스페이스에서는 `skills/wikibird-research-html
 - Anthropic Docs, [Agent Skills - Claude Code](https://docs.claude.com/en/docs/claude-code/skills)
 - Anthropic Help Center, [Use Skills in Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude)
 - Gemini CLI Docs, [Custom Commands](https://google-gemini.github.io/gemini-cli/docs/cli/custom-commands.html)
-
-## Gemini CLI fallback
-
-Gemini CLI에서 스킬 폴더를 바로 읽지 못하는 환경이면 custom command를 씁니다.
-
-```sh
-mkdir -p ~/.gemini/commands
-cp adapters/gemini/commands/wikibird.toml ~/.gemini/commands/
-```
-
-그 다음 Gemini CLI에서 `wikibird` 명령에 조사할 주제를 넘겨 사용합니다.
 
 ## Chrome 스크린샷
 

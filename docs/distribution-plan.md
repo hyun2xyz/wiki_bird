@@ -22,13 +22,16 @@ skills/wikibird-research-html/
 
 | Platform | Best path | Notes |
 | --- | --- | --- |
-| Codex / ChatGPT | Install or upload the `skills/wikibird-research-html` folder. | OpenAI documents skills as reusable workflows, supported in ChatGPT, Codex, and API. Skills do not sync across products yet. |
+| ChatGPT / GPT | If Skills upload is available, upload the `skills/wikibird-research-html` folder as a zip. Otherwise provide the GitHub URL or paste `SKILL.md` into Custom Instructions / project instructions. | GitHub URL works for one conversation when the model can read it. Persistent auto-activation requires a supported Skills or instruction surface. |
+| Codex | Install with `scripts/install-skill.sh codex` or copy the folder to `~/.codex/skills/`. | Project-level fallback is `AGENTS.md` with a pointer to the skill folder or repo URL. |
 | Claude Code | Copy to `~/.claude/skills/wikibird-research-html` or `.claude/skills/wikibird-research-html`. | Claude Code discovers personal and project skills from these directories. |
-| Claude web/workspace | Upload/share the skill package if the workspace has Skills enabled. | Workspace sharing is controlled by plan/admin settings. |
-| Gemini CLI | Prefer Agent Skills folder if the local version supports it. Also provide a custom command fallback. | Official Gemini CLI docs clearly support project/user custom commands. Agent Skills support is evolving across Gemini CLI/Antigravity variants, so the repo includes both a skill folder and `adapters/gemini/commands/wikibird.toml`. |
+| Claude web/workspace | Upload/share the skill package if the workspace has Skills enabled. Otherwise provide the GitHub URL or put `SKILL.md` in Project knowledge / custom instructions. | Workspace sharing is controlled by plan/admin settings. |
+| Gemini CLI | Prefer a custom command fallback: copy `adapters/gemini/commands/wikibird.toml` to `~/.gemini/commands/`. | Official Gemini CLI docs clearly support project/user custom commands. Agent Skills support varies across Gemini/Antigravity variants. |
 | Other agents | Copy the same `SKILL.md` folder into the agent's skill directory if it supports Agent Skills. | Keep the package standard: `SKILL.md`, `references/`, `assets/`, no hidden local dependencies. |
 
 Wikibird-specific activation check: after the skill is active, normal assistant replies should end with `짹`. If a host does not auto-load skills, put that voice rule in the host's custom instruction or command prompt.
+
+First-run setup check: ask the user to choose default research depth, `하` quick overview, `중` normal Wikibird document, or `상` deep study research. If they skip the question and give an immediate task, use `중` and say it can be changed later.
 
 Reference docs checked on 2026-05-27:
 

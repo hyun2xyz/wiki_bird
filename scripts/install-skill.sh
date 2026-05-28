@@ -18,6 +18,7 @@ Targets:
   all          install to all targets above
 
 The script copies skills/wikibird-research-html into the selected personal skill directory.
+For gemini, it also installs adapters/gemini/commands/wikibird.toml into ~/.gemini/commands/.
 USAGE
 }
 
@@ -36,6 +37,16 @@ install_one() {
   rm -rf "$base/$SKILL_NAME"
   cp -R "$SOURCE" "$base/$SKILL_NAME"
   echo "Installed $SKILL_NAME -> $base/$SKILL_NAME"
+
+  if [[ "$target" == "gemini" ]]; then
+    local command_source="$ROOT/adapters/gemini/commands/wikibird.toml"
+    local command_base="$HOME/.gemini/commands"
+    if [[ -f "$command_source" ]]; then
+      mkdir -p "$command_base"
+      cp "$command_source" "$command_base/wikibird.toml"
+      echo "Installed Gemini command -> $command_base/wikibird.toml"
+    fi
+  fi
 }
 
 if [[ $# -ne 1 ]]; then

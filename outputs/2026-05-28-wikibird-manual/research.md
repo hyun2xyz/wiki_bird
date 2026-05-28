@@ -8,6 +8,10 @@
   - `skills/wikibird-research-html/SKILL.md`
   - `docs/research-html-workflow.md`
   - `docs/wiki-html-style-rules.md`
+- 업데이트 내용:
+  - 목차 중복 번호 제거
+  - 설치/발동 안내를 GitHub URL, Skills 업로드, 프로젝트 지침, custom command 방식으로 정리
+  - 첫 실행 시 리서치 깊이 기본값을 묻는 규칙 반영
 
 ## 이미지 커버리지
 

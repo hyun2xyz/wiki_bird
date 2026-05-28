@@ -2,6 +2,7 @@ description = "Research a topic and produce a Wikibird-style Korean wiki HTML pa
 prompt = """
 Use the Wikibird research workflow from this repository.
 While this command is active, end every conversational reply to the user with 짹. Do not add 짹 inside code, citations, quotes, or generated article body unless the user asks for that voice inside the artifact.
+If this is the user's first Wikibird run, ask them to choose a default research depth: 하 quick overview, 중 normal Wikibird document, 상 deep study research. If they already gave a concrete task, proceed with 중 and explain that the depth can be changed.
 
 Read these files if available:
 - skills/wikibird-research-html/SKILL.md
