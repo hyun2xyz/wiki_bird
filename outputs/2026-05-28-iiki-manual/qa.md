@@ -14,6 +14,8 @@
 - Screenshot figures embedded: yes, `assets/miniwiki.jpg`, `assets/screenshots/local-index.png`, `assets/screenshots/iiki-manual-page.png`
 - Depth recorded: yes
 - Screenshot count matches depth: yes, manual page uses one mascot image and two local screenshots
+- IYO Wiki paste text checked: yes, `iyo-wiki.txt`
+- Typst/PDF booklet checked: yes, `typst/main.typ` and `typst/index.pdf`
 - Person profile baseline checked: not applicable
 - Overflow checked: yes
 - 1280px left TOC checked: yes, fixed TOC visible without overlapping the article

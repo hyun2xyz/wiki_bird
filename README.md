@@ -1,6 +1,6 @@
 # iiki
 
-**2026-05-28 · v0.1.3 · 첫 베타테스트 (ദ്ദി ᴖ⩊ᴖ )** 
+**2026-05-29 · v0.2.0 · 위키 txt와 Typst 소책자 베타 (ദ്ദി ᴖ⩊ᴖ )**
 
 [English README](README.en.md)
 
@@ -53,23 +53,25 @@ repo 최상단의 `index.html`은 로컬 작업용 목록입니다. `outputs/` �
 - 한국어 위키식 설명문 작성
 - 고정 목차가 있는 HTML 페이지 생성
 - Chrome 스크린샷 이미지 첨부
+- IYO Wiki 복붙용 `iyo-wiki.txt` 생성
 - `research.md`, `qa.md` 기록
-- 선택적으로 Typst/PDF 출력
+- 선택적으로 Typst/PDF 소책자 출력
 
 기본 결과물 구조는 이렇습니다.
 
 ```text
 outputs/YYYY-MM-DD-topic-slug/
 ├── index.html
+├── iyo-wiki.txt
 ├── research.md
 ├── qa.md
 ├── assets/
 │   └── screenshots/
 │       └── 01-source-or-page.png
 └── typst/
+    ├── iiki-booklet.typ
     ├── main.typ
-    ├── index.pdf
-    └── index.html
+    └── index.pdf
 ```
 
 각 출력 폴더의 `index.html`은 그냥 브라우저로 열어도 되는 정적 HTML입니다. 새 리서치 출력물은 바탕화면에 만들지 않고, 지정한 폴더 또는 repo 안의 `outputs/` 아래에 만듭니다.
@@ -282,20 +284,41 @@ open index.html
 
 새 리서치 결과를 만들거나 수정한 뒤에는 `node scripts/build-index.js`를 실행해 최상단 `index.html` 목록을 갱신합니다.
 
-Typst/PDF가 필요한 경우 repo 루트에서 컴파일합니다.
+## IYO Wiki 복붙용 txt
+
+이요 위키에 붙여 넣을 텍스트가 필요하면 최종 HTML을 만든 뒤 아래 명령을 실행합니다.
 
 ```sh
-typst compile --root . outputs/<slug>/typst/main.typ outputs/<slug>/typst/index.pdf
-typst compile --root . --features html outputs/<slug>/typst/main.typ outputs/<slug>/typst/index.html
+node scripts/export-iyo-wiki-text.js outputs/YYYY-MM-DD-topic-slug
 ```
 
-Typst HTML export는 아직 실험적이라, 문서용 결과는 PDF를 더 안정적인 출력으로 봅니다.
+그러면 같은 폴더에 `iyo-wiki.txt`가 생깁니다. 제목, 문단, 링크, 목록, 표, 인용문, 이미지 캡션을 IYO Wiki에 붙여 넣기 쉬운 문법으로 바꿔 줍니다.
+
+이미지는 `{{iyoimage ...}}` 형태의 자리표시자로 들어갑니다. 실제 위키에 올릴 때는 이미지를 업로드한 뒤 `file="..."` 경로를 맞춰 주면 됩니다.
+
+## Typst/PDF 소책자
+
+논문처럼 읽히는 소책자 PDF가 필요하면 아래 명령을 실행합니다.
+
+```sh
+node scripts/build-typst-booklet.js outputs/YYYY-MM-DD-topic-slug
+```
+
+그러면 `typst/main.typ`, `typst/iiki-booklet.typ`, `typst/index.pdf`가 만들어집니다. Typst CLI가 없으면 `.typ` 파일만 만들 수 있고, PDF 컴파일은 나중에 하면 됩니다.
+
+Typst 원고만 만들고 싶을 때는 이렇게 씁니다.
+
+```sh
+node scripts/build-typst-booklet.js outputs/YYYY-MM-DD-topic-slug --no-compile
+```
 
 ## repo 안 주요 파일
 
 - `skills/iiki-research-html/SKILL.md` - 설치 가능한 스킬 본문
 - `skills/iiki-research-html/references/` - 리서치/HTML/Typst 규칙
 - `skills/iiki-research-html/scripts/capture-chrome-screenshot.sh` - Chrome 스크린샷 helper
+- `scripts/export-iyo-wiki-text.js` - IYO Wiki 복붙용 txt 생성
+- `scripts/build-typst-booklet.js` - Typst/PDF 소책자 생성
 - `.claude/agents/iiki-research-html-builder.md` - Claude Code용 프로젝트 에이전트
 - `index.html` - 로컬 전용 리서치 결과 목록
 - `docs/index.html` - GitHub 배포용 iiki 사용 설명서

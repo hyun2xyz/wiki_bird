@@ -14,6 +14,10 @@ skills/iiki-research-html/
 ├── LICENSE
 ├── agents/openai.yaml
 ├── scripts/
+│   ├── capture-chrome-screenshot.sh
+│   ├── export-iyo-wiki-text.js
+│   ├── build-typst-booklet.js
+│   └── lib/iiki-html-export.js
 ├── references/
 └── assets/
 ```
@@ -32,6 +36,8 @@ skills/iiki-research-html/
 iiki-specific activation check: after the skill is active, normal assistant replies should end with `짹`. If a host does not auto-load skills, put that voice rule in the host's custom instruction or command prompt.
 
 First-run setup check: ask the user to choose default research depth, `하` quick overview, `중` normal iiki document, or `상` deep study research. If they skip the question and give an immediate task, use `중` and say it can be changed later.
+
+Optional output checks: when users ask for IYO Wiki copy-paste text, generate `iyo-wiki.txt`; when they ask for Typst/PDF/booklet output, generate `typst/main.typ` and `typst/index.pdf`.
 
 Reference docs checked on 2026-05-27:
 

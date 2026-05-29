@@ -4,7 +4,7 @@ description: "Research a topic with current, source-backed information and turn 
 license: MIT
 metadata:
   author: hyun2xyz
-  version: "0.1.3"
+  version: "0.2.0"
 ---
 
 # iiki Research HTML
@@ -54,18 +54,21 @@ Create this structure unless the user specifies another path:
 ```text
 outputs/YYYY-MM-DD-topic-slug/
 ├── index.html
+├── iyo-wiki.txt
 ├── research.md
 ├── qa.md
 ├── assets/
 │   └── screenshots/
 │       └── 01-source-or-page.png
 └── typst/
+    ├── iiki-booklet.typ
     ├── main.typ
-    ├── index.pdf
-    └── index.html
+    └── index.pdf
 ```
 
-Typst output is optional. Produce it when the user asks for PDF, print, Typst, course notes, or document export.
+`iyo-wiki.txt` is optional by default, but produce it whenever the user asks for IYO Wiki paste text, wiki syntax, copy-paste wiki text, or a page that should move into iyoxyz.com later.
+
+Typst output is optional by default, but produce it whenever the user asks for PDF, print, Typst, booklet, zine, 소책자, 논문 같은 형식, course notes, or document export.
 
 ## Research Rules
 
@@ -164,6 +167,24 @@ Follow `references/typst-output.md` when Typst output is requested.
 
 Treat Typst as the PDF/print/document output, not as the replacement for the web wiki page. The HTML page remains the primary web reading surface.
 
+For booklet/PDF output, use the repo helper after the HTML is finished:
+
+```sh
+node scripts/build-typst-booklet.js outputs/YYYY-MM-DD-topic-slug
+```
+
+This creates `typst/main.typ`, copies `typst/iiki-booklet.typ`, and writes `typst/index.pdf` when the Typst CLI is available.
+
+## IYO Wiki Text Export
+
+When the user wants to paste the result into IYO Wiki, generate `iyo-wiki.txt` from the final HTML:
+
+```sh
+node scripts/export-iyo-wiki-text.js outputs/YYYY-MM-DD-topic-slug
+```
+
+The export is a copy-paste helper, not a replacement for IYO Wiki editing. It converts headings, paragraphs, links, lists, quotes, tables, and screenshot figures into WackoWiki/IYO-friendly text. Image macros keep local image paths as placeholders; the user may still need to upload images or adjust paths inside IYO Wiki.
+
 ## QA
 
 Before completion:
@@ -175,6 +196,8 @@ Before completion:
 - Check visible source section.
 - Check external source links when network tools allow it.
 - Check selected depth is recorded and screenshot coverage fits the topic and chosen depth.
+- If `iyo-wiki.txt` was requested, check it exists and preserves headings, links, tables, and image placeholders.
+- If Typst/PDF was requested, check `typst/main.typ` exists and compile `typst/index.pdf` when Typst CLI is available.
 - For people, check basic profile fields and public visual/profile evidence are included or explicitly marked unavailable.
 - Record results in `qa.md`.
 
@@ -185,4 +208,7 @@ Before completion:
 - `templates/research-page.html`: canonical self-contained HTML starter. Copy this first, then replace placeholders and sections.
 - `references/typst-output.md`: Typst/PDF output guidance.
 - `assets/iiki-brief.typ`: starter Typst template.
+- `assets/iiki-booklet.typ`: A5 paper-like booklet/PDF Typst template.
 - `scripts/capture-chrome-screenshot.sh`: Chrome headless screenshot helper.
+- `scripts/export-iyo-wiki-text.js`: IYO Wiki copy-paste text export helper.
+- `scripts/build-typst-booklet.js`: Typst/PDF booklet builder.

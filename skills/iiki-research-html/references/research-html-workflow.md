@@ -113,6 +113,43 @@ Embed useful screenshots with:
 </figure>
 ```
 
+## IYO Wiki Paste Text
+
+If the user asks for IYO Wiki paste text, wiki syntax, copy-paste wiki text, or a result that should later move into iyoxyz.com, create `iyo-wiki.txt` after the final HTML is done:
+
+```sh
+node scripts/export-iyo-wiki-text.js outputs/YYYY-MM-DD-topic-slug
+```
+
+This file is meant for copy-pasting into IYO Wiki. It converts the final HTML into WackoWiki/IYO-friendly text:
+
+- `h1`, `h2`, `h3` become wiki headings.
+- Links become `((url label))`.
+- Lists, quotes, code blocks, and tables become editable wiki text.
+- Screenshot figures become `{{iyoimage ...}}` placeholders with local paths and captions.
+
+Do not treat this as a perfect upload. Image paths may need adjustment after the user uploads files to IYO Wiki.
+
+## Typst Booklet / PDF
+
+If the user asks for Typst, PDF, print, booklet, 소책자, 논문 같은 형식, or course notes, create a Typst booklet after the HTML is done:
+
+```sh
+node scripts/build-typst-booklet.js outputs/YYYY-MM-DD-topic-slug
+```
+
+The helper creates:
+
+```text
+outputs/YYYY-MM-DD-topic-slug/
+└── typst/
+    ├── iiki-booklet.typ
+    ├── main.typ
+    └── index.pdf
+```
+
+Use `--no-compile` only when Typst CLI is unavailable or when a caller only wants the `.typ` source. The default should compile `index.pdf`.
+
 ## QA
 
 After writing a research output, run `node scripts/build-index.js` from the repo root so the local top-level `index.html` stays current.
@@ -133,6 +170,8 @@ Write `qa.md` with:
 - Screenshot figures embedded: yes/no
 - Depth recorded: yes/no
 - Screenshot coverage fits topic/depth: yes/no
+- IYO Wiki paste text checked: yes/no/not requested
+- Typst/PDF booklet checked: yes/no/not requested
 - Person profile baseline checked: yes/no/not applicable
 - Overflow checked: yes/no
 - Known limits:

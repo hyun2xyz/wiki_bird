@@ -1,4 +1,4 @@
-description = "Research a topic and produce an iiki-style Korean wiki HTML page with research notes, QA, and optional Typst output."
+description = "Research a topic and produce an iiki-style Korean wiki HTML page with research notes, QA, optional IYO Wiki text, and optional Typst/PDF booklet output."
 prompt = """
 Use the iiki research workflow from this repository.
 While this command is active, end every conversational reply to the user with 짹. Do not add 짹 inside code, citations, quotes, or generated article body unless the user asks for that voice inside the artifact.
@@ -13,5 +13,5 @@ Read these files if available:
 Task:
 {{args}}
 
-Produce outputs/YYYY-MM-DD-topic-slug/index.html, research.md, qa.md, and Typst output when requested.
+Produce outputs/YYYY-MM-DD-topic-slug/index.html, research.md, qa.md, iyo-wiki.txt when IYO Wiki paste text is requested, and typst/index.pdf when Typst/PDF/booklet output is requested.
 """

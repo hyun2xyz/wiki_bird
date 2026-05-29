@@ -12,28 +12,47 @@ Create Typst output when the user asks for:
 - course notes
 - Typst
 - offline handout
+- booklet / zine / 소책자
+- 논문 같은 형식
 
 ## File Structure
 
 ```text
 outputs/YYYY-MM-DD-topic-slug/
 └── typst/
+    ├── iiki-booklet.typ
     ├── main.typ
-    ├── index.pdf
-    └── index.html
+    └── index.pdf
 ```
 
-## Template
+## Booklet Template
 
-Use `assets/iiki-brief.typ` as the starter template. If the repo already has `typst/iiki-brief.typ`, use that shared template instead.
+Use `assets/iiki-booklet.typ` or the shared repo template at `typst/iiki-booklet.typ` for paper-like booklet output.
+
+The default booklet is A5, compact, source-backed, and closer to a small paper or study booklet than a slide deck. Keep the HTML page as the primary web surface, then derive the Typst/PDF from that final page.
+
+`assets/iiki-brief.typ` and `typst/iiki-brief.typ` remain available for short one-page briefs.
 
 ## Compile
 
 From the repository root:
 
 ```sh
-typst compile --root . outputs/<slug>/typst/main.typ outputs/<slug>/typst/index.pdf
-typst compile --root . --features html outputs/<slug>/typst/main.typ outputs/<slug>/typst/index.html
+node scripts/build-typst-booklet.js outputs/<slug>
 ```
 
-Typst HTML export may be incomplete depending on the Typst version. Treat PDF as the stable Typst output and HTML as an experimental preview.
+The helper writes `typst/main.typ`, copies `typst/iiki-booklet.typ`, and compiles `typst/index.pdf` when the Typst CLI is available.
+
+Use this only when `.typ` source is needed without compiling:
+
+```sh
+node scripts/build-typst-booklet.js outputs/<slug> --no-compile
+```
+
+Manual compile remains possible:
+
+```sh
+typst compile outputs/<slug>/typst/main.typ outputs/<slug>/typst/index.pdf
+```
+
+Typst HTML export is not part of the default iiki contract. Treat PDF as the stable Typst output.

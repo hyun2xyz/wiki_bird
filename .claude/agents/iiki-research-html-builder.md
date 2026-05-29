@@ -99,6 +99,8 @@ outputs/YYYY-MM-DD-topic-slug/
    - Check links, source labels, dates, and page title.
    - Check screenshot files load and figure captions are visible.
    - Check selected depth, image coverage, and person profile baseline when applicable.
+   - If IYO Wiki paste text is requested, run `node scripts/export-iyo-wiki-text.js outputs/YYYY-MM-DD-topic-slug` and inspect `iyo-wiki.txt`.
+   - If Typst/PDF/booklet output is requested, run `node scripts/build-typst-booklet.js outputs/YYYY-MM-DD-topic-slug` and check `typst/index.pdf` when Typst CLI is available.
    - Run `node scripts/build-index.js` from the repo root after creating or updating an output.
    - Record verification results in the final response or `qa.md`.
 
@@ -109,12 +111,19 @@ For substantial work, produce:
 ```text
 outputs/YYYY-MM-DD-topic-slug/
 ├── index.html
+├── iyo-wiki.txt
 ├── research.md
 ├── qa.md
-└── assets/
-    └── screenshots/
-        └── 01-source-or-page.png
+├── assets/
+│   └── screenshots/
+│       └── 01-source-or-page.png
+└── typst/
+    ├── iiki-booklet.typ
+    ├── main.typ
+    └── index.pdf
 ```
+
+`iyo-wiki.txt` and `typst/` are optional unless the user asks for IYO Wiki copy-paste text, wiki syntax, Typst, PDF, print, booklet, 소책자, 논문 같은 형식, or course notes.
 
 For small work, a single `index.html` plus a short source section is acceptable.
 

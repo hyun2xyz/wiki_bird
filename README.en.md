@@ -1,6 +1,6 @@
 # iiki
 
-**2026-05-28 · v0.1.3 · First beta test (ദ്ദി ᴖ⩊ᴖ )**
+**2026-05-29 · v0.2.0 · IYO Wiki text and Typst booklet beta (ദ്ദി ᴖ⩊ᴖ )**
 
 ```text
 Hello, I'm Hyun.
@@ -56,23 +56,25 @@ The root `index.html` is a local-only index of generated research pages under `o
 - Korean wiki-style writing by default
 - Static HTML page with a fixed table of contents
 - Chrome screenshot capture
+- `iyo-wiki.txt` export for IYO Wiki copy-paste
 - `research.md` and `qa.md` logs
-- Optional Typst/PDF output
+- Optional Typst/PDF booklet output
 
 Default output structure:
 
 ```text
 outputs/YYYY-MM-DD-topic-slug/
 ├── index.html
+├── iyo-wiki.txt
 ├── research.md
 ├── qa.md
 ├── assets/
 │   └── screenshots/
 │       └── 01-source-or-page.png
 └── typst/
+    ├── iiki-booklet.typ
     ├── main.typ
-    ├── index.pdf
-    └── index.html
+    └── index.pdf
 ```
 
 Each output folder has its own `index.html`, which can be opened directly in a browser. New research outputs should be created in a specified folder or under this repo's `outputs/`, not on the Desktop by default.
@@ -284,20 +286,41 @@ open index.html
 
 Run `node scripts/build-index.js` after creating or editing an output so the root `index.html` stays current.
 
-Typst/PDF output:
+## IYO Wiki Copy-Paste Text
+
+If you need text that can be pasted into IYO Wiki, run this after the final HTML is finished:
 
 ```sh
-typst compile --root . outputs/<slug>/typst/main.typ outputs/<slug>/typst/index.pdf
-typst compile --root . --features html outputs/<slug>/typst/main.typ outputs/<slug>/typst/index.html
+node scripts/export-iyo-wiki-text.js outputs/YYYY-MM-DD-topic-slug
 ```
 
-Typst HTML export is still experimental, so PDF is the more stable document output.
+This creates `iyo-wiki.txt` in the same output folder. It converts headings, paragraphs, links, lists, tables, quotes, and image captions into IYO Wiki-friendly text.
+
+Images are exported as `{{iyoimage ...}}` placeholders. After uploading files to IYO Wiki, adjust the `file="..."` paths as needed.
+
+## Typst/PDF Booklet
+
+For a paper-like booklet PDF, run:
+
+```sh
+node scripts/build-typst-booklet.js outputs/YYYY-MM-DD-topic-slug
+```
+
+This creates `typst/main.typ`, `typst/iiki-booklet.typ`, and `typst/index.pdf`. If the Typst CLI is unavailable, the `.typ` files can still be generated and compiled later.
+
+To generate Typst source without compiling PDF:
+
+```sh
+node scripts/build-typst-booklet.js outputs/YYYY-MM-DD-topic-slug --no-compile
+```
 
 ## Main Files
 
 - `skills/iiki-research-html/SKILL.md` - installable skill body
 - `skills/iiki-research-html/references/` - research, HTML, and Typst rules
 - `skills/iiki-research-html/scripts/capture-chrome-screenshot.sh` - Chrome screenshot helper
+- `scripts/export-iyo-wiki-text.js` - IYO Wiki copy-paste text export
+- `scripts/build-typst-booklet.js` - Typst/PDF booklet export
 - `.claude/agents/iiki-research-html-builder.md` - Claude Code project agent
 - `index.html` - local-only research output index
 - `docs/index.html` - public iiki user guide for GitHub Pages

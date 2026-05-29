@@ -13,14 +13,19 @@ For this repository, use `docs/wiki-html-style-rules.md` as the default format g
 ```text
 outputs/YYYY-MM-DD-topic-slug/
 ├── index.html
+├── iyo-wiki.txt
 ├── research.md
 ├── qa.md
-└── assets/
-    └── screenshots/
-        └── 01-source-or-page.png
+├── assets/
+│   └── screenshots/
+│       └── 01-source-or-page.png
+└── typst/
+    ├── iiki-booklet.typ
+    ├── main.typ
+    └── index.pdf
 ```
 
-Use a shorter structure only for very small tasks.
+Use a shorter structure only for very small tasks. `iyo-wiki.txt` and `typst/` are optional unless the user asks for IYO Wiki paste text or PDF/booklet output.
 
 ## Phase 1: Scope
 
@@ -177,6 +182,33 @@ Quality checks:
 - Colors meet normal readability expectations.
 - Screenshot figures have useful `alt` text and captions.
 
+## Phase 5.5: IYO Wiki Paste Text
+
+When the user wants a version they can paste into IYO Wiki, create `iyo-wiki.txt` from the final HTML:
+
+```sh
+node scripts/export-iyo-wiki-text.js outputs/YYYY-MM-DD-topic-slug
+```
+
+This export is designed to look close after copy-paste into IYO Wiki:
+
+- headings become WackoWiki-style headings
+- links become `((url label))`
+- lists, quotes, code blocks, and tables stay editable
+- screenshot figures become `{{iyoimage ...}}` placeholders
+
+The image paths are still placeholders. After uploading images to IYO Wiki, the user may need to adjust `file="..."`.
+
+## Phase 5.6: Typst Booklet / PDF
+
+When the user asks for Typst, PDF, print, booklet, 소책자, 논문 같은 형식, or course notes, build a Typst booklet:
+
+```sh
+node scripts/build-typst-booklet.js outputs/YYYY-MM-DD-topic-slug
+```
+
+The helper copies `typst/iiki-booklet.typ`, writes `typst/main.typ`, and compiles `typst/index.pdf` when the Typst CLI is installed. Use `--no-compile` only when the caller wants Typst source without PDF.
+
 ## Phase 6: QA
 
 After writing a research output, run `node scripts/build-index.js` from the repo root. The generated root `index.html` is a local-only list of iiki outputs.
@@ -196,6 +228,8 @@ Record checks in `qa.md`:
 - Screenshot figures embedded: yes/no
 - Depth recorded: yes/no
 - Screenshot coverage fits topic/depth: yes/no
+- IYO Wiki paste text checked: yes/no/not requested
+- Typst/PDF booklet checked: yes/no/not requested
 - Person profile baseline checked: yes/no/not applicable
 - Known limits:
 ```
@@ -211,4 +245,5 @@ Before sharing:
 - Source URLs are present.
 - Generated output is in `outputs/`.
 - Agent definition is in `.claude/agents/iiki-research-html-builder.md`.
+- If requested, `iyo-wiki.txt` and `typst/index.pdf` were generated and checked.
 - README explains how to use the agent.
