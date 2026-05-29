@@ -145,6 +145,8 @@ Build the page around the reader's job:
 - Visuals: tables, timelines, comparison grids, diagrams, screenshots, or simple charts.
 - Sources: visible and easy to inspect.
 
+Do not translate sources paragraph by paragraph. Rewrite the findings into a Korean explanation path: define the topic, add context, explain the mechanism, then show why it matters. If a list or table is needed, introduce it with one plain explanatory paragraph so the page reads like a guide, not copied research notes.
+
 Default sections:
 
 1. Summary.
@@ -171,6 +173,7 @@ Default requirements:
 - Compact wiki layout with a left fixed table of contents on desktop.
 - Source section heading is `출처`.
 - Namuwiki-adjacent Korean tone: direct, human, plain, and lightly explanatory.
+- Avoid private opinions or diary-like asides. If a judgment is useful, tie it to evidence or a clear comparison.
 
 Quality checks:
 

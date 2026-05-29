@@ -168,6 +168,10 @@ Write like a careful human wiki editor:
 - Prefer concrete nouns and verbs.
 - Explain unfamiliar concepts with simple analogies, then return to the actual mechanism.
 - Keep paragraph blocks short.
+- Avoid source-by-source translation. Rewrite the material into a Korean reading path: definition, context, mechanism, consequence, and caveat when needed.
+- Add enough explanation that a reader can understand why a fact matters, not only that the fact exists.
+- Keep the voice factual. Do not add diary-like comments, private feelings, or loose opinions unless the user asks for that mode.
+- Put a short explanatory paragraph before dense lists, timelines, or tables so they do not feel like copied notes.
 
 Good tone:
 

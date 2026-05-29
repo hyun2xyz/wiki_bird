@@ -31,6 +31,8 @@ Use `assets/iiki-booklet.typ` or the shared repo template at `typst/iiki-booklet
 
 The default booklet is A5, compact, source-backed, and closer to a small paper or study booklet than a slide deck. Keep the HTML page as the primary web surface, then derive the Typst/PDF from that final page.
 
+The PDF should read like an edited document, not a printout of translated notes. Keep section openings explanatory, preserve source-backed claims, and avoid casual commentary unless the user explicitly asks for it.
+
 `assets/iiki-brief.typ` and `typst/iiki-brief.typ` remain available for short one-page briefs.
 
 ## Compile

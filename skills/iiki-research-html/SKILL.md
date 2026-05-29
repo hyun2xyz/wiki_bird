@@ -105,6 +105,10 @@ Write like a careful human wiki editor:
 - Explain the flow, not just isolated facts.
 - Use simple analogies when they clarify the mechanism.
 - Avoid AI-like filler such as "본 문서에서는", "독자 여러분", and generic motivational wrap-ups.
+- Do not make the page feel like a translated source digest. Read the sources, then rewrite the explanation around the reader's path.
+- Add explanatory connective tissue: what a term means, why a detail matters, how one event leads to the next, and what changes if the claim is true.
+- Keep judgment grounded. Avoid private opinion, diary-like asides, and loose "느낌" language unless the user explicitly asks for commentary.
+- Prefer one clear explanatory paragraph before a dense list or table, so the reader knows how to read the details.
 
 Default explanation flow:
 

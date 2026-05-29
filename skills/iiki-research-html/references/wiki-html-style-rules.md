@@ -147,6 +147,10 @@ section > pre {
 - No generic "이번 글에서는" filler.
 - Prefer concrete nouns and verbs.
 - Keep paragraphs short.
+- Avoid source-by-source translation. Rewrite the material into a Korean reading path: definition, context, mechanism, consequence, and caveat when needed.
+- Add enough explanation that a reader can understand why a fact matters, not only that the fact exists.
+- Keep the voice factual. Do not add diary-like comments, private feelings, or loose opinions unless the user asks for that mode.
+- Put a short explanatory paragraph before dense lists, timelines, or tables so they do not feel like copied notes.
 
 ## Sources
 

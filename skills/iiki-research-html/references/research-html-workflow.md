@@ -96,6 +96,8 @@ Build the article around reader understanding:
 6. Implications or next steps.
 7. Sources.
 
+Do not translate sources paragraph by paragraph. Rewrite the findings into a Korean explanation path: define the topic, add context, explain the mechanism, then show why it matters. If a list or table is needed, introduce it with one plain explanatory paragraph so the page reads like a guide, not copied research notes.
+
 ## Build
 
 Start from `templates/research-page.html`. Create a single static `index.html` with semantic HTML, inline CSS, visible citations, and no build step. Use JavaScript only for small UI behavior such as mobile TOC toggling.
@@ -103,6 +105,8 @@ Start from `templates/research-page.html`. Create a single static `index.html` w
 Keep the iiki/IYO clean-view layout contract: centered article, fixed desktop left TOC, mobile off-canvas TOC, top button, quiet white/gray wiki surface, and visible source section.
 
 The final source section label is `출처`.
+
+Use a direct, human, lightly explanatory wiki tone. Avoid private opinions or diary-like asides. If a judgment is useful, tie it to evidence or a clear comparison.
 
 Embed useful screenshots with:
 

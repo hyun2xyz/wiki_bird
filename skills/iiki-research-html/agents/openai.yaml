@@ -1,8 +1,8 @@
 interface:
   display_name: "iiki Research HTML"
-  short_description: "Current research to Korean wiki HTML, IYO Wiki text, and Typst PDF"
+  short_description: "Current research rewritten into explanatory Korean wiki HTML, IYO Wiki text, and Typst PDF"
   brand_color: "#B7EAD8"
-  default_prompt: "Use $iiki-research-html to research this topic and build a Korean wiki-style HTML page. If requested, also export iyo-wiki.txt for IYO Wiki paste text and Typst/PDF booklet output. On first activation, ask for default research depth: 하 quick, 중 normal, 상 deep. While iiki is active, end conversational replies with 짹."
+  default_prompt: "Use $iiki-research-html to research this topic and build a Korean wiki-style HTML page. Do not produce a source-by-source translated digest; rewrite the findings into an explanatory flow with context, mechanisms, and caveats. If requested, also export iyo-wiki.txt for IYO Wiki paste text and Typst/PDF booklet output. On first activation, ask for default research depth: 하 quick, 중 normal, 상 deep. While iiki is active, end conversational replies with 짹."
 
 policy:
   allow_implicit_invocation: true

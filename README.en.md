@@ -47,18 +47,20 @@ iiki is a research agent/skill that turns a topic into a readable wiki-style HTM
 
 Give it something to research, and it checks current sources, keeps citations, captures useful screenshots, and writes a compact wiki page with a table of contents. When needed, it can also create Typst/PDF output.
 
+The goal is not to translate source pages line by line. iiki checks the material, then rewrites it into a readable explanation: terms are unpacked before they are used, context is added where it changes the meaning, and tables or images are pulled out when they help the reader verify what is being said. The voice should stay factual, not chatty; when judgment is needed, the evidence sits next to it.
+
 The root `index.html` is a local-only index of generated research pages under `outputs/`. For public GitHub Pages documentation, use `docs/index.html`.
 
 ## What It Does
 
-- Topic research
-- Source-backed synthesis
-- Korean wiki-style writing by default
-- Static HTML page with a fixed table of contents
-- Chrome screenshot capture
-- `iyo-wiki.txt` export for IYO Wiki copy-paste
-- `research.md` and `qa.md` logs
-- Optional Typst/PDF booklet output
+- Topic research: start from official, primary, and recent sources whenever possible.
+- Source-backed synthesis: keep evidence near important claims and mark uncertainty instead of smoothing it over.
+- Korean wiki-style writing by default: rewrite the flow for Korean readers instead of translating source sentences one by one.
+- Static HTML page with a fixed table of contents: make long research easy to scan and revisit.
+- Chrome screenshot capture: keep visual proof for people, services, papers, official pages, and interfaces that need to be seen.
+- `iyo-wiki.txt` export for IYO Wiki copy-paste: turn the HTML result into wiki-friendly text.
+- `research.md` and `qa.md` logs: record what was checked, what passed, and what remains limited.
+- Optional Typst/PDF booklet output: create a separate print-friendly document version from the same research.
 
 Default output structure:
 
@@ -288,25 +290,25 @@ Run `node scripts/build-index.js` after creating or editing an output so the roo
 
 ## IYO Wiki Copy-Paste Text
 
-If you need text that can be pasted into IYO Wiki, run this after the final HTML is finished:
+If you need text that can be pasted into IYO Wiki, run this after the final HTML is finished. This is not a second research result; it is an intermediate form for moving the already organized page into a wiki editor.
 
 ```sh
 node scripts/export-iyo-wiki-text.js outputs/YYYY-MM-DD-topic-slug
 ```
 
-This creates `iyo-wiki.txt` in the same output folder. It converts headings, paragraphs, links, lists, tables, quotes, and image captions into IYO Wiki-friendly text.
+This creates `iyo-wiki.txt` in the same output folder. It converts headings, paragraphs, links, lists, tables, quotes, and image captions into IYO Wiki-friendly text. The export keeps as much as possible editable, so the pasted page can still be revised inside the wiki.
 
 Images are exported as `{{iyoimage ...}}` placeholders. After uploading files to IYO Wiki, adjust the `file="..."` paths as needed.
 
 ## Typst/PDF Booklet
 
-For a paper-like booklet PDF, run:
+For a paper-like booklet PDF, run this after the HTML is finished. HTML is the screen-reading version; Typst/PDF is the saved, shared, or printed version. The idea is to derive a document edition from the same research, not to write the research twice.
 
 ```sh
 node scripts/build-typst-booklet.js outputs/YYYY-MM-DD-topic-slug
 ```
 
-This creates `typst/main.typ`, `typst/iiki-booklet.typ`, and `typst/index.pdf`. If the Typst CLI is unavailable, the `.typ` files can still be generated and compiled later.
+This creates `typst/main.typ`, `typst/iiki-booklet.typ`, and `typst/index.pdf`. The default layout is close to an A5 booklet, with calmer margins and line lengths for longer reading. If the Typst CLI is unavailable, the `.typ` files can still be generated and compiled later.
 
 To generate Typst source without compiling PDF:
 

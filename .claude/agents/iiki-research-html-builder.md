@@ -75,6 +75,8 @@ outputs/YYYY-MM-DD-topic-slug/
    - Group findings by user value, not by source order.
    - Include a concise source-backed claim list.
    - Explain the flow: what it is, why it matters, how it works, what changed recently, and what to watch next.
+   - Do not make the page feel like translated notes. Rewrite the research into a Korean explanation path with definitions, context, mechanisms, consequences, and caveats where useful.
+   - Keep the voice factual and wiki-like. Avoid private opinion, diary-like asides, and loose commentary unless the user asks for that mode.
 
 4. HTML Production
    - Create semantic HTML: `header`, `main`, `section`, `article`, `footer`.
