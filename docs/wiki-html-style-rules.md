@@ -15,6 +15,15 @@ outputs/YYYY-MM-DD-topic-slug/
 
 `index.html` should be self-contained unless the user provides images or assets.
 
+## Canonical Template
+
+- Start new research pages from `templates/research-page.html`.
+- The installed skill copy is `skills/iiki-research-html/templates/research-page.html`.
+- Copy the template first, then replace placeholders, expand the TOC, and add sections.
+- Do not start from a blank HTML file or a new visual concept unless the user explicitly asks for a different design.
+- By default, do not put the mini wiki bird image at the top of ordinary research pages. Keep that image for README/manual/brand examples.
+- Keep this style compatible with the IYO Wiki clean-view direction: centered article, desktop fixed left TOC, mobile off-canvas TOC, bottom-right top button, quiet white/gray wiki surface, and visible source section.
+
 ## Page Shape
 
 - Use a wiki document structure, not a landing page.
@@ -41,7 +50,7 @@ outputs/YYYY-MM-DD-topic-slug/
 - Desktop left TOC width: around `240-280px`.
 - Desktop TOC: `position: fixed`, `top` set, no fixed `bottom`, `height: fit-content`, and slightly larger bottom padding than top padding for optical balance. Use `max-height` only as a fallback for very long TOCs.
 - Desktop TOC should sit farther left than the centered article. A good default is `left: max(16px, calc((100vw - 1500px) / 2));`.
-- TOC lists should use either browser-generated numbers or numbers in the link text, not both. For Wikibird's numbered heading text, use `list-style: none; padding-left: 0;`.
+- TOC lists should use either browser-generated numbers or numbers in the link text, not both. For iiki's numbered heading text, use `list-style: none; padding-left: 0;`.
 - In the TOC, color only the section number blue and keep the section title black. Use spans such as `<span class="toc-num">1.</span> <span class="toc-title">Title</span>`, and apply underline styling to the spans rather than the parent anchor.
 - Callout/key blocks should use a quiet left-border note style, not a full tinted box. Keep mint only for rare highlights that need stronger emphasis.
 - Korean prose should break by word, not by arbitrary syllable. Use `word-break: keep-all`, `overflow-wrap: break-word`, and `hyphens: auto` on normal text. Keep stronger breaking only for code or unusually long tokens.
@@ -244,5 +253,5 @@ Before calling the page done:
 - Heading links work.
 - Text does not overlap or overflow.
 - Source section exists.
-- Screenshot figures exist when a visual/source capture is useful.
+- Screenshot figures exist when a visual/source capture is useful, and coverage fits the topic/depth rather than a fixed image count.
 - Current facts have exact dates or source freshness notes.

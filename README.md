@@ -1,10 +1,10 @@
-# Wikibird
+# iiki
 
 **2026-05-28 · v0.1.3 · 첫 베타테스트 (ദ്ദി ᴖ⩊ᴖ )** 
 
 [English README](README.en.md)
 
-![Wikibird mini wiki mascot](docs/assets/miniwiki.jpg)
+![iiki mini wiki mascot](docs/assets/miniwiki.jpg)
 
 > **짹**
 
@@ -25,7 +25,7 @@ AI에게 무언가 요청하고 산출물을 텍스트 또는 Markdown으로 받
 
 ***
 
-제 친구 위키버드를 소개합니다.
+제 친구 이키를 소개합니다.
 
 저희 이요 위키에서 키우는 새인데요.
 메인 서비스로는 말 끝마다 짹이라고 붙여서 귀엽습니다.
@@ -39,7 +39,7 @@ AI에게 무언가 요청하고 산출물을 텍스트 또는 Markdown으로 받
 
 Kim Hyun [@hyun2xyz](https://www.instagram.com/hyun2xyz)
 
-Wikibird는 리서치를 해서 바로 읽을 수 있는 위키형 HTML 문서로 정리하는 에이전트/스킬입니다.
+iiki는 리서치를 해서 바로 읽을 수 있는 위키형 HTML 문서로 정리하는 에이전트/스킬입니다.
 
 무언가를 조사해 달라고 하면, 최신 자료를 확인하고, 출처를 남기고, 목차가 있는 작은 위키 페이지로 만들어 줍니다. 
 필요하면 Typst/PDF 출력도 같이 뽑습니다.
@@ -78,25 +78,25 @@ outputs/YYYY-MM-DD-topic-slug/
 
 repo 최상단의 `index.html`은 로컬에서만 쓰는 간단한 목록입니다.
 
-![Wikibird local index screenshot](docs/assets/screenshots/local-index.png)
+![iiki local index screenshot](docs/assets/screenshots/local-index.png)
 
-각 리서치 기록은 `outputs/YYYY-MM-DD-topic-slug/` 폴더 안에 있고, 그 안의 `index.html`을 로컬에서 열어 확인합니다. Wikibird 문서는 이렇게 왼쪽 목차, 본문, 이미지, 출처가 한 페이지에 정리됩니다.
+각 리서치 기록은 `outputs/YYYY-MM-DD-topic-slug/` 폴더 안에 있고, 그 안의 `index.html`을 로컬에서 열어 확인합니다. iiki 문서는 이렇게 왼쪽 목차, 본문, 이미지, 출처가 한 페이지에 정리됩니다.
 
-![Wikibird wiki page screenshot](docs/assets/screenshots/wikibird-manual-page.png)
+![iiki wiki page screenshot](docs/assets/screenshots/iiki-manual-page.png)
 
 ## 설치와 발동
 
-Wikibird를 실제로 쓰는 권장 환경은 CLI 기반 에이전트입니다. 리서치 결과를 파일로 저장하고, Chrome 캡처를 남기고, `node scripts/build-index.js` 같은 검증까지 이어가려면 Codex CLI나 Claude Code가 가장 안정적입니다.
+iiki를 실제로 쓰는 권장 환경은 CLI 기반 에이전트입니다. 리서치 결과를 파일로 저장하고, Chrome 캡처를 남기고, `node scripts/build-index.js` 같은 검증까지 이어가려면 Codex CLI나 Claude Code가 가장 안정적입니다.
 
 ### 1. Codex CLI 설치
 
 ```sh
-git clone https://github.com/hyun2xyz/wiki_bird.git
-cd wiki_bird
+git clone https://github.com/hyun2xyz/iiki.git
+cd iiki
 scripts/install-skill.sh codex
 ```
 
-현재 Codex user skill 위치는 `$HOME/.agents/skills/wikibird-research-html/`입니다. repo 전용으로만 쓰려면 `.agents/skills/wikibird-research-html/`에 둘 수 있습니다.
+현재 Codex user skill 위치는 `$HOME/.agents/skills/iiki-research-html/`입니다. repo 전용으로만 쓰려면 `.agents/skills/iiki-research-html/`에 둘 수 있습니다.
 
 예전 Codex 환경을 쓰고 있다면 legacy 경로로 설치합니다.
 
@@ -107,68 +107,68 @@ scripts/install-skill.sh codex-legacy
 Codex에서는 이렇게 부르면 됩니다.
 
 ```text
-Use $wikibird-research-html
+Use $iiki-research-html
 ```
 
 ### 2. Claude Code 설치
 
 ```sh
-git clone https://github.com/hyun2xyz/wiki_bird.git
-cd wiki_bird
+git clone https://github.com/hyun2xyz/iiki.git
+cd iiki
 scripts/install-skill.sh claude
 ```
 
-Claude Code에서는 `~/.claude/skills/wikibird-research-html/` 또는 프로젝트 `.claude/skills/wikibird-research-html/`에 스킬 폴더를 둡니다.
+Claude Code에서는 `~/.claude/skills/iiki-research-html/` 또는 프로젝트 `.claude/skills/iiki-research-html/`에 스킬 폴더를 둡니다.
 
 Claude Code에서는 이렇게 부르면 됩니다.
 
 ```text
-Use wikibird-research-html
+Use iiki-research-html
 ```
 
-설치 스크립트는 기존 Wikibird 설치 폴더가 있으면 지우고 다시 복사합니다.
+설치 스크립트는 기존 iiki 설치 폴더가 있으면 지우고 다시 복사합니다.
 
 ### 3. 기본 리서치 깊이 설정
 
-처음 Wikibird를 학습시키거나 등록한 뒤에는 기본 리서치 깊이를 하나 정합니다.
+처음 iiki를 학습시키거나 등록한 뒤에는 기본 리서치 깊이를 하나 정합니다.
 
 ```text
 리서치 깊이를 기본값으로 정해둘까요? 하/중/상 중에서 고르면 됩니다.
-하: 빠른 개요, 중: 일반 Wikibird 문서, 상: 공부용 깊은 조사입니다.
+하: 빠른 개요, 중: 일반 iiki 문서, 상: 공부용 깊은 조사입니다.
 ```
 
 ### 4. Windows에서 Codex CLI용 수동 설치
 
 ```powershell
-git clone https://github.com/hyun2xyz/wiki_bird.git
-cd wiki_bird
+git clone https://github.com/hyun2xyz/iiki.git
+cd iiki
 
-$dest = Join-Path $HOME ".agents\skills\wikibird-research-html"
+$dest = Join-Path $HOME ".agents\skills\iiki-research-html"
 New-Item -ItemType Directory -Force (Split-Path $dest) | Out-Null
 Remove-Item -Recurse -Force $dest -ErrorAction SilentlyContinue
-Copy-Item -Recurse ".\skills\wikibird-research-html" $dest
+Copy-Item -Recurse ".\skills\iiki-research-html" $dest
 ```
 
 ### 5. 설치 확인
 
 1. Codex나 Claude Code를 다시 시작합니다.
-2. `$wikibird-research-html` 또는 `Use $wikibird-research-html`로 불러봅니다.
+2. `$iiki-research-html` 또는 `Use $iiki-research-html`로 불러봅니다.
 3. 처음 불렀다면 리서치 깊이를 `하`, `중`, `상` 중 하나로 정합니다.
 4. 안 보이면 설치 폴더 안에 `SKILL.md`가 바로 있는지 확인합니다.
 
 Codex 기준으로는 이런 구조여야 합니다.
 
 ```text
-$HOME/.agents/skills/wikibird-research-html/SKILL.md
+$HOME/.agents/skills/iiki-research-html/SKILL.md
 ```
 
 ### 6. 앱에서 1분 체험
 
-ChatGPT, Claude, Gemini 앱에서는 설치와 발동법을 따로 설명하지 않습니다. 대신 아래 프롬프트를 한 번 붙여 넣고, 이번 대화에서 Wikibird 방식을 따라 하게 만들면 됩니다.
+ChatGPT, Claude, Gemini 앱에서는 설치와 발동법을 따로 설명하지 않습니다. 대신 아래 프롬프트를 한 번 붙여 넣고, 이번 대화에서 iiki 방식을 따라 하게 만들면 됩니다.
 
 ```text
-https://github.com/hyun2xyz/wiki_bird 를 기준으로 wikibird 방식을 사용해 주세요.
-README.md와 skills/wikibird-research-html/SKILL.md를 읽고 따라 해 주세요.
+https://github.com/hyun2xyz/iiki 를 기준으로 iiki 방식을 사용해 주세요.
+README.md와 skills/iiki-research-html/SKILL.md를 읽고 따라 해 주세요.
 
 주제: HTML 프로토타입이 AI 리서치 결과물로 유용한 이유
 리서치 깊이: 중
@@ -182,13 +182,13 @@ README.md와 skills/wikibird-research-html/SKILL.md를 읽고 따라 해 주세�
 한국어 위키식 설명문으로 정리해 주세요.
 ```
 
-이 방식은 구조를 맛보는 용도입니다. 앱 안에서는 실제 파일 생성, Chrome 캡처 저장, 로컬 인덱스 갱신이 안정적으로 이어지지 않을 수 있습니다. 제대로 된 Wikibird 결과물을 만들 때는 CLI 환경을 권장합니다.
+이 방식은 구조를 맛보는 용도입니다. 앱 안에서는 실제 파일 생성, Chrome 캡처 저장, 로컬 인덱스 갱신이 안정적으로 이어지지 않을 수 있습니다. 제대로 된 iiki 결과물을 만들 때는 CLI 환경을 권장합니다.
 
 ### 문제 해결
 
 - 앱에서 결과가 일반 답변처럼 나오면: GitHub 주소만 준 상태라 “이번 대화에서 따라 하기”로 동작한 것입니다. 위의 1분 체험 프롬프트처럼 `README.md`와 `SKILL.md`를 읽고, 결과물 목록을 명시합니다.
-- HTML 모양이 Wikibird 스타일과 다르면: 앱이 실제 repo 파일을 열고 저장하지 못해 임의 스타일로 만든 경우가 많습니다. 실제 HTML 파일까지 필요하면 CLI 환경을 권장합니다.
-- Codex에서 스킬이 안 보이면: `$HOME/.agents/skills/wikibird-research-html/SKILL.md` 위치를 확인하고 Codex를 재시작합니다.
+- HTML 모양이 iiki 스타일과 다르면: 앱이 실제 repo 파일을 열고 저장하지 못해 임의 스타일로 만든 경우가 많습니다. 실제 HTML 파일까지 필요하면 CLI 환경을 권장합니다.
+- Codex에서 스킬이 안 보이면: `$HOME/.agents/skills/iiki-research-html/SKILL.md` 위치를 확인하고 Codex를 재시작합니다.
 - 예전 Codex 설정을 쓰고 있다면: `scripts/install-skill.sh codex-legacy`로 `~/.codex/skills/`에 설치합니다.
 
 참고한 공식 문서:
@@ -201,7 +201,7 @@ README.md와 skills/wikibird-research-html/SKILL.md를 읽고 따라 해 주세�
 스킬을 지원하는 에이전트에게 이렇게 말하면 됩니다.
 
 ```text
-Use $wikibird-research-html.
+Use $iiki-research-html.
 새로운 그래픽 디자인 교육과정 책을 조사해서 outputs/YYYY-MM-DD-graphic-design-course/index.html로 정리해 주세요.
 최신 자료를 확인하고, Chrome 스크린샷도 넣고, research.md와 qa.md도 남겨 주세요.
 ```
@@ -209,16 +209,16 @@ Use $wikibird-research-html.
 한국어로 짧게 말해도 됩니다.
 
 ```text
-$wikibird-research-html 써서 Typst 템플릿 생태계를 조사하고 위키형 HTML로 만들어 주세요.
+$iiki-research-html 써서 Typst 템플릿 생태계를 조사하고 위키형 HTML로 만들어 주세요.
 ```
 
 학습이 되었다면 더 짧게 해도 됩니다.
 
 ```text
-위키버드로 써서 Typst 조사해줘
+이키로 써서 Typst 조사해줘
 ```
 
-Wikibird가 발동된 대화에서는 답변 끝에 `짹`을 붙이는 작은 말투 규칙이 들어 있습니다.
+iiki가 발동된 대화에서는 답변 끝에 `짹`을 붙이는 작은 말투 규칙이 들어 있습니다.
 
 ```text
 정리해 드릴게요 짹
@@ -228,7 +228,7 @@ Wikibird가 발동된 대화에서는 답변 끝에 `짹`을 붙이는 작은 �
 리서치 깊이는 `하`, `중`, `상`으로 고를 수 있습니다. 안 쓰면 기본은 `중`입니다.
 
 ```text
-$wikibird-research-html 써서 안드레 카파시를 조사해 주세요.
+$iiki-research-html 써서 안드레 카파시를 조사해 주세요.
 리서치 깊이: 상
 인물 기본 정보, 얼굴/공식 프로필 화면, 대표 작업 화면도 같이 넣어 주세요.
 ```
@@ -238,12 +238,12 @@ $wikibird-research-html 써서 안드레 카파시를 조사해 주세요.
 | 깊이 | 자료량 | 이미지 |
 | --- | --- | --- |
 | 하 | 빠른 개요, 3-5개 출처 | 핵심 캡처 위주 |
-| 중 | 기본 Wikibird 문서, 6-10개 출처 | 주요 섹션에 필요한 만큼 |
+| 중 | 기본 iiki 문서, 6-10개 출처 | 주요 섹션에 필요한 만큼 |
 | 상 | 깊은 공부용 문서, 10개 이상 출처 가능하면 사용 | 이해와 검증에 필요한 만큼 충분히 추가 |
 
 ## Chrome 스크린샷
 
-Wikibird는 리서치 HTML에 최소 1장의 Chrome 캡처 이미지를 넣는 것을 기본 규칙으로 합니다.
+iiki는 리서치 HTML에 최소 1장의 Chrome 캡처 이미지를 넣는 것을 기본 규칙으로 합니다.
 
 원칙은 이렇습니다.
 
@@ -258,7 +258,7 @@ Wikibird는 리서치 HTML에 최소 1장의 Chrome 캡처 이미지를 넣는 �
 에이전트의 Chrome 도구가 없을 때는 helper를 쓸 수 있습니다.
 
 ```sh
-skills/wikibird-research-html/scripts/capture-chrome-screenshot.sh \
+skills/iiki-research-html/scripts/capture-chrome-screenshot.sh \
   "https://example.com" \
   outputs/YYYY-MM-DD-topic-slug/assets/screenshots/01-example.png
 ```
@@ -293,12 +293,12 @@ Typst HTML export는 아직 실험적이라, 문서용 결과는 PDF를 더 안�
 
 ## repo 안 주요 파일
 
-- `skills/wikibird-research-html/SKILL.md` - 설치 가능한 스킬 본문
-- `skills/wikibird-research-html/references/` - 리서치/HTML/Typst 규칙
-- `skills/wikibird-research-html/scripts/capture-chrome-screenshot.sh` - Chrome 스크린샷 helper
-- `.claude/agents/research-html-builder.md` - Claude Code용 프로젝트 에이전트
+- `skills/iiki-research-html/SKILL.md` - 설치 가능한 스킬 본문
+- `skills/iiki-research-html/references/` - 리서치/HTML/Typst 규칙
+- `skills/iiki-research-html/scripts/capture-chrome-screenshot.sh` - Chrome 스크린샷 helper
+- `.claude/agents/iiki-research-html-builder.md` - Claude Code용 프로젝트 에이전트
 - `index.html` - 로컬 전용 리서치 결과 목록
-- `docs/index.html` - GitHub 배포용 Wikibird 사용 설명서
+- `docs/index.html` - GitHub 배포용 iiki 사용 설명서
 - `docs/research-html-workflow.md` - 작업 흐름 문서
 - `docs/wiki-html-style-rules.md` - HTML 스타일 규칙
 - `docs/distribution-plan.md` - Codex, Claude, Gemini, Cursor 배포 계획

@@ -1,4 +1,4 @@
-#let wikibird-brief(title: "", meta: "", body) = [
+#let iiki-brief(title: "", meta: "", body) = [
   #set page(
     paper: "a4",
     margin: (x: 20mm, y: 22mm),
@@ -17,6 +17,6 @@
   #body
 ]
 
-#let source(title, url, note: "checked 2026-05-27") = [
+#let source(title, url, note: "checked YYYY-MM-DD") = [
   - #link(url)[#title], #note.
 ]

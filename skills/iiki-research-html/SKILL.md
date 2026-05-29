@@ -1,5 +1,5 @@
 ---
-name: wikibird-research-html
+name: iiki-research-html
 description: "Research a topic with current, source-backed information and turn it into a compact Korean wiki-style HTML page with fixed desktop TOC, mobile TOC drawer, visible sources, research notes, QA notes, and optional Typst/PDF output. Use for researched explainers, study notes, visual wiki pages, education materials, or report pages."
 license: MIT
 metadata:
@@ -7,7 +7,7 @@ metadata:
   version: "0.1.3"
 ---
 
-# Wikibird Research HTML
+# iiki Research HTML
 
 Use this skill when the user wants a researched topic turned into a readable wiki-style artifact, especially in Korean.
 
@@ -34,7 +34,7 @@ On first activation or after a fresh install, ask the user to choose a default r
 
 ```text
 리서치 깊이를 기본값으로 정해둘까요? 하/중/상 중에서 고르면 됩니다.
-하: 빠른 개요, 중: 일반 Wikibird 문서, 상: 공부용 깊은 조사입니다.
+하: 빠른 개요, 중: 일반 iiki 문서, 상: 공부용 깊은 조사입니다.
 ```
 
 If the user gives a clear immediate task and does not answer the setup question, proceed with `중` for that task and mention that they can change the depth next time.
@@ -42,7 +42,7 @@ If the user gives a clear immediate task and does not answer the setup question,
 Depth rules:
 
 - `하`: quick wiki note. Use about 3-5 reliable sources, essential screenshots when useful, and a compact page with the essential flow only.
-- `중`: normal Wikibird output. Use about 6-10 sources, screenshots for major sections as needed, a source map, claim ledger, timeline/table when useful, and a complete source section.
+- `중`: normal iiki output. Use about 6-10 sources, screenshots for major sections as needed, a source map, claim ledger, timeline/table when useful, and a complete source section.
 - `상`: deep study output. Use 10+ sources where available, add enough screenshots or visual figures for understanding and verification, stronger cross-checking, richer timeline/context, common misunderstandings, and a more explicit claim ledger.
 
 When the user says "가볍게", "짧게", or "빠르게", treat it as `하`. When the user says "쭉", "제대로", "공부용", "깊게", "상세히", or asks about a person/company/technology history, prefer `중` or `상` depending on scope.
@@ -122,6 +122,8 @@ Follow `references/wiki-html-style-rules.md`.
 
 Minimum requirements:
 
+- Start every new research HTML page from `templates/research-page.html`. Do not invent a new visual system unless the user explicitly asks for a different design.
+- Keep the generated page compatible with the IYO Wiki clean-view direction: centered article, fixed left TOC on desktop, off-canvas TOC on mobile, bottom-right top button, plain white/gray wiki surface, and no decorative mascot by default.
 - Self-contained `index.html` with inline CSS and small inline JS only when needed.
 - Desktop TOC fixed on the left.
 - Article `main` stays centered in the viewport; do not push it right to make room for the TOC.
@@ -180,6 +182,7 @@ Before completion:
 
 - `references/research-html-workflow.md`: full research-to-HTML workflow.
 - `references/wiki-html-style-rules.md`: visual and editorial house style.
+- `templates/research-page.html`: canonical self-contained HTML starter. Copy this first, then replace placeholders and sections.
 - `references/typst-output.md`: Typst/PDF output guidance.
-- `assets/wikibird-brief.typ`: starter Typst template.
+- `assets/iiki-brief.typ`: starter Typst template.
 - `scripts/capture-chrome-screenshot.sh`: Chrome headless screenshot helper.

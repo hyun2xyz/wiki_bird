@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SKILL_NAME="wikibird-research-html"
+SKILL_NAME="iiki-research-html"
 SOURCE="$ROOT/skills/$SKILL_NAME"
 
 usage() {
@@ -15,7 +15,7 @@ Targets:
   codex-legacy install to ~/.codex/skills/ (older Codex setups)
   claude       install to ~/.claude/skills/
 
-The script overwrites any existing Wikibird skill folder in the selected personal skill directory.
+The script overwrites any existing iiki skill folder in the selected personal skill directory.
 USAGE
 }
 

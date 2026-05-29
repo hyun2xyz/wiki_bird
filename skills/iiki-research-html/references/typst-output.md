@@ -25,7 +25,7 @@ outputs/YYYY-MM-DD-topic-slug/
 
 ## Template
 
-Use `assets/wikibird-brief.typ` as the starter template. If the repo already has `typst/wikibird-brief.typ`, use that shared template instead.
+Use `assets/iiki-brief.typ` as the starter template. If the repo already has `typst/iiki-brief.typ`, use that shared template instead.
 
 ## Compile
 

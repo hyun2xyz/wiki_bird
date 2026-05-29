@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="ko" id="top">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{TITLE}}</title>
+	<style>
+		:root {
+			color-scheme: light;
+			--text: #222;
+			--muted: #62676d;
+			--line: #aeb4bb;
+			--soft-line: #d8dde3;
+			--link: #2457b7;
+			--paper: #fff;
+			--surface: #f6f7f8;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+
+		body {
+			margin: 0;
+			overflow-x: hidden;
+			background: var(--paper);
+			color: var(--text);
+			font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+			font-size: 16px;
+			line-height: 1.72;
+			letter-spacing: 0;
+		}
+
+		main {
+			width: 100%;
+			max-width: 880px;
+			margin: 0 auto;
+			padding: 30px 34px 72px;
+			word-break: keep-all;
+			overflow-wrap: break-word;
+			hyphens: auto;
+			-webkit-hyphens: auto;
+		}
+
+		header {
+			border-bottom: 2px solid var(--line);
+			margin-bottom: 26px;
+			padding-bottom: 18px;
+		}
+
+		h1 {
+			margin: 0 0 10px;
+			font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+			font-size: clamp(30px, 3.4vw, 42px);
+			line-height: 1.18;
+			letter-spacing: 0;
+		}
+
+		.meta {
+			margin: 0;
+			color: var(--muted);
+			font-size: 14px;
+			overflow-wrap: break-word;
+		}
+
+		h2, h3 {
+			font-weight: 700;
+			line-height: 1.35;
+			letter-spacing: 0;
+		}
+
+		h2 {
+			margin: 40px 0 16px;
+			border-bottom: 2px solid var(--line);
+			padding-bottom: 8px;
+			font-size: 26px;
+		}
+
+		h3 {
+			margin: 30px 0 10px;
+			font-size: 21px;
+		}
+
+		p { margin: 0 0 18px; }
+
+		p, li, figcaption, dt, dd, th, td {
+			max-width: 100%;
+			word-break: keep-all;
+			overflow-wrap: break-word;
+			hyphens: auto;
+			-webkit-hyphens: auto;
+		}
+
+		a {
+			color: var(--link);
+			text-decoration-thickness: 1px;
+			text-underline-offset: 3px;
+			overflow-wrap: break-word;
+			word-break: keep-all;
+		}
+
+		code {
+			border: 1px solid var(--soft-line);
+			background: var(--surface);
+			padding: 1px 5px;
+			font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+			font-size: 0.92em;
+			overflow-wrap: anywhere;
+			word-break: break-word;
+		}
+
+		pre {
+			border: 1px solid var(--soft-line);
+			background: #f8fafc;
+			padding: 14px 16px 18px;
+			overflow-x: auto;
+			font-size: 14px;
+			line-height: 1.55;
+		}
+
+		pre code {
+			border: 0;
+			background: transparent;
+			padding: 0;
+			font-size: inherit;
+		}
+
+		.toc {
+			position: fixed;
+			top: 24px;
+			left: max(16px, calc((100vw - 1500px) / 2));
+			width: 270px;
+			height: fit-content;
+			max-height: calc(100vh - 48px);
+			overflow-y: auto;
+			border: 1px solid var(--line);
+			background: var(--surface);
+			margin: 0;
+			padding: 14px 16px 18px;
+			font-size: 14px;
+			line-height: 1.45;
+		}
+
+		.toc strong {
+			display: block;
+			margin-bottom: 10px;
+			font-size: 16px;
+		}
+
+		.toc ol {
+			margin: 0;
+			padding-left: 0;
+			list-style: none;
+		}
+
+		.toc li { margin: 5px 0; }
+		.toc li:last-child { margin-bottom: 0; }
+		.toc a { text-decoration: none; }
+
+		.toc a .toc-num {
+			color: var(--link);
+			text-decoration: underline;
+			text-decoration-thickness: 1px;
+			text-underline-offset: 3px;
+		}
+
+		.toc a .toc-title {
+			color: var(--text);
+			text-decoration: underline;
+			text-decoration-color: var(--text);
+			text-decoration-thickness: 1px;
+			text-underline-offset: 3px;
+		}
+
+		.key {
+			border: 0;
+			border-left: 3px solid var(--soft-line);
+			background: transparent;
+			padding: 0 0 0 18px;
+			margin: 22px 0 26px;
+		}
+
+		.key p { margin: 0 0 10px; }
+
+		.infobox {
+			display: grid;
+			grid-template-columns: 170px 1fr;
+			border-top: 1px solid var(--soft-line);
+			border-left: 1px solid var(--soft-line);
+			margin: 18px 0 28px;
+			font-size: 14px;
+			line-height: 1.55;
+		}
+
+		.infobox dt,
+		.infobox dd {
+			margin: 0;
+			border-right: 1px solid var(--soft-line);
+			border-bottom: 1px solid var(--soft-line);
+			padding: 9px 10px;
+		}
+
+		.infobox dt {
+			background: var(--surface);
+			font-weight: 700;
+		}
+
+		.table-wrap {
+			overflow-x: auto;
+			margin: 18px 0 28px;
+		}
+
+		table {
+			width: 100%;
+			min-width: 620px;
+			border-collapse: collapse;
+			font-size: 14px;
+			line-height: 1.55;
+		}
+
+		th, td {
+			border: 1px solid var(--soft-line);
+			padding: 9px 10px;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		th { background: var(--surface); }
+
+		.screenshot {
+			margin: 24px 0 30px;
+		}
+
+		.screenshot img {
+			display: block;
+			width: 100%;
+			height: auto;
+			border: 1px solid var(--line);
+			background: #fff;
+		}
+
+		.screenshot figcaption {
+			margin-top: 8px;
+			color: var(--muted);
+			font-size: 13px;
+			line-height: 1.5;
+		}
+
+		ul, ol {
+			margin: 0 0 16px 22px;
+			padding: 0;
+		}
+
+		li { margin: 5px 0; }
+
+		section > p,
+		section > ul,
+		section > ol,
+		section > .key,
+		section > .infobox,
+		section > .screenshot,
+		section > .table-wrap,
+		section > pre {
+			margin-left: 10px;
+			width: calc(100% - 10px);
+		}
+
+		.index-button,
+		.top-button,
+		.mobile-menu-button {
+			position: fixed;
+			z-index: 30;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 42px;
+			height: 42px;
+			border: 1px solid rgba(34, 34, 34, 0.34);
+			background: rgba(255, 255, 255, 0.72);
+			color: var(--text);
+			text-decoration: none;
+			backdrop-filter: blur(8px);
+			-webkit-backdrop-filter: blur(8px);
+		}
+
+		.index-button {
+			left: 18px;
+			bottom: 18px;
+			width: auto;
+			padding: 0 12px;
+			font-size: 14px;
+		}
+
+		.top-button {
+			right: 18px;
+			bottom: 18px;
+			font-size: 20px;
+			line-height: 1;
+		}
+
+		.mobile-menu-button {
+			top: 12px;
+			left: 12px;
+			display: none;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 180ms ease;
+		}
+
+		.mobile-menu-icon {
+			position: absolute;
+			font-size: 22px;
+			line-height: 1;
+		}
+		.menu-backdrop { display: none; }
+
+		footer {
+			margin-top: 44px;
+			border-top: 1px solid var(--soft-line);
+			padding-top: 14px;
+			color: var(--muted);
+			font-size: 14px;
+		}
+
+		@media (min-width: 1180px) and (max-width: 1499px) {
+			main { max-width: 760px; }
+			.toc {
+				left: 20px;
+				width: 210px;
+			}
+		}
+
+		@media (max-width: 1179px) {
+			.toc {
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				z-index: 25;
+				width: min(82vw, 320px);
+				max-height: none;
+				margin: 0;
+				padding: 58px 18px 20px;
+				font-size: 15px;
+				background: rgba(246, 247, 248, 0.96);
+				box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+				transform: translateX(-105%);
+				transition: transform 200ms ease;
+			}
+
+			body.toc-open .toc { transform: translateX(0); }
+
+			.mobile-menu-button { display: inline-flex; }
+			.mobile-menu-button.is-visible,
+			body.toc-open .mobile-menu-button {
+				opacity: 1;
+				pointer-events: auto;
+			}
+
+			.menu-backdrop {
+				position: fixed;
+				inset: 0;
+				z-index: 20;
+				display: block;
+				background: rgba(255, 255, 255, 0.34);
+				opacity: 0;
+				pointer-events: none;
+				transition: opacity 200ms ease;
+			}
+
+			body.toc-open .menu-backdrop {
+				opacity: 1;
+				pointer-events: auto;
+			}
+		}
+
+		@media (max-width: 760px) {
+			main {
+				max-width: 100vw;
+				padding: 24px 18px 56px;
+			}
+
+			h1 {
+				font-size: 30px;
+				overflow-wrap: anywhere;
+			}
+
+			h2 { font-size: 23px; }
+			h3 { font-size: 19px; }
+			.meta { overflow-wrap: anywhere; }
+
+			section > p,
+			section > ul,
+			section > ol,
+			section > .key,
+			section > .infobox,
+			section > .screenshot,
+			section > .table-wrap,
+			section > pre {
+				margin-left: 0;
+				width: 100%;
+			}
+
+			.infobox {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+<body>
+	<button class="mobile-menu-button" type="button" aria-label="목차 열기" aria-expanded="false">
+		<span class="mobile-menu-icon" aria-hidden="true">☰</span>
+	</button>
+	<div class="menu-backdrop" aria-hidden="true"></div>
+	<a class="index-button" href="../../index.html" aria-label="인덱스로 돌아가기">Index</a>
+	<a class="top-button" href="#top" aria-label="최상단으로 이동">↑</a>
+
+	<main>
+		<header>
+			<h1>{{TITLE}}</h1>
+			<p class="meta">{{META}}</p>
+		</header>
+
+		<nav class="toc" aria-label="목차">
+			<strong>목차</strong>
+			<ol>
+				<li><a href="#summary"><span class="toc-num">1.</span> <span class="toc-title">한 줄 결론</span></a></li>
+				<li><a href="#sources"><span class="toc-num">2.</span> <span class="toc-title">출처</span></a></li>
+			</ol>
+		</nav>
+
+		<section id="summary">
+			<h2>1. 한 줄 결론</h2>
+			<div class="key">
+				<p><strong>{{ONE_LINE_CONCLUSION}}</strong></p>
+			</div>
+			<p>{{LEAD_PARAGRAPH}}</p>
+		</section>
+
+		<section id="sources">
+			<h2>2. 출처</h2>
+			<ul>
+				<li><a href="https://example.com">{{SOURCE_TITLE}}</a>, 확인일: {{CHECKED_DATE}}.</li>
+			</ul>
+		</section>
+
+		<footer>
+			<p>iiki research HTML. Generated {{CHECKED_DATE}}.</p>
+		</footer>
+	</main>
+
+	<script>
+		(() => {
+			const button = document.querySelector('.mobile-menu-button');
+			const backdrop = document.querySelector('.menu-backdrop');
+			const links = document.querySelectorAll('.toc a');
+
+			if (!button) return;
+
+			const setOpen = (open) => {
+				document.body.classList.toggle('toc-open', open);
+				button.setAttribute('aria-expanded', String(open));
+			};
+
+			const updateButton = () => {
+				button.classList.toggle('is-visible', window.scrollY > 120);
+			};
+
+			button.addEventListener('click', () => setOpen(!document.body.classList.contains('toc-open')));
+			backdrop?.addEventListener('click', () => setOpen(false));
+			links.forEach((link) => link.addEventListener('click', () => setOpen(false)));
+			window.addEventListener('scroll', updateButton, { passive: true });
+			updateButton();
+		})();
+	</script>
+</body>
+</html>

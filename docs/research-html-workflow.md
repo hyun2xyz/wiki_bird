@@ -39,7 +39,7 @@ On first activation or after a fresh install, ask the user to choose a default r
 
 ```text
 리서치 깊이를 기본값으로 정해둘까요? 하/중/상 중에서 고르면 됩니다.
-하: 빠른 개요, 중: 일반 Wikibird 문서, 상: 공부용 깊은 조사입니다.
+하: 빠른 개요, 중: 일반 iiki 문서, 상: 공부용 깊은 조사입니다.
 ```
 
 If the user gives a concrete task and does not answer the setup question, proceed with `중` for that task and note that the default can be changed later.
@@ -50,9 +50,9 @@ Depth settings:
 
 | Depth | Sources | Screenshots | Best for |
 | --- | --- | --- | --- |
-| `하` | 3-5 | 1-2 | Quick orientation or short note. |
-| `중` | 6-10 | 3-5 | Default Wikibird page. |
-| `상` | 10+ where available | 5-8 | Person/company/technology history, serious study notes, complex comparisons. |
+| `하` | 3-5 | Essential captures only | Quick orientation or short note. |
+| `중` | 6-10 | As needed for major sections | Default iiki page. |
+| `상` | 10+ where available | Enough for understanding and verification | Person/company/technology history, serious study notes, complex comparisons. |
 
 Record the selected depth in `research.md`.
 
@@ -97,7 +97,7 @@ Default capture rules:
 If the agent has a native Chrome/browser tool, use that first. If not, use the bundled helper:
 
 ```sh
-skills/wikibird-research-html/scripts/capture-chrome-screenshot.sh \
+skills/iiki-research-html/scripts/capture-chrome-screenshot.sh \
   "https://example.com" \
   outputs/YYYY-MM-DD-topic-slug/assets/screenshots/01-example.png
 ```
@@ -154,6 +154,8 @@ Default sections:
 
 Default requirements:
 
+- Start from `templates/research-page.html`, or from the installed copy at `skills/iiki-research-html/templates/research-page.html`.
+- Keep the iiki/IYO clean-view layout contract: centered article, fixed desktop left TOC, mobile off-canvas TOC, top button, and quiet white/gray wiki surface.
 - One self-contained `index.html`.
 - Semantic HTML.
 - Responsive CSS in `<style>`.
@@ -177,7 +179,7 @@ Quality checks:
 
 ## Phase 6: QA
 
-After writing a research output, run `node scripts/build-index.js` from the repo root. The generated root `index.html` is a local-only list of Wikibird outputs.
+After writing a research output, run `node scripts/build-index.js` from the repo root. The generated root `index.html` is a local-only list of iiki outputs.
 
 Record checks in `qa.md`:
 
@@ -193,7 +195,7 @@ Record checks in `qa.md`:
 - Chrome screenshots captured: yes/no
 - Screenshot figures embedded: yes/no
 - Depth recorded: yes/no
-- Screenshot count matches depth: yes/no
+- Screenshot coverage fits topic/depth: yes/no
 - Person profile baseline checked: yes/no/not applicable
 - Known limits:
 ```
@@ -208,5 +210,5 @@ Before sharing:
 - No large copied source dumps.
 - Source URLs are present.
 - Generated output is in `outputs/`.
-- Agent definition is in `.claude/agents/research-html-builder.md`.
+- Agent definition is in `.claude/agents/iiki-research-html-builder.md`.
 - README explains how to use the agent.

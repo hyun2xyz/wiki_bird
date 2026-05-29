@@ -12,7 +12,7 @@ On first activation or after a fresh install, ask the user to choose a default r
 
 ```text
 리서치 깊이를 기본값으로 정해둘까요? 하/중/상 중에서 고르면 됩니다.
-하: 빠른 개요, 중: 일반 Wikibird 문서, 상: 공부용 깊은 조사입니다.
+하: 빠른 개요, 중: 일반 iiki 문서, 상: 공부용 깊은 조사입니다.
 ```
 
 If the user gives a concrete task and does not answer the setup question, proceed with `중` for that task and note that the default can be changed later.
@@ -20,7 +20,7 @@ If the user gives a concrete task and does not answer the setup question, procee
 | Depth | Sources | Screenshots | Use when |
 | --- | --- | --- | --- |
 | `하` | 3-5 | Essential captures only | Quick orientation, short explanation, small note. |
-| `중` | 6-10 | As needed for major sections | Default Wikibird explainer, study note, practical research page. |
+| `중` | 6-10 | As needed for major sections | Default iiki explainer, study note, practical research page. |
 | `상` | 10+ where available | Add enough for understanding and verification | Person/company/technology history, serious study, market map, complex comparison. |
 
 Record the selected depth in `research.md`. If the requested depth is impossible because sources are sparse or screenshots fail, continue with the closest possible output and explain the limit in `qa.md`.
@@ -55,7 +55,7 @@ Default:
 Use the agent's Chrome/browser tool when available. If not, use:
 
 ```sh
-skills/wikibird-research-html/scripts/capture-chrome-screenshot.sh \
+skills/iiki-research-html/scripts/capture-chrome-screenshot.sh \
   "https://example.com" \
   outputs/YYYY-MM-DD-topic-slug/assets/screenshots/01-example.png
 ```
@@ -98,7 +98,9 @@ Build the article around reader understanding:
 
 ## Build
 
-Create a single static `index.html` with semantic HTML, inline CSS, visible citations, and no build step. Use JavaScript only for small UI behavior such as mobile TOC toggling.
+Start from `templates/research-page.html`. Create a single static `index.html` with semantic HTML, inline CSS, visible citations, and no build step. Use JavaScript only for small UI behavior such as mobile TOC toggling.
+
+Keep the iiki/IYO clean-view layout contract: centered article, fixed desktop left TOC, mobile off-canvas TOC, top button, quiet white/gray wiki surface, and visible source section.
 
 The final source section label is `출처`.
 
@@ -130,7 +132,7 @@ Write `qa.md` with:
 - Chrome screenshots captured: yes/no
 - Screenshot figures embedded: yes/no
 - Depth recorded: yes/no
-- Screenshot count matches depth: yes/no
+- Screenshot coverage fits topic/depth: yes/no
 - Person profile baseline checked: yes/no/not applicable
 - Overflow checked: yes/no
 - Known limits:

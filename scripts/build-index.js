@@ -49,6 +49,21 @@ function getMtime(file) {
   }
 }
 
+function getSlugDate(slug) {
+  const match = slug.match(/^(\d{4}-\d{2}-\d{2})(?:-|$)/);
+  return match ? match[1] : "";
+}
+
+function getSortTime(slug, mtime) {
+  const slugDate = getSlugDate(slug);
+  if (slugDate) {
+    const timestamp = Date.parse(`${slugDate}T00:00:00Z`);
+    if (!Number.isNaN(timestamp)) return timestamp;
+  }
+
+  return mtime.getTime();
+}
+
 function buildItems() {
   if (!fs.existsSync(outputsDir)) return [];
 
@@ -66,6 +81,7 @@ function buildItems() {
       const meta = matchFirst(html, /<p class="meta"[^>]*>([\s\S]*?)<\/p>/i);
       const depth = matchFirst(research, /(?:리서치 깊이|Research depth|Depth)\s*[:：]\s*([^\n]+)/i);
       const mtime = getMtime(htmlPath);
+      const slugDate = getSlugDate(slug);
 
       return {
         slug,
@@ -77,8 +93,8 @@ function buildItems() {
         href: `outputs/${slug}/index.html`,
         researchHref: fs.existsSync(path.join(outputsDir, slug, "research.md")) ? `outputs/${slug}/research.md` : "",
         qaHref: qaExists ? `outputs/${slug}/qa.md` : "",
-        date: mtime.toISOString().slice(0, 10),
-        sortTime: mtime.getTime(),
+        date: slugDate || mtime.toISOString().slice(0, 10),
+        sortTime: getSortTime(slug, mtime),
       };
     })
     .filter(Boolean)
@@ -117,7 +133,7 @@ const html = `<!doctype html>
 <head>
 \t<meta charset="utf-8">
 \t<meta name="viewport" content="width=device-width, initial-scale=1">
-\t<title>Wikibird Index</title>
+\t<title>iiki Index</title>
 \t<style>
 \t\t:root {
 \t\t\tcolor-scheme: light;
@@ -191,7 +207,7 @@ const html = `<!doctype html>
 </head>
 <body>
 \t<main>
-\t\t<ol aria-label="Wikibird 리서치 목록">${rows || "\n\t\t\t<li><time></time><span>No outputs yet</span></li>"}
+\t\t<ol aria-label="iiki 리서치 목록">${rows || "\n\t\t\t<li><time></time><span>No outputs yet</span></li>"}
 \t\t</ol>
 \t</main>
 </body>

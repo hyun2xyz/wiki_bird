@@ -1,4 +1,4 @@
-# Wikibird
+# iiki
 
 **2026-05-28 · v0.1.3 · First beta test (ദ്ദി ᴖ⩊ᴖ )**
 
@@ -24,7 +24,7 @@ More importantly, it is very ugly.
 
 ***
 
-Let me introduce my friend Wikibird.
+Let me introduce my friend iiki.
 
 It is a bird we raise in our IYO Wiki.
 Its main service is that it adds 짹 to the end of every sentence, which is cute.
@@ -39,11 +39,11 @@ Then, use it well.
 
 [한국어 README](README.md)
 
-![Wikibird mini wiki mascot](docs/assets/miniwiki.jpg)
+![iiki mini wiki mascot](docs/assets/miniwiki.jpg)
 
 > **Hello. I can organize anything for you, 짹**
 
-Wikibird is a research agent/skill that turns a topic into a readable wiki-style HTML document.
+iiki is a research agent/skill that turns a topic into a readable wiki-style HTML document.
 
 Give it something to research, and it checks current sources, keeps citations, captures useful screenshots, and writes a compact wiki page with a table of contents. When needed, it can also create Typst/PDF output.
 
@@ -81,26 +81,26 @@ Each output folder has its own `index.html`, which can be opened directly in a b
 
 The root `index.html` is a simple local list.
 
-![Wikibird local index screenshot](docs/assets/screenshots/local-index.png)
+![iiki local index screenshot](docs/assets/screenshots/local-index.png)
 
 Each research record lives in `outputs/YYYY-MM-DD-topic-slug/`. Open that folder's `index.html` locally to read the generated wiki page.
-Wikibird documents put the left table of contents, body text, images, and sources together on one page.
+iiki documents put the left table of contents, body text, images, and sources together on one page.
 
-![Wikibird wiki page screenshot](docs/assets/screenshots/wikibird-manual-page.png)
+![iiki wiki page screenshot](docs/assets/screenshots/iiki-manual-page.png)
 
 ## Install And Activate
 
-The recommended way to use Wikibird is through CLI-based agents. If you want research output saved as files, Chrome screenshots captured, and checks like `node scripts/build-index.js` run reliably, use Codex CLI or Claude Code.
+The recommended way to use iiki is through CLI-based agents. If you want research output saved as files, Chrome screenshots captured, and checks like `node scripts/build-index.js` run reliably, use Codex CLI or Claude Code.
 
 ### 1. Install For Codex CLI
 
 ```sh
-git clone https://github.com/hyun2xyz/wiki_bird.git
-cd wiki_bird
+git clone https://github.com/hyun2xyz/iiki.git
+cd iiki
 scripts/install-skill.sh codex
 ```
 
-The current Codex user skill location is `$HOME/.agents/skills/wikibird-research-html/`. For repo scope, place the skill at `.agents/skills/wikibird-research-html/`.
+The current Codex user skill location is `$HOME/.agents/skills/iiki-research-html/`. For repo scope, place the skill at `.agents/skills/iiki-research-html/`.
 
 For older Codex setups, install into the legacy location:
 
@@ -111,68 +111,68 @@ scripts/install-skill.sh codex-legacy
 Invoke it in Codex like this:
 
 ```text
-Use $wikibird-research-html
+Use $iiki-research-html
 ```
 
 ### 2. Install For Claude Code
 
 ```sh
-git clone https://github.com/hyun2xyz/wiki_bird.git
-cd wiki_bird
+git clone https://github.com/hyun2xyz/iiki.git
+cd iiki
 scripts/install-skill.sh claude
 ```
 
-For Claude Code, keep the skill folder in `~/.claude/skills/wikibird-research-html/` or project `.claude/skills/wikibird-research-html/`.
+For Claude Code, keep the skill folder in `~/.claude/skills/iiki-research-html/` or project `.claude/skills/iiki-research-html/`.
 
 Invoke it in Claude Code like this:
 
 ```text
-Use wikibird-research-html
+Use iiki-research-html
 ```
 
-The install script overwrites any existing Wikibird skill folder at the target location.
+The install script overwrites any existing iiki skill folder at the target location.
 
 ### 3. Set Research Depth
 
-After first installing or teaching Wikibird, ask the user to choose a default research depth:
+After first installing or teaching iiki, ask the user to choose a default research depth:
 
 ```text
 Would you like to set a default research depth? Choose 하, 중, or 상.
-하: quick overview, 중: normal Wikibird document, 상: deep study research.
+하: quick overview, 중: normal iiki document, 상: deep study research.
 ```
 
 ### 4. Manual PowerShell Install For Codex CLI
 
 ```powershell
-git clone https://github.com/hyun2xyz/wiki_bird.git
-cd wiki_bird
+git clone https://github.com/hyun2xyz/iiki.git
+cd iiki
 
-$dest = Join-Path $HOME ".agents\skills\wikibird-research-html"
+$dest = Join-Path $HOME ".agents\skills\iiki-research-html"
 New-Item -ItemType Directory -Force (Split-Path $dest) | Out-Null
 Remove-Item -Recurse -Force $dest -ErrorAction SilentlyContinue
-Copy-Item -Recurse ".\skills\wikibird-research-html" $dest
+Copy-Item -Recurse ".\skills\iiki-research-html" $dest
 ```
 
 ### 5. Check Installation
 
 1. Restart Codex or Claude Code.
-2. Invoke `$wikibird-research-html` or `Use $wikibird-research-html`.
+2. Invoke `$iiki-research-html` or `Use $iiki-research-html`.
 3. On first use, choose a default research depth: `하`, `중`, or `상`.
 4. If the skill does not appear, check that `SKILL.md` is directly inside the installed skill folder.
 
 For Codex, the expected user-scope structure is:
 
 ```text
-$HOME/.agents/skills/wikibird-research-html/SKILL.md
+$HOME/.agents/skills/iiki-research-html/SKILL.md
 ```
 
 ### 6. One-Minute App Trial
 
-For ChatGPT, Claude, and Gemini apps, this README does not provide install or activation steps. Use the prompt below to make the model follow Wikibird for the current conversation only.
+For ChatGPT, Claude, and Gemini apps, this README does not provide install or activation steps. Use the prompt below to make the model follow iiki for the current conversation only.
 
 ```text
-Use the Wikibird method based on https://github.com/hyun2xyz/wiki_bird.
-Read README.md and skills/wikibird-research-html/SKILL.md, then follow them.
+Use the iiki method based on https://github.com/hyun2xyz/iiki.
+Read README.md and skills/iiki-research-html/SKILL.md, then follow them.
 
 Topic: Why HTML prototypes are useful as AI research outputs
 Research depth: 중
@@ -186,13 +186,13 @@ Output:
 Write it as a Korean wiki-style explanation.
 ```
 
-This is only for previewing the structure. App chats may not reliably create local files, save Chrome screenshots, or refresh the local index. Use a CLI environment for real Wikibird outputs.
+This is only for previewing the structure. App chats may not reliably create local files, save Chrome screenshots, or refresh the local index. Use a CLI environment for real iiki outputs.
 
 ### Troubleshooting
 
 - If an app returns a normal chat answer: it probably treated the GitHub URL as "read this for the current conversation." Use the one-minute trial prompt above and explicitly name `README.md`, `SKILL.md`, and the expected output files.
-- If the HTML does not look like Wikibird: the app may be inventing its own style because it cannot write and verify the repo files. Use a CLI environment for real HTML output.
-- If Codex cannot see the skill: check `$HOME/.agents/skills/wikibird-research-html/SKILL.md`, then restart Codex.
+- If the HTML does not look like iiki: the app may be inventing its own style because it cannot write and verify the repo files. Use a CLI environment for real HTML output.
+- If Codex cannot see the skill: check `$HOME/.agents/skills/iiki-research-html/SKILL.md`, then restart Codex.
 - If you are on an older Codex setup: run `scripts/install-skill.sh codex-legacy` to install into `~/.codex/skills/`.
 
 Official references:
@@ -205,7 +205,7 @@ Official references:
 Ask an agent that supports skills:
 
 ```text
-Use $wikibird-research-html.
+Use $iiki-research-html.
 Research the book A New Program for Graphic Design and turn it into outputs/YYYY-MM-DD-graphic-design-course/index.html.
 Check current sources, include Chrome screenshots, and keep research.md and qa.md.
 ```
@@ -213,16 +213,16 @@ Check current sources, include Chrome screenshots, and keep research.md and qa.m
 You can also call it more casually:
 
 ```text
-Use Wikibird to research the Typst template ecosystem and make a wiki-style HTML page.
+Use iiki to research the Typst template ecosystem and make a wiki-style HTML page.
 ```
 
 Once the agent has learned the skill, this can be even shorter:
 
 ```text
-Use Wikibird for a Typst research note.
+Use iiki for a Typst research note.
 ```
 
-When Wikibird is active, conversational replies should end with `짹`.
+When iiki is active, conversational replies should end with `짹`.
 
 ```text
 I'll organize it, 짹
@@ -232,7 +232,7 @@ Done, 짹
 Research depth can be set to `하`, `중`, or `상`. If no depth is specified, the default is `중`.
 
 ```text
-Use $wikibird-research-html to research Andrej Karpathy.
+Use $iiki-research-html to research Andrej Karpathy.
 Research depth: 상
 Include basic profile information, a public profile/face reference, and representative work pages.
 ```
@@ -240,12 +240,12 @@ Include basic profile information, a public profile/face reference, and represen
 | Depth | Sources | Images | Use |
 | --- | --- | --- | --- |
 | `하` | 3-5 sources | Essential captures only | Quick overview |
-| `중` | 6-10 sources | As needed for major sections | Normal Wikibird document |
+| `중` | 6-10 sources | As needed for major sections | Normal iiki document |
 | `상` | 10+ sources when available | Add enough for understanding and verification | Deep study document |
 
 ## Chrome Screenshots
 
-Wikibird expects at least one Chrome-captured image in research HTML outputs.
+iiki expects at least one Chrome-captured image in research HTML outputs.
 
 Guidelines:
 
@@ -260,7 +260,7 @@ Guidelines:
 If the agent has no native Chrome tool, use the helper:
 
 ```sh
-skills/wikibird-research-html/scripts/capture-chrome-screenshot.sh \
+skills/iiki-research-html/scripts/capture-chrome-screenshot.sh \
   "https://example.com" \
   outputs/YYYY-MM-DD-topic-slug/assets/screenshots/01-example.png
 ```
@@ -295,12 +295,12 @@ Typst HTML export is still experimental, so PDF is the more stable document outp
 
 ## Main Files
 
-- `skills/wikibird-research-html/SKILL.md` - installable skill body
-- `skills/wikibird-research-html/references/` - research, HTML, and Typst rules
-- `skills/wikibird-research-html/scripts/capture-chrome-screenshot.sh` - Chrome screenshot helper
-- `.claude/agents/research-html-builder.md` - Claude Code project agent
+- `skills/iiki-research-html/SKILL.md` - installable skill body
+- `skills/iiki-research-html/references/` - research, HTML, and Typst rules
+- `skills/iiki-research-html/scripts/capture-chrome-screenshot.sh` - Chrome screenshot helper
+- `.claude/agents/iiki-research-html-builder.md` - Claude Code project agent
 - `index.html` - local-only research output index
-- `docs/index.html` - public Wikibird user guide for GitHub Pages
+- `docs/index.html` - public iiki user guide for GitHub Pages
 - `docs/research-html-workflow.md` - workflow docs
 - `docs/wiki-html-style-rules.md` - HTML style rules
 - `docs/distribution-plan.md` - Codex, Claude, Gemini, and Cursor distribution notes

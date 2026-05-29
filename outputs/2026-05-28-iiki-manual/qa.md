@@ -11,7 +11,7 @@
 - Mobile TOC drawer checked: yes
 - Index return button checked: yes
 - Chrome screenshots captured: yes, local index and manual page
-- Screenshot figures embedded: yes, `assets/miniwiki.jpg`, `assets/screenshots/local-index.png`, `assets/screenshots/wikibird-manual-page.png`
+- Screenshot figures embedded: yes, `assets/miniwiki.jpg`, `assets/screenshots/local-index.png`, `assets/screenshots/iiki-manual-page.png`
 - Depth recorded: yes
 - Screenshot count matches depth: yes, manual page uses one mascot image and two local screenshots
 - Person profile baseline checked: not applicable
