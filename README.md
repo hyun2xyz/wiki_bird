@@ -345,3 +345,8 @@ MIT. 스킬 폴더 안에도 별도 `LICENSE`가 들어 있어 폴더만 따로 
 
 ## 그럼 화이팅
 화이팅
+
+## 운영 노트
+
+- [NAS RAM/OOM 장애 노트 (2026-05-26)](docs/ops/nas-memory-oom-2026-05-26.md)
+- [NAS Drive 보안 및 이미지 캐시 업데이트 (2026-05-30)](docs/ops/nas-drive-security-cache-2026-05-30.md)
